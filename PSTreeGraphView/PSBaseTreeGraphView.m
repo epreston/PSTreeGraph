@@ -254,7 +254,6 @@
             // Add the nodeView as a subview of the subtreeView.
             [subtreeView addSubview:[subtreeView nodeView]];
 			
-			
             // Register the subtreeView in our map table, so we can look it up by its modelNode.
             [self setSubtreeView:subtreeView forModelNode:modelNode];
 			
@@ -270,8 +269,6 @@
 					[subtreeView insertSubview:childSubtreeView belowSubview:[subtreeView nodeView]];
                 }
             }
-			
-			
 			
         } else {
             [subtreeView release];
@@ -638,7 +635,7 @@
             UIView *nodeView = [subtreeView nodeView];
             if (nodeView) {
                 CGRect nodeViewFrame = [nodeView frame];
-                id<PSTreeGraphModelNode> nearestChild = [subtreeView modelNodeClosestToY:CGRectGetMidY(nodeViewFrame)];
+                id <PSTreeGraphModelNode> nearestChild = [subtreeView modelNodeClosestToY:CGRectGetMidY(nodeViewFrame)];
                 if (nearestChild) {
                     [self setSelectedModelNodes:[NSSet setWithObject:nearestChild]];
                 }

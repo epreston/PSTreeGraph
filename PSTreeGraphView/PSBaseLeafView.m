@@ -23,7 +23,7 @@
 
 
 #pragma mark -
-#pragma mark Optimizations for Layer-Backed Mode
+#pragma mark Update Layer
 
 - (void)updateLayerAppearanceToMatchContainerView {
     CALayer *layer = [self layer];
