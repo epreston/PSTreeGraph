@@ -94,22 +94,19 @@ typedef NSInteger PSTreeGraphOrientationStyle;
 }
 
 
-#pragma mark -
-#pragma mark Delegate
+#pragma mark - Delegate
 
 @property (nonatomic, assign) id delegate;
 
 
-#pragma mark -
-#pragma mark Parent Resize Notification
+#pragma mark - Parent Resize Notification
 
 // Use this method to keep the view in sync for now.
 
 - (void)parentClipViewDidResize:(id)object;
 
 
-#pragma mark -
-#pragma mark Creating Instances
+#pragma mark - Creating Instances
 
 // Initializes a new TreeGraph instance.  (TreeGraph's designated initializer is the same as 
 // UIView's: -initWithFrame:.)  The TreeGraph has default appearance properties and layout 
@@ -119,8 +116,7 @@ typedef NSInteger PSTreeGraphOrientationStyle;
 - (id)initWithFrame:(CGRect)frame;
 
 
-#pragma mark -
-#pragma mark Connection to Model
+#pragma mark - Connection to Model
 
 // The root of the model node tree that the TreeGraph is being asked to display.  (The modelRoot
 // may have ancestor nodes, but TreeGraph will ignore them and treat modelRoot as the root.)  May
@@ -132,8 +128,7 @@ typedef NSInteger PSTreeGraphOrientationStyle;
 @property(retain) id <PSTreeGraphModelNode> modelRoot;
 
 
-#pragma mark -
-#pragma mark Root SubtreeView Access
+#pragma mark - Root SubtreeView Access
 
 // A TreeGraph builds the tree it displays using recursively nested SubtreeView instances.  This
 // read-only accessor provides a way to get the rootmost SubtreeView (the one that corresponds 
@@ -142,8 +137,7 @@ typedef NSInteger PSTreeGraphOrientationStyle;
 @property(readonly) PSBaseSubtreeView *rootSubtreeView;
 
 
-#pragma mark -
-#pragma mark Node View Nib Specification
+#pragma mark - Node View Nib Specification
 
 // The name of the .nib file from which to instantiate node views.  (This API design assumes that
 // all node views should be instantiated from the same .nib.  If a tree of heterogeneous nodes 
@@ -160,8 +154,7 @@ typedef NSInteger PSTreeGraphOrientationStyle;
 @property(retain) NSBundle *nodeViewNibBundle;
 
 
-#pragma mark -
-#pragma mark Selection State
+#pragma mark - Selection State
 
 //  The unordered set of model nodes that are currently selected in the TreeGraph.  When no nodes
 // are selected, this is an empty NSSet.  It will never be nil (and attempting to set it to nil
@@ -181,8 +174,7 @@ typedef NSInteger PSTreeGraphOrientationStyle;
 @property(readonly) CGRect selectionBounds;
 
 
-#pragma mark -
-#pragma mark Node Hit-Testing
+#pragma mark - Node Hit-Testing
 
 // Returns the model node under the given point, which must be expressed in the TreeGraph's 
 // interior (bounds) coordinate space.  If there is a collapsed subtree at the given point, 
@@ -192,8 +184,7 @@ typedef NSInteger PSTreeGraphOrientationStyle;
 - (id <PSTreeGraphModelNode> )modelNodeAtPoint:(CGPoint)p;
 
 
-#pragma mark -
-#pragma mark Sizing and Layout
+#pragma mark - Sizing and Layout
 
 // A TreeGraph's minimumFrameSize is the size needed to accommodate its content (as currently 
 // laid out) and margins.  Changes to the TreeGraph's content, layout, or margins will update 
@@ -248,8 +239,7 @@ typedef NSInteger PSTreeGraphOrientationStyle;
 - (CGRect)boundsOfModelNodes:(NSSet *)modelNodes;
 
 
-#pragma mark -
-#pragma mark Scrolling
+#pragma mark - Scrolling
 
 // Does a [self scrollRectToVisible:] with the bounding box of the specified model nodes.
  
@@ -260,8 +250,7 @@ typedef NSInteger PSTreeGraphOrientationStyle;
 - (void)scrollSelectedModelNodesToVisible;
 
 
-#pragma mark -
-#pragma mark Animation Support
+#pragma mark - Animation Support
 
 // Whether the TreeGraph animates layout operations.  Defaults to YES.  If set to NO, layout 
 // jumpst instantaneously to the tree's new state.
@@ -274,8 +263,7 @@ typedef NSInteger PSTreeGraphOrientationStyle;
 @property BOOL layoutAnimationSuppressed;
 
 
-#pragma mark -
-#pragma mark Layout Metrics
+#pragma mark - Layout Metrics
 
 // The amount of padding to leave between the displayed tree and each of the four edges of the 
 // TreeGraph's bounds.
@@ -291,8 +279,7 @@ typedef NSInteger PSTreeGraphOrientationStyle;
 @property CGFloat siblingSpacing;
 
 
-#pragma mark -
-#pragma mark Styling
+#pragma mark - Styling
 
 // The fill color for the TreeGraph's content area.
  

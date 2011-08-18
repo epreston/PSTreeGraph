@@ -32,8 +32,7 @@
 }
 
 
-#pragma mark -
-#pragma mark Path Drawing
+#pragma mark - Drawing
 
 - (UIBezierPath *)directConnectionsPath {
     CGRect bounds = [self bounds];

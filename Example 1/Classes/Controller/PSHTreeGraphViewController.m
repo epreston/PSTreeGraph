@@ -14,11 +14,11 @@
 
 #import "ObjCClassWrapper.h"
 
+
 @implementation PSHTreeGraphViewController
 
 
-#pragma mark -
-#pragma mark Property Accessors
+#pragma mark - Property Accessors
 
 @synthesize treeGraphView;
 
@@ -40,8 +40,7 @@
 }
 
 
-#pragma mark -
-#pragma mark View Creation and Initializer
+#pragma mark - View Creation and Initializer
 
 // The designated initializer. Override to perform setup that is required before the view is loaded.
 //- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -85,8 +84,7 @@
 }
 
 
-#pragma mark -
-#pragma mark TreeGraph Delegate
+#pragma mark - TreeGraph Delegate
 
 -(void) configureNodeView:(UIView *)nodeView 
             withModelNode:(id <PSTreeGraphModelNode> )modelNode {
@@ -110,8 +108,7 @@
 }
 
 
-#pragma mark -
-#pragma mark Memory Management
+#pragma mark - Memory Management
 
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.

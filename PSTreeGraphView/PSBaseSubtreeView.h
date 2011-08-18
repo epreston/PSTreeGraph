@@ -67,7 +67,7 @@
 @property(readonly,getter=isLeaf) BOOL leaf;
 
 
-#pragma mark Selection State
+#pragma mark - Selection State
 
 // Whether the node is part of the TreeGraph's current selection.  This can be a useful property to bind user
 // interface state to.
@@ -75,7 +75,7 @@
 @property(readonly) BOOL nodeIsSelected;
 
 
-#pragma mark Layout
+#pragma mark - Layout
 
 //Returns YES if this subtree needs relayout.
  
@@ -108,7 +108,7 @@
 - (IBAction)toggleExpansion:(id)sender;
 
 
-#pragma mark Invalidation
+#pragma mark - Invalidation
 
 //Marks all BranchView instances in this subtree as needing display.
  
@@ -119,7 +119,7 @@
 - (void)resursiveSetSubtreeBordersNeedDisplay;
 
 
-#pragma mark Node Hit-Testing
+#pragma mark - Node Hit-Testing
 
 // Returns the visible model node whose nodeView contains the given point "p", where "p" is specified in the 
 // SubtreeView's interior (bounds) coordinate space.  Returns nil if there is no node under the specified point.
@@ -133,7 +133,7 @@
 - ( id <PSTreeGraphModelNode> )modelNodeClosestToY:(CGFloat)y;
 
 
-#pragma mark Debugging
+#pragma mark - Debugging
 
 //Returns an indented multi-line NSString summary of the displayed tree.  Provided as a debugging aid.
  

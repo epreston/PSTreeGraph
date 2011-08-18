@@ -24,8 +24,7 @@
 @interface PSBaseTreeGraphView (Internal)
 
 
-#pragma mark -
-#pragma mark ModelNode -> SubtreeView Relationship Management
+#pragma mark - ModelNode -> SubtreeView Relationship Management
 
 // Returns the SubtreeView that corresponds to the specified modelNode, as tracked by the TreeGraph's
 // modelNodeToSubtreeViewMapTable.
@@ -39,8 +38,7 @@
           forModelNode:(id)modelNode;
 
 
-#pragma mark -
-#pragma mark Model Tree Navigation
+#pragma mark - Model Tree Navigation
 
 // Returns YES if modelNode is a descendant of possibleAncestor, NO if not.
 //
@@ -73,8 +71,7 @@
                                atRelativeIndex:(NSInteger)relativeIndex;
 
 
-#pragma mark -
-#pragma mark Node View Nib Caching
+#pragma mark - Node View Nib Caching
 
 //* NOT SUPPORTED ON iOS 3.2*
 

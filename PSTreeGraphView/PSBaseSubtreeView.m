@@ -35,8 +35,7 @@ static CGFloat subtreeBorderWidth(void) {
 @implementation PSBaseSubtreeView
 
 
-#pragma mark -
-#pragma mark Attributes
+#pragma mark - Attributes
 
 @synthesize modelNode;
 @synthesize nodeView;
@@ -47,8 +46,7 @@ static CGFloat subtreeBorderWidth(void) {
 }
 
 
-#pragma mark -
-#pragma mark Instance Initialization
+#pragma mark - Instance Initialization
 
 - initWithModelNode:(id <PSTreeGraphModelNode> )newModelNode {
     
@@ -93,36 +91,7 @@ static CGFloat subtreeBorderWidth(void) {
 }
 
 
-#pragma mark -
-#pragma mark Optimizations for Layer-Backed Mode
-
-- (void)updateSubtreeBorder {
-    CALayer *layer = [self layer];
-    if (layer) {
-        // Disable implicit animations during these layer property changes, to make them take effect immediately.
-        // BOOL actionsWereDisabled = [CATransaction disableActions];
-        // [CATransaction setDisableActions:YES];
-		
-        // If the enclosing TreeGraph has its "showsSubtreeFrames" debug feature enabled, 
-		// configure the backing layer to draw its border programmatically.  This is much more efficient
-		// than allocating a backing store for each SubtreeView's backing layer, only to stroke a simple
-		// rectangle into that backing store.
-		
-        PSBaseTreeGraphView *treeGraph = [self enclosingTreeGraph];
-        if ([treeGraph showsSubtreeFrames]) {
-            [layer setBorderWidth:subtreeBorderWidth()];
-            [layer setBorderColor:[subtreeBorderColor() CGColor]];
-        } else {
-            [layer setBorderWidth:0.0];
-        }
-		
-        // [CATransaction setDisableActions:actionsWereDisabled];
-    }
-}
-
-
-#pragma mark -
-#pragma mark Layout
+#pragma mark - Layout
 
 - (BOOL)needsGraphLayout {
     return needsGraphLayout;
@@ -453,8 +422,7 @@ static CGFloat subtreeBorderWidth(void) {
 }
 
 
-#pragma mark -
-#pragma mark Drawing
+#pragma mark - Drawing
 
 //- (void)drawRect:(CGRect)dirtyRect {
 //	
@@ -475,9 +443,32 @@ static CGFloat subtreeBorderWidth(void) {
 //    }
 //}
 
+- (void)updateSubtreeBorder {
+    CALayer *layer = [self layer];
+    if (layer) {
+        // Disable implicit animations during these layer property changes, to make them take effect immediately.
+        // BOOL actionsWereDisabled = [CATransaction disableActions];
+        // [CATransaction setDisableActions:YES];
+		
+        // If the enclosing TreeGraph has its "showsSubtreeFrames" debug feature enabled, 
+		// configure the backing layer to draw its border programmatically.  This is much more efficient
+		// than allocating a backing store for each SubtreeView's backing layer, only to stroke a simple
+		// rectangle into that backing store.
+		
+        PSBaseTreeGraphView *treeGraph = [self enclosingTreeGraph];
+        if ([treeGraph showsSubtreeFrames]) {
+            [layer setBorderWidth:subtreeBorderWidth()];
+            [layer setBorderColor:[subtreeBorderColor() CGColor]];
+        } else {
+            [layer setBorderWidth:0.0];
+        }
+		
+        // [CATransaction setDisableActions:actionsWereDisabled];
+    }
+}
 
-#pragma mark -
-#pragma mark Invalidation
+
+#pragma mark - Invalidation
 
 - (void)recursiveSetConnectorsViewsNeedDisplay {
 	
@@ -513,16 +504,14 @@ static CGFloat subtreeBorderWidth(void) {
 }
 
 
-#pragma mark -
-#pragma mark Selection State
+#pragma mark - Selection State
 
 - (BOOL)nodeIsSelected {
     return [[[self enclosingTreeGraph] selectedModelNodes] containsObject:[self modelNode]];
 }
 
 
-#pragma mark -
-#pragma mark Node Hit-Testing
+#pragma mark - Node Hit-Testing
 
 - (id <PSTreeGraphModelNode> )modelNodeAtPoint:(CGPoint)p {
     
@@ -586,8 +575,7 @@ static CGFloat subtreeBorderWidth(void) {
 }
 
 
-#pragma mark -
-#pragma mark Debugging
+#pragma mark - Debugging
 
 - (NSString *)description {
     return [NSString stringWithFormat:@"SubtreeView<%@>", [modelNode description]];
@@ -615,8 +603,7 @@ static CGFloat subtreeBorderWidth(void) {
 }
 
 
-#pragma mark -
-#pragma mark Memory Management
+#pragma mark - Memory Management
 
 - (void)dealloc {
 	//    [nodeView release]; // not retained, since an IBOutlet

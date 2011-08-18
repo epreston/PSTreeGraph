@@ -16,8 +16,7 @@
 @synthesize viewController;
 
 
-#pragma mark -
-#pragma mark Application Lifecycle
+#pragma mark - Application Lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     
@@ -51,8 +50,7 @@
 }
 
 
-#pragma mark -
-#pragma mark Memory Management
+#pragma mark - Memory Management
 
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {
 	// Free up as much memory as possible by purging cached data objects that can be recreated 

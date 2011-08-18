@@ -32,8 +32,7 @@
 }
 
 
-#pragma mark -
-#pragma mark Styling
+#pragma mark - Styling
 
 //The color of the ContainerView's stroked border.
 @property(copy) UIColor *borderColor;
@@ -48,8 +47,7 @@
 @property(copy) UIColor *fillColor;
 
 
-#pragma mark -
-#pragma mark Selection State
+#pragma mark - Selection State
 
 @property BOOL showingSelected;
 

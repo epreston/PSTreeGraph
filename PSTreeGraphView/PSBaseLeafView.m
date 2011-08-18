@@ -22,8 +22,7 @@
 @implementation PSBaseLeafView
 
 
-#pragma mark -
-#pragma mark Update Layer
+#pragma mark - Update Layer
 
 - (void)updateLayerAppearanceToMatchContainerView {
     CALayer *layer = [self layer];
@@ -64,8 +63,7 @@
 }
 
 
-#pragma mark -
-#pragma mark Initialization
+#pragma mark - Initialization
 
 - (void)configureDetaults {
 	// Initialize ivars directly.  As a rule, it's best to avoid invoking accessors from an -init...
@@ -94,8 +92,7 @@
 }
 
 
-#pragma mark -
-#pragma mark Drawing
+#pragma mark - Drawing
 
 // Since we set each ContainerView's layerContentsRedrawPolicy to UIViewLayerContentsRedrawNever,
 // this -drawRect: method will only be invoked if the ContainerView is window-backed.  If the
@@ -129,8 +126,7 @@
 //}
 
 
-#pragma mark -
-#pragma mark Styling
+#pragma mark - Styling 
 
 - (UIColor *)borderColor {
     return borderColor;
@@ -179,8 +175,7 @@
 }
 
 
-#pragma mark -
-#pragma mark Selection State
+#pragma mark - Selection State
 
 - (BOOL)showingSelected {
     return showingSelected;
@@ -194,8 +189,7 @@
 }
 
 
-#pragma mark -
-#pragma mark Memory Management
+#pragma mark - Memory Management
 
 - (void)dealloc {
     [borderColor release];

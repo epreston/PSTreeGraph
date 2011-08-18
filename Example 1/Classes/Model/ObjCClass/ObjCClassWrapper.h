@@ -21,8 +21,7 @@
 }
 
 
-#pragma mark -
-#pragma mark Creating Instances
+#pragma mark - Creating Instances
 
 // Returns an ObjCClassWrapper for the given Objective-C class.  ObjCClassWrapper maintains 
 // a set of unique instances, so this will always return the same ObjCClassWrapper for a given Class.
@@ -35,8 +34,7 @@
 + (ObjCClassWrapper *)wrapperForClassNamed:(NSString *)aClassName;
 
 
-#pragma mark -
-#pragma mark Property Accessors
+#pragma mark - Property Accessors
 
 // The wrappedClass' name (e.g. @"UIButton")
 

@@ -31,8 +31,7 @@
 @synthesize minimumFrameSize;
 
 
-#pragma mark -
-#pragma mark Creating Instances
+#pragma mark - Creating Instances
 
 - (void)configureDetaults {
 	
@@ -74,16 +73,14 @@
 }
 
 
-#pragma mark -
-#pragma mark Root SubtreeView Access
+#pragma mark - Root SubtreeView Access
 
 - (PSBaseSubtreeView *)rootSubtreeView {
     return [self subtreeViewForModelNode:[self modelRoot]];
 }
 
 
-#pragma mark -
-#pragma mark Node View Nib Specification
+#pragma mark - Node View Nib Specification 
 
 - (NSString *)nodeViewNibName {
     return nodeViewNibName;
@@ -120,8 +117,7 @@
 }
 
 
-#pragma mark -
-#pragma mark Node View Nib Caching
+#pragma mark - Node View Nib Caching
 
 // iOS 4.0 and above ONLY
 
@@ -137,8 +133,7 @@
 //}
 
 
-#pragma mark -
-#pragma mark Selection State
+#pragma mark - Selection State
 
 // The unordered set of model nodes that are currently selected in the TreeGraph.  When 
 // no nodes are selected, this is an empty NSSet.  It will never be nil (and attempting
@@ -204,8 +199,7 @@
 }
 
 
-#pragma mark -
-#pragma mark Graph Building
+#pragma mark - Graph Building
 
 - (PSBaseSubtreeView *)newGraphForModelNode:(id <PSTreeGraphModelNode> )modelNode {
     
@@ -292,8 +286,7 @@
 }
 
 
-#pragma mark -
-#pragma mark Layout
+#pragma mark - Layout
 
 - (void)updateFrameSizeForContentAndClipView {
     CGSize newFrameSize;
@@ -478,8 +471,7 @@
 }
 
 
-#pragma mark -
-#pragma mark Scrolling
+#pragma mark - Scrolling
 
 - (void)scrollModelNodesToVisible:(NSSet *)modelNodes {
     CGRect targetRect = [self boundsOfModelNodes:modelNodes];
@@ -500,8 +492,7 @@
 }
 
 
-#pragma mark -
-#pragma mark Drawing
+#pragma mark - Drawing
 
 // TreeGraph always completely fills its bounds with its backgroundColor, so as long
 // as the TreeGraph's backgroundColor is opaque, the TreeGraph can be considered opaque.
@@ -524,8 +515,7 @@
 //}
 
 
-#pragma mark -
-#pragma mark Data Source
+#pragma mark - Data Source
 
 - (id <PSTreeGraphModelNode> )modelRoot {
     return modelRoot;
@@ -561,8 +551,7 @@
 }
 
 
-#pragma mark -
-#pragma mark Node Hit-Testing
+#pragma mark - Node Hit-Testing
 
 // Returns the model node under the given point, which must be expressed in the TreeGraph's interior (bounds)
 // coordinate space.  If there is a collapsed subtree at the given point, returns the model node at the root
@@ -584,8 +573,7 @@
 }
 
 
-#pragma mark -
-#pragma mark Key Event Handling
+#pragma mark - Key Event Handling
 
 // Make TreeGraphs able to -becomeFirstResponder, so they can receive key events.
  
@@ -682,8 +670,7 @@
 //}
 
 
-#pragma mark -
-#pragma mark Mouse Event Handling
+#pragma mark - Mouse Event Handling
 
 // Always receive -mouseDown: messages for clicks that occur in a TreeGraph, even if the click
 // is one that's activating the window.  This lets the user start interacting with the TreeGraph's
@@ -715,8 +702,7 @@
 //}
 
 
-#pragma mark -
-#pragma mark Gesture Event Handling
+#pragma mark - Gesture Event Handling
 
 //- (void)beginGestureWithEvent:(NSEvent *)event {
 //    // Temporarily suspend layout animations during handling of a gesture sequence.
@@ -750,8 +736,7 @@
 //}
 
 
-#pragma mark -
-#pragma mark Styling
+#pragma mark - Styling
 
 // Getters and setters for TreeGraph's appearance-related properties: colors, metrics, etc.  We could almost 
 // auto-generate these using "@synthesize", but we want each setter to automatically mark the affected parts 
@@ -868,8 +853,7 @@
 @implementation PSBaseTreeGraphView (Internal)
 
 
-#pragma mark -
-#pragma mark ModelNode -> SubtreeView Relationship Management
+#pragma mark - ModelNode -> SubtreeView Relationship Management
 
 - (PSBaseSubtreeView *)subtreeViewForModelNode:(id)modelNode {
     return [modelNodeToSubtreeViewMapTable objectForKey:modelNode];
@@ -880,8 +864,7 @@
 }
 
 
-#pragma mark -
-#pragma mark Model Tree Navigation
+#pragma mark - Model Tree Navigation
 
 - (BOOL)modelNode:(id <PSTreeGraphModelNode> )modelNode 
    isDescendantOf:(id <PSTreeGraphModelNode> )possibleAncestor {
@@ -935,8 +918,7 @@
 }
 
 
-#pragma mark -
-#pragma mark Memory Management
+#pragma mark - Memory Management
 
 - (void)dealloc {
     

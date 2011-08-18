@@ -31,8 +31,7 @@ static NSInteger CompareClassNames(id classA, id classB, void* context) {
 }
 
 
-#pragma mark -
-#pragma mark Creating Instances
+#pragma mark - Creating Instances
 
 - initWithWrappedClass:(Class)aClass {
     self = [super init];
@@ -64,8 +63,7 @@ static NSInteger CompareClassNames(id classA, id classB, void* context) {
 }
 
 
-#pragma mark -
-#pragma mark Property Accessors
+#pragma mark -  Property Accessors
 
 - (NSString *)name {
     return NSStringFromClass(wrappedClass);
@@ -115,8 +113,7 @@ static NSInteger CompareClassNames(id classA, id classB, void* context) {
 }
 
 
-#pragma mark -
-#pragma mark TreeGraphModelNode Protocol Conformance
+#pragma mark - TreeGraphModelNode Protocol
 
 - (id <PSTreeGraphModelNode> )parentModelNode {
     return [self superclassWrapper];
@@ -127,8 +124,7 @@ static NSInteger CompareClassNames(id classA, id classB, void* context) {
 }
 
 
-#pragma mark -
-#pragma mark Memory Management
+#pragma mark - Memory Management
 
 - (void)dealloc {
     [subclassesCache release];
