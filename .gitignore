@@ -1,0 +1,30 @@
+# OSX Specific System Files
+.DS_Store
+profile
+*.swp
+ehthumbs.db
+Thumbs.db
+
+# Backup files
+*~.nib
+
+# Xcode Specific Files
+build/*
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+*.xcworkspace
+!default.xcworkspace
+xcuserdata
+*.moved-aside
+
+# Textmate - if you build your xcode projects with it
+*.tm_build_errors
+
+# old skool
+.svn
