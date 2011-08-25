@@ -13,14 +13,16 @@
 @implementation PSHTreeGraphView
 
 
-- (id)initWithFrame:(CGRect)frame {
+- (id) initWithFrame:(CGRect)frame 
+{
     if ((self = [super initWithFrame:frame])) {
         // Initialization code
     }
     return self;
 }
 
-- (void)dealloc {
+- (void) dealloc 
+{
     [super dealloc];
 }
 

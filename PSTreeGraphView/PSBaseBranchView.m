@@ -20,7 +20,8 @@
 @implementation PSBaseBranchView
 
 
-- (PSBaseTreeGraphView *)enclosingTreeGraph {
+- (PSBaseTreeGraphView *) enclosingTreeGraph 
+{
     UIView *ancestor = [self superview];
     while (ancestor) {
         if ([ancestor isKindOfClass:[PSBaseTreeGraphView class]]) {
@@ -34,7 +35,8 @@
 
 #pragma mark - Drawing
 
-- (UIBezierPath *)directConnectionsPath {
+- (UIBezierPath *) directConnectionsPath 
+{
     CGRect bounds = [self bounds];
 	CGPoint rootPoint = CGPointZero;
 	
@@ -46,7 +48,6 @@
 		rootPoint = CGPointMake(CGRectGetMidX(bounds), CGRectGetMinY(bounds));
 	}
 
-	
     // Create a single bezier path that we'll use to stroke all the lines.
     UIBezierPath *path = [UIBezierPath bezierPath];
 	
@@ -65,7 +66,6 @@
 					targetPoint = [self convertPoint:CGPointMake(CGRectGetMidX(subviewBounds), CGRectGetMinY(subviewBounds)) fromView:subview];
 				}
 
-				
                 [path moveToPoint:rootPoint];
                 [path addLineToPoint:targetPoint];
             }
@@ -76,7 +76,8 @@
     return path;
 }
 
-- (UIBezierPath *)orthogonalConnectionsPath {
+- (UIBezierPath *) orthogonalConnectionsPath 
+{
     // Compute the needed adjustment in x and y to align our lines for crisp, exact pixel coverage.  
 	// (We can only do this if the lineWidth is integral, which it usually is.)
 	//    CGFloat adjustment = 0.0;
@@ -212,8 +213,8 @@
     return path;
 }
 
-- (void)drawRect:(CGRect)dirtyRect {
-	
+- (void) drawRect:(CGRect)dirtyRect 
+{
     // Build the set of lines to stroke, according to our enclosingTreeGraph's connectingLineStyle.
     UIBezierPath *path = nil;
 	

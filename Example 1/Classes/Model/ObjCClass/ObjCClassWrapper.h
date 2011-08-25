@@ -26,32 +26,32 @@
 // Returns an ObjCClassWrapper for the given Objective-C class.  ObjCClassWrapper maintains 
 // a set of unique instances, so this will always return the same ObjCClassWrapper for a given Class.
 
-+ (ObjCClassWrapper *)wrapperForClass:(Class)aClass;
++ (ObjCClassWrapper *) wrapperForClass:(Class)aClass;
 
 // Returns an ObjCClassWrapper for the given Objective-C class, by looking the Class up by
 // name and then invoking +wrapperForClass:
 
-+ (ObjCClassWrapper *)wrapperForClassNamed:(NSString *)aClassName;
++ (ObjCClassWrapper *) wrapperForClassNamed:(NSString *)aClassName;
 
 
 #pragma mark - Property Accessors
 
 // The wrappedClass' name (e.g. @"UIButton")
 
-@property(readonly) NSString *name;
+@property (nonatomic, readonly) NSString *name;
 
 // An ObjCClassWrapper representing the wrappedClass' superclass.
 
-@property(readonly) ObjCClassWrapper *superclassWrapper;
+@property (nonatomic, readonly) ObjCClassWrapper *superclassWrapper;
 
 // An array of ObjCClassWrappers representing the wrappedClass' subclasses.  
 // (For convenience, the subclasses are sorted by name.)
 
-@property(readonly) NSArray *subclasses;
+@property (nonatomic, readonly) NSArray *subclasses;
 
 // The wrappedClass' intrinsic instance size (which doesn't include external/auxiliary storage).
 
-@property(readonly) size_t wrappedClassInstanceSize;
+@property (nonatomic, readonly) size_t wrappedClassInstanceSize;
 
 
 @end

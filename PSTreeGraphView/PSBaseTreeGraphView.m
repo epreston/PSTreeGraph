@@ -33,8 +33,8 @@
 
 #pragma mark - Creating Instances
 
-- (void)configureDetaults {
-	
+- (void) configureDetaults 
+{
 	[self setBackgroundColor: [UIColor colorWithRed:0.55 green:0.76 blue:0.93 alpha:1.0]];
 	//[self setClipsToBounds:YES];
 	
@@ -59,7 +59,8 @@
 	// [self setLayerContentsRedrawPolicy:UIViewLayerContentsRedrawNever];
 }
 
-- (id)initWithFrame:(CGRect)frame {
+- (id) initWithFrame:(CGRect)frame 
+{
     self = [super initWithFrame:frame];
     if (self) {
         [self configureDetaults];
@@ -67,7 +68,8 @@
     return self;
 }
 
-- (void)awakeFromNib {
+- (void) awakeFromNib 
+{
 	[super awakeFromNib];
 	[self configureDetaults];
 }
@@ -75,7 +77,8 @@
 
 #pragma mark - Root SubtreeView Access
 
-- (PSBaseSubtreeView *)rootSubtreeView {
+- (PSBaseSubtreeView *) rootSubtreeView 
+{
     return [self subtreeViewForModelNode:[self modelRoot]];
 }
 
@@ -103,7 +106,7 @@
     return nodeViewNibBundle;
 }
 
-- (void)setNodeViewNibBundle:(NSBundle *)newBundle {
+- (void) setNodeViewNibBundle:(NSBundle *)newBundle {
     if (nodeViewNibBundle != newBundle) {
         
 		// iOS 4.0 and above ONLY
@@ -139,12 +142,13 @@
 // no nodes are selected, this is an empty NSSet.  It will never be nil (and attempting
 // to set it to nil will raise an exception).
  
-- (NSSet *)selectedModelNodes {
+- (NSSet *) selectedModelNodes 
+{
     return [[selectedModelNodes retain] autorelease];
 }
 
-- (void)setSelectedModelNodes:(NSSet *)newSelectedModelNodes {
-    
+- (void) setSelectedModelNodes:(NSSet *)newSelectedModelNodes 
+{
     NSParameterAssert(newSelectedModelNodes != nil); // Never pass nil. Pass [NSSet set] instead.
     
     // Verify that each of the nodes in the new selection is in the TreeGraph's assigned model tree.
@@ -189,19 +193,21 @@
     }
 }
 
-- (id <PSTreeGraphModelNode> )singleSelectedModelNode {
+- (id <PSTreeGraphModelNode> ) singleSelectedModelNode 
+{
     NSSet *selection = [self selectedModelNodes];
     return ([selection count] == 1) ? [selection anyObject] : nil;
 }
 
-- (CGRect)selectionBounds {
+- (CGRect) selectionBounds 
+{
     return [self boundsOfModelNodes:[self selectedModelNodes]];
 }
 
 
 #pragma mark - Graph Building
 
-- (PSBaseSubtreeView *)newGraphForModelNode:(id <PSTreeGraphModelNode> )modelNode {
+- (PSBaseSubtreeView *) newGraphForModelNode:(id <PSTreeGraphModelNode> )modelNode {
     
     NSParameterAssert(modelNode);
 	
@@ -273,8 +279,8 @@
     return subtreeView;
 }
 
-- (void)buildGraph {
-	
+- (void) buildGraph 
+{	
     // Traverse the model tree, building a SubtreeView for each model node.
     id <PSTreeGraphModelNode> root = [self modelRoot];
     if (root) {
@@ -288,7 +294,8 @@
 
 #pragma mark - Layout
 
-- (void)updateFrameSizeForContentAndClipView {
+- (void) updateFrameSizeForContentAndClipView 
+{
     CGSize newFrameSize;
     CGSize newMinimumFrameSize = [self minimumFrameSize];
 	
@@ -314,8 +321,8 @@
 	
 }
 
-- (void)updateRootSubtreeViewPositionForSize:(CGSize)rootSubtreeViewSize {
-	
+- (void) updateRootSubtreeViewPositionForSize:(CGSize)rootSubtreeViewSize 
+{	
     // Position the rootSubtreeView within the TreeGraph.
     PSBaseSubtreeView *rootSubtreeView = [self rootSubtreeView];
 	
@@ -342,22 +349,26 @@
 	
 }
 
-- (PSTreeGraphOrientationStyle)treeGraphOrientation {
+- (PSTreeGraphOrientationStyle) treeGraphOrientation 
+{
     return treeGraphOrientation;
 }
 
-- (void)setTreeGraphOrientation:(PSTreeGraphOrientationStyle)newTreeGraphOrientation {
+- (void) setTreeGraphOrientation:(PSTreeGraphOrientationStyle)newTreeGraphOrientation 
+{
     if (treeGraphOrientation != newTreeGraphOrientation) {
         treeGraphOrientation = newTreeGraphOrientation;
         [[self rootSubtreeView] recursiveSetConnectorsViewsNeedDisplay];
     }
 }
 
-- (BOOL)resizesToFillEnclosingScrollView {
+- (BOOL) resizesToFillEnclosingScrollView 
+{
     return resizesToFillEnclosingScrollView;
 }
 
-- (void)setResizesToFillEnclosingScrollView:(BOOL)flag {
+- (void) setResizesToFillEnclosingScrollView:(BOOL)flag 
+{
     if (resizesToFillEnclosingScrollView != flag) {
         resizesToFillEnclosingScrollView = flag;
         [self updateFrameSizeForContentAndClipView];
@@ -365,8 +376,8 @@
     }
 }
 
-- (void)parentClipViewDidResize:(id)object {
-	
+- (void) parentClipViewDidResize:(id)object 
+{
 	// TODO: Additional checks to ensure we are in a UIScrollView
 	UIScrollView *enclosingScrollView = (UIScrollView *)[self superview];
 	
@@ -376,7 +387,8 @@
     }
 }
 
-- (void)willMoveToSuperview:(UIView *)newSuperview {
+- (void) willMoveToSuperview:(UIView *)newSuperview 
+{
     // Ask to be notified when our superview's frame size changes (if it's an NSClipView, which is a pretty
 	// good indication that this TreeGraph is an UIScrollView's documentView), so that we can automatically 
 	// resize to always fill the UIScrollView's content area.
@@ -392,8 +404,8 @@
     [super willMoveToSuperview:newSuperview];
 }
 
-- (void)layoutSubviews {
-	
+- (void) layoutSubviews 
+{	
     // Do graph layout if we need to.
     [self layoutGraphIfNeeded];
 	
@@ -403,7 +415,8 @@
     [super layoutSubviews];
 }
 
-- (CGSize)layoutGraphIfNeeded {
+- (CGSize) layoutGraphIfNeeded 
+{
     PSBaseSubtreeView *rootSubtreeView = [self rootSubtreeView];
     if ([self needsGraphLayout] && [self modelRoot]) {
 		
@@ -431,31 +444,37 @@
     }
 }
 
-- (BOOL)needsGraphLayout {
+- (BOOL) needsGraphLayout 
+{
     return [[self rootSubtreeView] needsGraphLayout];
 }
 
-- (void)setNeedsGraphLayout {
+- (void) setNeedsGraphLayout 
+{
     [[self rootSubtreeView] recursiveSetNeedsGraphLayout];
     [self setNeedsDisplay];
 }
 
-- (void)collapseRoot {
+- (void) collapseRoot 
+{
     [[self rootSubtreeView] setExpanded:NO];
 }
 
-- (void)expandRoot {
+- (void) expandRoot 
+{
     [[self rootSubtreeView] setExpanded:YES];
 }
 
-- (IBAction)toggleExpansionOfSelectedModelNodes:(id)sender {
+- (IBAction) toggleExpansionOfSelectedModelNodes:(id)sender 
+{
     for (id <PSTreeGraphModelNode> modelNode in [self selectedModelNodes]) {
         PSBaseSubtreeView *subtreeView = [self subtreeViewForModelNode:modelNode];
         [subtreeView toggleExpansion:sender];
     }
 }
 
-- (CGRect)boundsOfModelNodes:(NSSet *)modelNodes {
+- (CGRect) boundsOfModelNodes:(NSSet *)modelNodes 
+{
     CGRect boundingBox = CGRectZero;
     for (id <PSTreeGraphModelNode> modelNode in modelNodes) {
         PSBaseSubtreeView *subtreeView = [self subtreeViewForModelNode:modelNode];
@@ -473,7 +492,8 @@
 
 #pragma mark - Scrolling
 
-- (void)scrollModelNodesToVisible:(NSSet *)modelNodes {
+- (void) scrollModelNodesToVisible:(NSSet *)modelNodes 
+{
     CGRect targetRect = [self boundsOfModelNodes:modelNodes];
     if (!CGRectIsEmpty(targetRect)) {
         CGFloat padding = [self contentMargin];
@@ -487,7 +507,8 @@
     }
 }
 
-- (void)scrollSelectedModelNodesToVisible {
+- (void) scrollSelectedModelNodesToVisible 
+{
     [self scrollModelNodesToVisible:[self selectedModelNodes]];
 }
 
@@ -505,24 +526,16 @@
 //    return ( CGColorGetAlpha([[self backgroundColor] CGColor]) < 1.0) ? NO : YES;
 //}
 
-// REMOVED: USED LAYER PROPERTY INSTEAD
-
-//- (void)drawRect:(CGRect)rect {
-//	
-//    // Fill background.
-//    [[self backgroundColor] set];
-//    UIRectFill(rect);
-//}
-
 
 #pragma mark - Data Source
 
-- (id <PSTreeGraphModelNode> )modelRoot {
+- (id <PSTreeGraphModelNode> ) modelRoot 
+{
     return modelRoot;
 }
 
-- (void)setModelRoot:(id <PSTreeGraphModelNode> )newModelRoot {
-    
+- (void) setModelRoot:(id <PSTreeGraphModelNode> )newModelRoot 
+{    
     NSParameterAssert(newModelRoot == nil || [newModelRoot conformsToProtocol:@protocol(PSTreeGraphModelNode)]);
     
     if (modelRoot != newModelRoot) {
@@ -557,8 +570,8 @@
 // coordinate space.  If there is a collapsed subtree at the given point, returns the model node at the root
 // of the collapsed subtree.  If there is no model node at the given point, returns nil.
  
-- (id <PSTreeGraphModelNode> )modelNodeAtPoint:(CGPoint)p {
-	
+- (id <PSTreeGraphModelNode> ) modelNodeAtPoint:(CGPoint)p 
+{
     // Since we've composed our content using views (SubtreeViews and enclosed nodeViews), we can use 
     // UIView's -hitTest: method to easily identify our deepest descendant view under the given point.  
     // We rely on the front-to-back order of hit-testing to ensure that we return the root of a collapsed
@@ -577,11 +590,13 @@
 
 // Make TreeGraphs able to -becomeFirstResponder, so they can receive key events.
  
-- (BOOL)acceptsFirstResponder {
+- (BOOL) acceptsFirstResponder 
+{
     return YES;
 }
 
-- (void)moveToSiblingByRelativeIndex:(NSInteger)relativeIndex {
+- (void) moveToSiblingByRelativeIndex:(NSInteger)relativeIndex 
+{
     id <PSTreeGraphModelNode> modelNode = [self singleSelectedModelNode];
     if (modelNode) {
         id <PSTreeGraphModelNode> sibling = [self siblingOfModelNode:modelNode atRelativeIndex:relativeIndex];
@@ -597,7 +612,8 @@
     [self scrollSelectedModelNodesToVisible];
 }
 
-- (void)moveToParent:(id)sender {
+- (void) moveToParent:(id)sender 
+{
     id <PSTreeGraphModelNode> modelNode = [self singleSelectedModelNode];
     if (modelNode) {
         if (modelNode != [self modelRoot]) {
@@ -615,7 +631,8 @@
     [self scrollSelectedModelNodesToVisible];
 }
 
-- (void)moveToNearestChild:(id)sender {
+- (void) moveToNearestChild:(id)sender 
+{
     id <PSTreeGraphModelNode> modelNode = [self singleSelectedModelNode];
     if (modelNode) {
         PSBaseSubtreeView *subtreeView = [self subtreeViewForModelNode:modelNode];
@@ -638,19 +655,23 @@
     [self scrollSelectedModelNodesToVisible];
 }
 
-- (void)moveUp:(id)sender {
+- (void) moveUp:(id)sender 
+{
     [self moveToSiblingByRelativeIndex:-1];
 }
 
-- (void)moveDown:(id)sender {
+- (void) moveDown:(id)sender 
+{
     [self moveToSiblingByRelativeIndex:1];
 }
 
-- (void)moveLeft:(id)sender {
+- (void) moveLeft:(id)sender 
+{
     [self moveToParent:sender];
 }
 
-- (void)moveRight:(id)sender {
+- (void) moveRight:(id)sender 
+{
     [self moveToNearestChild:sender];
 }
 
@@ -765,11 +786,13 @@
 //    }
 //}
 
-- (UIColor *)connectingLineColor {
+- (UIColor *) connectingLineColor 
+{
     return connectingLineColor;
 }
 
-- (void)setConnectingLineColor:(UIColor *)newConnectingLineColor {
+- (void) setConnectingLineColor:(UIColor *)newConnectingLineColor 
+{
     if (connectingLineColor != newConnectingLineColor) {
         [connectingLineColor release];
         connectingLineColor = [newConnectingLineColor copy];
@@ -777,11 +800,13 @@
     }
 }
 
-- (CGFloat)contentMargin {
+- (CGFloat) contentMargin 
+{
     return contentMargin;
 }
 
-- (void)setContentMargin:(CGFloat)newContentMargin {
+- (void) setContentMargin:(CGFloat)newContentMargin 
+{
     if (contentMargin != newContentMargin) {
         contentMargin = newContentMargin;
         [self setNeedsGraphLayout];
@@ -789,11 +814,13 @@
     }
 }
 
-- (CGFloat)parentChildSpacing {
+- (CGFloat) parentChildSpacing 
+{
     return parentChildSpacing;
 }
 
-- (void)setParentChildSpacing:(CGFloat)newParentChildSpacing {
+- (void) setParentChildSpacing:(CGFloat)newParentChildSpacing 
+{
     if (parentChildSpacing != newParentChildSpacing) {
         parentChildSpacing = newParentChildSpacing;
         [self setNeedsGraphLayout];
@@ -801,11 +828,13 @@
     }
 }
 
-- (CGFloat)siblingSpacing {
+- (CGFloat) siblingSpacing 
+{
     return siblingSpacing;
 }
 
-- (void)setSiblingSpacing:(CGFloat)newSiblingSpacing {
+- (void) setSiblingSpacing:(CGFloat)newSiblingSpacing 
+{
     if (siblingSpacing != newSiblingSpacing) {
         siblingSpacing = newSiblingSpacing;
         [self setNeedsGraphLayout];
@@ -813,18 +842,21 @@
     }
 }
 
-- (PSTreeGraphConnectingLineStyle)connectingLineStyle {
+- (PSTreeGraphConnectingLineStyle) connectingLineStyle 
+{
     return connectingLineStyle;
 }
 
-- (void)setConnectingLineStyle:(PSTreeGraphConnectingLineStyle)newConnectingLineStyle {
+- (void) setConnectingLineStyle:(PSTreeGraphConnectingLineStyle)newConnectingLineStyle 
+{
     if (connectingLineStyle != newConnectingLineStyle) {
         connectingLineStyle = newConnectingLineStyle;
         [[self rootSubtreeView] recursiveSetConnectorsViewsNeedDisplay];
     }
 }
 
-- (CGFloat)connectingLineWidth {
+- (CGFloat) connectingLineWidth 
+{
     return connectingLineWidth;
 }
 
@@ -835,11 +867,13 @@
     }
 }
 
-- (BOOL)showsSubtreeFrames {
+- (BOOL) showsSubtreeFrames 
+{
     return showsSubtreeFrames;
 }
 
-- (void)setShowsSubtreeFrames:(BOOL)newShowsSubtreeFrames {
+- (void) setShowsSubtreeFrames:(BOOL)newShowsSubtreeFrames 
+{
     if (showsSubtreeFrames != newShowsSubtreeFrames) {
         showsSubtreeFrames = newShowsSubtreeFrames;
         [[self rootSubtreeView] resursiveSetSubtreeBordersNeedDisplay];
@@ -855,20 +889,22 @@
 
 #pragma mark - ModelNode -> SubtreeView Relationship Management
 
-- (PSBaseSubtreeView *)subtreeViewForModelNode:(id)modelNode {
+- (PSBaseSubtreeView *) subtreeViewForModelNode:(id)modelNode 
+{
     return [modelNodeToSubtreeViewMapTable objectForKey:modelNode];
 }
 
-- (void)setSubtreeView:(PSBaseSubtreeView *)subtreeView forModelNode:(id)modelNode {
+- (void) setSubtreeView:(PSBaseSubtreeView *)subtreeView forModelNode:(id)modelNode 
+{
     [modelNodeToSubtreeViewMapTable setObject:subtreeView forKey:modelNode];
 }
 
 
 #pragma mark - Model Tree Navigation
 
-- (BOOL)modelNode:(id <PSTreeGraphModelNode> )modelNode 
-   isDescendantOf:(id <PSTreeGraphModelNode> )possibleAncestor {
-    
+- (BOOL) modelNode:(id <PSTreeGraphModelNode> )modelNode 
+    isDescendantOf:(id <PSTreeGraphModelNode> )possibleAncestor 
+{    
     NSParameterAssert(modelNode != nil);
     NSParameterAssert(possibleAncestor != nil);
     
@@ -882,17 +918,17 @@
     return NO;
 }
 
-- (BOOL)modelNodeIsInAssignedTree:(id <PSTreeGraphModelNode> )modelNode {
-    
+- (BOOL) modelNodeIsInAssignedTree:(id <PSTreeGraphModelNode> )modelNode 
+{    
     NSParameterAssert(modelNode != nil);
     
     id <PSTreeGraphModelNode> root = [self modelRoot];
     return (modelNode == root || [self modelNode:modelNode isDescendantOf:root]) ? YES : NO;
 }
 
-- (id <PSTreeGraphModelNode> )siblingOfModelNode:(id <PSTreeGraphModelNode> )modelNode 
-                            atRelativeIndex:(NSInteger)relativeIndex {
-    
+- (id <PSTreeGraphModelNode> ) siblingOfModelNode:(id <PSTreeGraphModelNode> )modelNode 
+                                  atRelativeIndex:(NSInteger)relativeIndex 
+{    
     NSParameterAssert(modelNode != nil);
     NSAssert([self modelNodeIsInAssignedTree:modelNode], @"modelNode is not in the tree");
 	
@@ -918,10 +954,10 @@
 }
 
 
-#pragma mark - Memory Management
+#pragma mark - Resource Management
 
-- (void)dealloc {
-    
+- (void) dealloc 
+{    
 	// iOS 4.0 and above ONLY
 	// [cachedNodeViewNib release];
 	

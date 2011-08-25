@@ -19,8 +19,8 @@
 	UILabel *detailLabel;
 }
 
-@property(assign) IBOutlet UIButton *expandButton;
-@property(assign) IBOutlet UILabel *titleLabel;
-@property(assign) IBOutlet UILabel *detailLabel;
+@property (nonatomic, assign) IBOutlet UIButton *expandButton;
+@property (nonatomic, assign) IBOutlet UILabel *titleLabel;
+@property (nonatomic, assign) IBOutlet UILabel *detailLabel;
 
 @end

@@ -103,7 +103,7 @@ typedef NSInteger PSTreeGraphOrientationStyle;
 
 // Use this method to keep the view in sync for now.
 
-- (void)parentClipViewDidResize:(id)object;
+- (void) parentClipViewDidResize:(id)object;
 
 
 #pragma mark - Creating Instances
@@ -113,7 +113,7 @@ typedef NSInteger PSTreeGraphOrientationStyle;
 // metrics, but to have a usable TreeGraph with actual content, you need to specify a 
 // nodeViewNibName, an optional nodeViewNibBundle, and a modelRoot.
  
-- (id)initWithFrame:(CGRect)frame;
+- (id) initWithFrame:(CGRect)frame;
 
 
 #pragma mark - Connection to Model
@@ -125,7 +125,7 @@ typedef NSInteger PSTreeGraphOrientationStyle;
 // to traverse the model tree, must conform to the TreeGraphModelNode protocol declared in 
 // TreeGraphModelNode.h
  
-@property(retain) id <PSTreeGraphModelNode> modelRoot;
+@property (nonatomic, retain) id <PSTreeGraphModelNode> modelRoot;
 
 
 #pragma mark - Root SubtreeView Access
@@ -134,7 +134,7 @@ typedef NSInteger PSTreeGraphOrientationStyle;
 // read-only accessor provides a way to get the rootmost SubtreeView (the one that corresponds 
 // to the modelRoot model node).
  
-@property(readonly) PSBaseSubtreeView *rootSubtreeView;
+@property (nonatomic, readonly) PSBaseSubtreeView *rootSubtreeView;
 
 
 #pragma mark - Node View Nib Specification
@@ -145,13 +145,13 @@ typedef NSInteger PSTreeGraphOrientationStyle;
 // Must specify a "View" .nib file, whose File's Owner is a SubtreeView, or the TreeGraph will be
 // unable to instantiate node views.
  
-@property(copy) NSString *nodeViewNibName;
+@property (nonatomic, copy) NSString *nodeViewNibName;
 
 // The NSBundle from which the .nib named by nodeViewNibName can be loaded.  May be nil, in which
 // case we follow the usual UIKit-implemented rules for automatically finding the named .nib 
 // file.
  
-@property(retain) NSBundle *nodeViewNibBundle;
+@property (nonatomic, retain) NSBundle *nodeViewNibBundle;
 
 
 #pragma mark - Selection State
@@ -161,17 +161,17 @@ typedef NSInteger PSTreeGraphOrientationStyle;
 // will raise an exception).  Every member of this set must be a descendant of the TreeGraph's 
 // modelRoot (or modelRoot itself).  If any member is not, TreeGraph will raise an exception.
  
-@property(copy) NSSet *selectedModelNodes;
+@property (nonatomic, copy) NSSet *selectedModelNodes;
 
 // Convenience accessor that returns the selected node, if exactly one node is currently 
 // selected.  Returns nil if zero, or more than one, nodees are currently selected.
  
-@property(readonly) id <PSTreeGraphModelNode> singleSelectedModelNode;
+@property (nonatomic, readonly) id <PSTreeGraphModelNode> singleSelectedModelNode;
 
 // Returns the bounding box of the selectedModelNodes.  The bounding box takes only the selected
 // nodes into account, disregarding any descendants they might have.
  
-@property(readonly) CGRect selectionBounds;
+@property (nonatomic, readonly) CGRect selectionBounds;
 
 
 #pragma mark - Node Hit-Testing
@@ -192,62 +192,62 @@ typedef NSInteger PSTreeGraphOrientationStyle;
 // than its minimumFrameSize, since we automatically expand the TreeGraph to always be at least 
 // as large as the NSScrollView's clip area (contentView) to provide a nicer user experience.
  
-@property CGSize minimumFrameSize;
+@property (nonatomic, assign) CGSize minimumFrameSize;
 
 // If YES, and if the TreeGraph is the documentView of an UIScrollView, the TreeGraph will 
 // automatically resize itself as needed to ensure that it always at least fills the content 
 // area of its enclosing UIScrollView.  If NO, or if the TreeGraph is not the documentView of 
 // an UIScrollView, the TreeGraph's size is determined only by its content and margins.
  
-@property BOOL resizesToFillEnclosingScrollView;
+@property (nonatomic, assign) BOOL resizesToFillEnclosingScrollView;
 
 // The style for tree graph orientation  (See the TreeGraphOrientationStyle enumeration above.)
 
-@property PSTreeGraphOrientationStyle treeGraphOrientation;
+@property (nonatomic) PSTreeGraphOrientationStyle treeGraphOrientation;
 
 //Returns YES if the tree needs relayout.
  
-- (BOOL)needsGraphLayout;
+- (BOOL) needsGraphLayout;
 
 //Marks the tree as needing relayout.
  
-- (void)setNeedsGraphLayout;
+- (void) setNeedsGraphLayout;
 
 // Performs graph layout, if the tree is marked as needing it.  Returns the size computed for the
 // tree (not including contentMargin).
  
-- (CGSize)layoutGraphIfNeeded;
+- (CGSize) layoutGraphIfNeeded;
 
 // Collapses the root node, if it is currently expanded.
  
-- (void)collapseRoot;
+- (void) collapseRoot;
 
 // Expands the root node, if it is currently collapsed.
  
-- (void)expandRoot;
+- (void) expandRoot;
 
 // Toggles the expansion state of the TreeGraph's selectedModelNodes, expanding those that are
 // currently collapsed, and collapsing those that are currently expanded.
  
-- (IBAction)toggleExpansionOfSelectedModelNodes:(id)sender;
+- (IBAction) toggleExpansionOfSelectedModelNodes:(id)sender;
 
 // Returns the bounding box of the node views that represent the specified modelNodes.  Model 
 // nodes that aren't part of the displayed tree, or are part of a collapsed subtree, are ignored
 // and don't contribute to the returned bounding box.  The bounding box takes only the specified
 // nodes into account, disregarding any descendants they might have.
  
-- (CGRect)boundsOfModelNodes:(NSSet *)modelNodes;
+- (CGRect) boundsOfModelNodes:(NSSet *)modelNodes;
 
 
 #pragma mark - Scrolling
 
 // Does a [self scrollRectToVisible:] with the bounding box of the specified model nodes.
  
-- (void)scrollModelNodesToVisible:(NSSet *)modelNodes;
+- (void) scrollModelNodesToVisible:(NSSet *)modelNodes;
 
 // Does a [self scrollRectToVisible:] with the bounding box of the selected model nodes.
  
-- (void)scrollSelectedModelNodesToVisible;
+- (void) scrollSelectedModelNodesToVisible;
 
 
 #pragma mark - Animation Support
@@ -255,12 +255,12 @@ typedef NSInteger PSTreeGraphOrientationStyle;
 // Whether the TreeGraph animates layout operations.  Defaults to YES.  If set to NO, layout 
 // jumpst instantaneously to the tree's new state.
  
-@property BOOL animatesLayout;
+@property (nonatomic, assign) BOOL animatesLayout;
 
 // Used to temporarily suppress layout animation during event tracking.  Layout animation happens
 // only if animatesLayout is YES and this is NO.
  
-@property BOOL layoutAnimationSuppressed;
+@property (nonatomic, assign) BOOL layoutAnimationSuppressed;
 
 
 #pragma mark - Layout Metrics
@@ -268,15 +268,15 @@ typedef NSInteger PSTreeGraphOrientationStyle;
 // The amount of padding to leave between the displayed tree and each of the four edges of the 
 // TreeGraph's bounds.
  
-@property CGFloat contentMargin;
+@property (nonatomic, assign) CGFloat contentMargin;
 
 // The horizonal spacing between each parent node and its child nodes.
  
-@property CGFloat parentChildSpacing;
+@property (nonatomic, assign) CGFloat parentChildSpacing;
 
 // The vertical spacing betwen sibling nodes.
  
-@property CGFloat siblingSpacing;
+@property (nonatomic, assign) CGFloat siblingSpacing;
 
 
 #pragma mark - Styling
@@ -287,20 +287,20 @@ typedef NSInteger PSTreeGraphOrientationStyle;
 
 // The stroke color for node connecting lines.
  
-@property(copy) UIColor *connectingLineColor;
+@property (nonatomic, copy) UIColor *connectingLineColor;
 
 // The width for node connecting lines.
  
-@property CGFloat connectingLineWidth;
+@property (nonatomic, assign) CGFloat connectingLineWidth;
 
 // The style for node connecting lines.  (See the PSTreeGraphConnectingLineStyle enumeration above.)
  
-@property PSTreeGraphConnectingLineStyle connectingLineStyle;
+@property (nonatomic) PSTreeGraphConnectingLineStyle connectingLineStyle;
 
 // Defaults to NO.  If YES, a stroked outline is shown around each of the TreeGraph's 
 // SubtreeViews.  This can be helpful for visualizing the TreeGraph's structure and layout.
  
-@property BOOL showsSubtreeFrames;
+@property (nonatomic, assign) BOOL showsSubtreeFrames;
 
 
 @end

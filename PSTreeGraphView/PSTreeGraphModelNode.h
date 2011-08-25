@@ -28,7 +28,7 @@
 // The model node's child nodes.  If the node has no children, this should return an 
 // empty array ([NSArray array]), not nil.
 
-- (NSArray *)childModelNodes;
+- (NSArray *) childModelNodes;
 
 @end
 
@@ -40,7 +40,7 @@
 
 // The delegate will configure the nodeView with the modelNode provided.
 
--(void) configureNodeView:(UIView *)nodeView withModelNode:(id <PSTreeGraphModelNode> )modelNode;
+- (void) configureNodeView:(UIView *)nodeView withModelNode:(id <PSTreeGraphModelNode> )modelNode;
 
 @end
 

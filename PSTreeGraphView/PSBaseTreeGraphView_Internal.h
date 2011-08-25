@@ -29,13 +29,13 @@
 // Returns the SubtreeView that corresponds to the specified modelNode, as tracked by the TreeGraph's
 // modelNodeToSubtreeViewMapTable.
 
-- (PSBaseSubtreeView *)subtreeViewForModelNode:(id)modelNode;
+- (PSBaseSubtreeView *) subtreeViewForModelNode:(id)modelNode;
 
 // Associates the specified subtreeView with the given modelNode in the TreeGraph's 
 // modelNodeToSubtreeViewMapTable, so that it can later be looked up using -subtreeViewForModelNode:
 
-- (void)setSubtreeView:(PSBaseSubtreeView *)subtreeView 
-          forModelNode:(id)modelNode;
+- (void) setSubtreeView:(PSBaseSubtreeView *)subtreeView 
+           forModelNode:(id)modelNode;
 
 
 #pragma mark - Model Tree Navigation
@@ -44,8 +44,8 @@
 //
 // Raises an exception if either modelNode or possibleAncestor is nil.
 
-- (BOOL)modelNode:(id <PSTreeGraphModelNode> )modelNode 
-   isDescendantOf:(id <PSTreeGraphModelNode> )possibleAncestor;
+- (BOOL) modelNode:(id <PSTreeGraphModelNode> )modelNode 
+    isDescendantOf:(id <PSTreeGraphModelNode> )possibleAncestor;
 
 // Returns YES if modelNode is the TreeGraph's assigned modelRoot, or a descendant of modelRoot.
 //
@@ -54,7 +54,7 @@
 //
 // Raises an exception if modelNode is nil.
 
-- (BOOL)modelNodeIsInAssignedTree:(id <PSTreeGraphModelNode> )modelNode;
+- (BOOL) modelNodeIsInAssignedTree:(id <PSTreeGraphModelNode> )modelNode;
 
 // Returns the sibling at the given offset relative to the given modelNode.  
 // (e.g. relativeIndex == -1 requests the previous sibling. relativeIndex == +1 requests the next sibling.)  
@@ -67,8 +67,8 @@
 //
 // Raises an exception if modelNode is nil, or if modelNode is not within the subtree assigned to the TreeGraph.
 
-- (id<PSTreeGraphModelNode>)siblingOfModelNode:(id <PSTreeGraphModelNode> )modelNode 
-                               atRelativeIndex:(NSInteger)relativeIndex;
+- (id<PSTreeGraphModelNode>) siblingOfModelNode:(id <PSTreeGraphModelNode> )modelNode 
+                                atRelativeIndex:(NSInteger)relativeIndex;
 
 
 #pragma mark - Node View Nib Caching
@@ -79,6 +79,6 @@
 // We automatically let go of the cachedNodeViewNib when either of these properties changes.  
 // Keeping a cached NSNib instance helps speed up repeated instantiation of node views.
 
-// @property(retain) UINib *cachedNodeViewNib;
+// @property (nonatomic, retain) UINib *cachedNodeViewNib;
 
 @end

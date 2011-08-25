@@ -19,10 +19,10 @@
 }
 
 // The TreeGraph
-@property(assign) IBOutlet PSBaseTreeGraphView *treeGraphView;
+@property(nonatomic, assign) IBOutlet PSBaseTreeGraphView *treeGraphView;
 
 // The name of the root class that the TreeGraph is currently showing.
-@property(copy) NSString *rootClassName;
+@property(nonatomic, copy) NSString *rootClassName;
 
 
 @end

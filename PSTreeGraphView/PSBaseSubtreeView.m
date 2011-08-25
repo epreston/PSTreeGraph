@@ -41,15 +41,16 @@ static CGFloat subtreeBorderWidth(void) {
 @synthesize nodeView;
 
 
-- (BOOL)isLeaf {
+- (BOOL)isLeaf 
+{
     return [[[self modelNode] childModelNodes] count] == 0;
 }
 
 
 #pragma mark - Instance Initialization
 
-- initWithModelNode:(id <PSTreeGraphModelNode> )newModelNode {
-    
+- initWithModelNode:(id <PSTreeGraphModelNode> )newModelNode 
+{    
     NSParameterAssert(newModelNode);
     
     self = [super initWithFrame:CGRectMake(10, 10, 100, 25)];
@@ -79,7 +80,8 @@ static CGFloat subtreeBorderWidth(void) {
 }
 
 
-- (PSBaseTreeGraphView *)enclosingTreeGraph {
+- (PSBaseTreeGraphView *) enclosingTreeGraph 
+{
     UIView *ancestor = [self superview];
     while (ancestor) {
         if ([ancestor isKindOfClass:[PSBaseTreeGraphView class]]) {
@@ -93,15 +95,18 @@ static CGFloat subtreeBorderWidth(void) {
 
 #pragma mark - Layout
 
-- (BOOL)needsGraphLayout {
+- (BOOL) needsGraphLayout 
+{
     return needsGraphLayout;
 }
 
-- (void)setNeedsGraphLayout {
+- (void) setNeedsGraphLayout 
+{
     needsGraphLayout = YES;
 }
 
-- (void)recursiveSetNeedsGraphLayout {
+- (void) recursiveSetNeedsGraphLayout 
+{
     [self setNeedsGraphLayout];
     for (UIView *subview in [self subviews]) {
         if ([subview isKindOfClass:[PSBaseSubtreeView class]]) {
@@ -110,14 +115,16 @@ static CGFloat subtreeBorderWidth(void) {
     }
 }
 
-- (CGSize)sizeNodeViewToFitContent {
+- (CGSize) sizeNodeViewToFitContent 
+{
     // TODO: Node size is hardwired for now, but the layout algorithm could accommodate variable-sized nodes
 	// if we implement size-to-fit for nodes.
 	
     return [nodeView frame].size;
 }
 
-- (CGSize)layoutGraphIfNeeded {
+- (CGSize) layoutGraphIfNeeded 
+{
     CGSize selfTargetSize;
 	
     if (!needsGraphLayout)
@@ -385,11 +392,13 @@ static CGFloat subtreeBorderWidth(void) {
     return selfTargetSize;
 }
 
-- (BOOL)isExpanded {
+- (BOOL) isExpanded 
+{
     return expanded;
 }
 
-- (void)setExpanded:(BOOL)flag {
+- (void) setExpanded:(BOOL)flag 
+{
     if (expanded != flag) {
 		
         // Remember this SubtreeView's new state.
@@ -407,8 +416,8 @@ static CGFloat subtreeBorderWidth(void) {
     }
 }
 
-- (IBAction)toggleExpansion:(id)sender {
-	
+- (IBAction) toggleExpansion:(id)sender 
+{
 	[UIView beginAnimations:@"TreeNodeExpansion" context:nil];
 	// [UIView setAnimationDuration:0.5];
 	[UIView setAnimationBeginsFromCurrentState:YES];
@@ -443,7 +452,8 @@ static CGFloat subtreeBorderWidth(void) {
 //    }
 //}
 
-- (void)updateSubtreeBorder {
+- (void) updateSubtreeBorder 
+{
     CALayer *layer = [self layer];
     if (layer) {
         // Disable implicit animations during these layer property changes, to make them take effect immediately.
@@ -470,8 +480,8 @@ static CGFloat subtreeBorderWidth(void) {
 
 #pragma mark - Invalidation
 
-- (void)recursiveSetConnectorsViewsNeedDisplay {
-	
+- (void) recursiveSetConnectorsViewsNeedDisplay 
+{
     // Mark this SubtreeView's connectorsView as needing display.
     [connectorsView setNeedsDisplay];
 	
@@ -484,7 +494,8 @@ static CGFloat subtreeBorderWidth(void) {
     }
 }
 
-- (void)resursiveSetSubtreeBordersNeedDisplay {
+- (void) resursiveSetSubtreeBordersNeedDisplay 
+{
     if ( [self layer] ) {
         // We only need this if layer-backed.  When we have a backing layer, we use the 
 		// layer's "border" properties to draw the subtree debug border.
@@ -506,15 +517,16 @@ static CGFloat subtreeBorderWidth(void) {
 
 #pragma mark - Selection State
 
-- (BOOL)nodeIsSelected {
+- (BOOL) nodeIsSelected 
+{
     return [[[self enclosingTreeGraph] selectedModelNodes] containsObject:[self modelNode]];
 }
 
 
 #pragma mark - Node Hit-Testing
 
-- (id <PSTreeGraphModelNode> )modelNodeAtPoint:(CGPoint)p {
-    
+- (id <PSTreeGraphModelNode> ) modelNodeAtPoint:(CGPoint)p 
+{    
 	// Check for intersection with our subviews, enumerating them in reverse order to get 
 	// front-to-back ordering.  We could use UIView's -hitTest: method here, but we don't
 	// want to bother hit-testing deeper than the nodeView level.
@@ -547,8 +559,8 @@ static CGFloat subtreeBorderWidth(void) {
     return nil;
 }
 
-- (id <PSTreeGraphModelNode> )modelNodeClosestToY:(CGFloat)y {
-    
+- (id <PSTreeGraphModelNode> ) modelNodeClosestToY:(CGFloat)y 
+{    
 	// Do a simple linear search of our subviews, ignoring non-SubtreeViews.  If performance was ever
     // an issue for this code, we could take advantage of knowing the layout order of the nodes to do
     // a sort of binary search.
@@ -577,15 +589,18 @@ static CGFloat subtreeBorderWidth(void) {
 
 #pragma mark - Debugging
 
-- (NSString *)description {
+- (NSString *) description 
+{
     return [NSString stringWithFormat:@"SubtreeView<%@>", [modelNode description]];
 }
 
-- (NSString *)nodeSummary {
+- (NSString *) nodeSummary 
+{
     return [NSString stringWithFormat:@"f=%@ %@", NSStringFromCGRect([nodeView frame]), [modelNode description]];
 }
 
-- (NSString *)treeSummaryWithDepth:(NSInteger)depth {
+- (NSString *) treeSummaryWithDepth:(NSInteger)depth 
+{
     NSEnumerator *subviewsEnumerator = [[self subviews] objectEnumerator];
     UIView *subview;
     NSMutableString *description = [NSMutableString string];
@@ -603,9 +618,10 @@ static CGFloat subtreeBorderWidth(void) {
 }
 
 
-#pragma mark - Memory Management
+#pragma mark - Resource Management
 
-- (void)dealloc {
+- (void) dealloc 
+{
 	//    [nodeView release]; // not retained, since an IBOutlet
     [connectorsView release];
     [modelNode release];

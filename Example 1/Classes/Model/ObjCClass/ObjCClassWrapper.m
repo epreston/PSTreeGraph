@@ -15,9 +15,11 @@
 
 static NSMutableDictionary *classToWrapperMapTable = nil;
 
+
 // Compares two ObjCClassWrappers by name, and returns an NSComparisonResult.
  
-static NSInteger CompareClassNames(id classA, id classB, void* context) {
+static NSInteger CompareClassNames(id classA, id classB, void* context) 
+{
     return [[classA description] compare:[classB description]];
 }
 
@@ -26,14 +28,16 @@ static NSInteger CompareClassNames(id classA, id classB, void* context) {
 @implementation ObjCClassWrapper
 
 
-- (id)copyWithZone:(NSZone *)zone {
+- (id) copyWithZone:(NSZone *)zone 
+{
     return [self retain];
 }
 
 
 #pragma mark - Creating Instances
 
-- initWithWrappedClass:(Class)aClass {
+- initWithWrappedClass:(Class)aClass 
+{
     self = [super init];
     if (self) {
         if (aClass != Nil) {
@@ -50,7 +54,8 @@ static NSInteger CompareClassNames(id classA, id classB, void* context) {
     return self;
 }
 
-+ (ObjCClassWrapper *)wrapperForClass:(Class)aClass {
++ (ObjCClassWrapper *) wrapperForClass:(Class)aClass 
+{
     ObjCClassWrapper *wrapper = [classToWrapperMapTable objectForKey:aClass];
     if (wrapper == nil) {
         wrapper = [[[self alloc] initWithWrappedClass:aClass] autorelease];
@@ -58,31 +63,36 @@ static NSInteger CompareClassNames(id classA, id classB, void* context) {
     return wrapper;
 }
 
-+ (ObjCClassWrapper *)wrapperForClassNamed:(NSString *)aClassName {
++ (ObjCClassWrapper *) wrapperForClassNamed:(NSString *)aClassName 
+{
     return [self wrapperForClass:NSClassFromString(aClassName)];
 }
 
 
 #pragma mark -  Property Accessors
 
-- (NSString *)name {
+- (NSString *) name 
+{
     return NSStringFromClass(wrappedClass);
 }
 
-- (NSString *)description {
+- (NSString *) description 
+{
     return [self name];
 }
 
-- (size_t)wrappedClassInstanceSize {
+- (size_t) wrappedClassInstanceSize 
+{
     return class_getInstanceSize(wrappedClass);
 }
 
-- (ObjCClassWrapper *)superclassWrapper {
+- (ObjCClassWrapper *) superclassWrapper 
+{
     return [[self class] wrapperForClass:class_getSuperclass(wrappedClass)];
 }
 
-- (NSArray *)subclasses {
-
+- (NSArray *) subclasses 
+{
     // If we haven't built our array of subclasses yet, do so.
     if (subclassesCache == nil) {
 
@@ -115,18 +125,21 @@ static NSInteger CompareClassNames(id classA, id classB, void* context) {
 
 #pragma mark - TreeGraphModelNode Protocol
 
-- (id <PSTreeGraphModelNode> )parentModelNode {
+- (id <PSTreeGraphModelNode> ) parentModelNode 
+{
     return [self superclassWrapper];
 }
 
-- (NSArray *)childModelNodes {
+- (NSArray *) childModelNodes 
+{
     return [self subclasses];
 }
 
 
-#pragma mark - Memory Management
+#pragma mark - Resource Management
 
-- (void)dealloc {
+- (void) dealloc
+{
     [subclassesCache release];
     [super dealloc];
 }

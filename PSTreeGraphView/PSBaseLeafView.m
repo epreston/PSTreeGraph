@@ -24,7 +24,8 @@
 
 #pragma mark - Update Layer
 
-- (void)updateLayerAppearanceToMatchContainerView {
+- (void) updateLayerAppearanceToMatchContainerView 
+{
     CALayer *layer = [self layer];
     if (layer) {
 		
@@ -65,7 +66,8 @@
 
 #pragma mark - Initialization
 
-- (void)configureDetaults {
+- (void) configureDetaults 
+{
 	// Initialize ivars directly.  As a rule, it's best to avoid invoking accessors from an -init...
 	// method, since they may wrongly expect the instance to be fully formed.
 	
@@ -77,7 +79,8 @@
 	[self updateLayerAppearanceToMatchContainerView];
 }
 
-- initWithFrame:(CGRect)newFrame {
+- initWithFrame:(CGRect)newFrame 
+{
     self = [super initWithFrame:newFrame];
     if (self) {
 		[self configureDetaults];
@@ -86,7 +89,8 @@
     return self;
 }
 
-- (void)awakeFromNib {
+- (void) awakeFromNib 
+{
 	[super awakeFromNib];
     [self configureDetaults];
 }
@@ -128,11 +132,13 @@
 
 #pragma mark - Styling 
 
-- (UIColor *)borderColor {
+- (UIColor*) borderColor 
+{
     return borderColor;
 }
 
-- (void)setBorderColor:(UIColor *)color {
+- (void) setBorderColor:(UIColor *)color 
+{
     if (borderColor != color) {
         [borderColor release];
         borderColor = [[color copy] retain];
@@ -140,33 +146,39 @@
     }
 }
 
-- (float)borderWidth {
+- (CGFloat) borderWidth 
+{
     return borderWidth;
 }
 
-- (void)setBorderWidth:(float)width {
+- (void) setBorderWidth:(CGFloat)width 
+{
     if (borderWidth != width) {
         borderWidth = width;
         [self updateLayerAppearanceToMatchContainerView];
     }
 }
 
-- (float)cornerRadius {
+- (CGFloat)cornerRadius 
+{
     return cornerRadius;
 }
 
-- (void)setCornerRadius:(float)radius {
+- (void) setCornerRadius:(CGFloat)radius 
+{
     if (cornerRadius != radius) {
         cornerRadius = radius;
         [self updateLayerAppearanceToMatchContainerView];
     }
 }
 
-- (UIColor *)fillColor {
+- (UIColor*) fillColor 
+{
     return fillColor;
 }
 
-- (void)setFillColor:(UIColor *)color {
+- (void) setFillColor:(UIColor *)color 
+{
     if (fillColor != color) {
         [fillColor release];
         fillColor = [[color copy] retain];
@@ -177,11 +189,13 @@
 
 #pragma mark - Selection State
 
-- (BOOL)showingSelected {
+- (BOOL) showingSelected 
+{
     return showingSelected;
 }
 
-- (void)setShowingSelected:(BOOL)newShowingSelected {
+- (void) setShowingSelected:(BOOL)newShowingSelected 
+{
     if (showingSelected != newShowingSelected) {
         showingSelected = newShowingSelected;
         [self updateLayerAppearanceToMatchContainerView];
@@ -189,9 +203,10 @@
 }
 
 
-#pragma mark - Memory Management
+#pragma mark - Resource Management
 
-- (void)dealloc {
+- (void) dealloc 
+{
     [borderColor release];
     [fillColor release];
 	
