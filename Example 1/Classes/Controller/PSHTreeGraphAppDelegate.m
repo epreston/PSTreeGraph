@@ -10,7 +10,9 @@
 #import "PSHTreeGraphAppDelegate.h"
 #import "PSHTreeGraphViewController.h"
 
+
 @implementation PSHTreeGraphAppDelegate
+
 
 @synthesize window;
 @synthesize viewController;
@@ -27,7 +29,6 @@
 	return YES;
 }
 
-
 - (void) applicationWillResignActive:(UIApplication *)application 
 {
     // Sent when the application is about to move from active to inactive state. This can occur for
@@ -38,13 +39,11 @@
 	// Games should use this method to pause the game.
 }
 
-
 - (void) applicationDidBecomeActive:(UIApplication *)application 
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive.
 	// If the application was previously in the background, optionally refresh the user interface.
 }
-
 
 - (void) applicationWillTerminate:(UIApplication *)application 
 {
