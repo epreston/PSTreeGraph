@@ -23,11 +23,13 @@
 
 #define CENTER_COLLAPSED_SUBTREE_ROOT   1
 
-static UIColor *subtreeBorderColor(void) {
+static UIColor *subtreeBorderColor(void) 
+{
     return [[UIColor colorWithRed:0.0 green:0.5 blue:0.0 alpha:1.0] retain];
 }
 
-static CGFloat subtreeBorderWidth(void) {
+static CGFloat subtreeBorderWidth(void) 
+{
     return 2.0;
 }
 
@@ -41,7 +43,7 @@ static CGFloat subtreeBorderWidth(void) {
 @synthesize nodeView;
 
 
-- (BOOL)isLeaf 
+- (BOOL) isLeaf 
 {
     return [[[self modelNode] childModelNodes] count] == 0;
 }

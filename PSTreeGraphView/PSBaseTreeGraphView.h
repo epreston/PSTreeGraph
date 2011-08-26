@@ -203,7 +203,7 @@ typedef NSInteger PSTreeGraphOrientationStyle;
 
 // The style for tree graph orientation  (See the TreeGraphOrientationStyle enumeration above.)
 
-@property (nonatomic) PSTreeGraphOrientationStyle treeGraphOrientation;
+@property (nonatomic, assign) PSTreeGraphOrientationStyle treeGraphOrientation;
 
 //Returns YES if the tree needs relayout.
  
@@ -295,7 +295,7 @@ typedef NSInteger PSTreeGraphOrientationStyle;
 
 // The style for node connecting lines.  (See the PSTreeGraphConnectingLineStyle enumeration above.)
  
-@property (nonatomic) PSTreeGraphConnectingLineStyle connectingLineStyle;
+@property (nonatomic, assign) PSTreeGraphConnectingLineStyle connectingLineStyle;
 
 // Defaults to NO.  If YES, a stroked outline is shown around each of the TreeGraph's 
 // SubtreeViews.  This can be helpful for visualizing the TreeGraph's structure and layout.
