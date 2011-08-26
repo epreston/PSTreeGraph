@@ -75,6 +75,7 @@
 	borderWidth = 3.0;
 	cornerRadius = 8.0;
 	fillColor = [[UIColor colorWithRed:1.0 green:0.5 blue:0.0 alpha:1.0] retain];
+    showingSelected = NO;
 	
 	[self updateLayerAppearanceToMatchContainerView];
 }

@@ -1,0 +1,462 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4F1FC8401407441500C343D9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F1FC83F1407441500C343D9 /* UIKit.framework */; };
+		4F1FC8421407441500C343D9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F1FC8411407441500C343D9 /* Foundation.framework */; };
+		4F1FC8441407441500C343D9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F1FC8431407441500C343D9 /* CoreGraphics.framework */; };
+		4F1FC84A1407441500C343D9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4F1FC8481407441500C343D9 /* InfoPlist.strings */; };
+		4F1FC84C1407441500C343D9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1FC84B1407441500C343D9 /* main.m */; };
+		4F1FC8501407441600C343D9 /* PSTTreeGraphAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1FC84F1407441600C343D9 /* PSTTreeGraphAppDelegate.m */; };
+		4F1FC8531407441600C343D9 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F1FC8511407441600C343D9 /* MainWindow.xib */; };
+		4F1FC8561407441600C343D9 /* PSTTreeGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1FC8551407441600C343D9 /* PSTTreeGraphViewController.m */; };
+		4F1FC8591407441600C343D9 /* PSTTreeGraphViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F1FC8571407441600C343D9 /* PSTTreeGraphViewController.xib */; };
+		4F1FC8611407441600C343D9 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F1FC8601407441600C343D9 /* SenTestingKit.framework */; };
+		4F1FC8621407441600C343D9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F1FC83F1407441500C343D9 /* UIKit.framework */; };
+		4F1FC8631407441600C343D9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F1FC8411407441500C343D9 /* Foundation.framework */; };
+		4F1FC8641407441600C343D9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F1FC8431407441500C343D9 /* CoreGraphics.framework */; };
+		4F1FC86C1407441600C343D9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4F1FC86A1407441600C343D9 /* InfoPlist.strings */; };
+		4F1FC86E1407441600C343D9 /* PSTTreeGraphTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 4F1FC86D1407441600C343D9 /* PSTTreeGraphTests.h */; };
+		4F1FC8701407441600C343D9 /* PSTTreeGraphTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1FC86F1407441600C343D9 /* PSTTreeGraphTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4F1FC8651407441600C343D9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4F1FC8321407441500C343D9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4F1FC83A1407441500C343D9;
+			remoteInfo = PSTTreeGraph;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4F1FC83B1407441500C343D9 /* PSTTreeGraph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PSTTreeGraph.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F1FC83F1407441500C343D9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		4F1FC8411407441500C343D9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		4F1FC8431407441500C343D9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		4F1FC8471407441500C343D9 /* PSTTreeGraph-Info.plist */ = {isa = PBXFileReference; path = "PSTTreeGraph-Info.plist"; sourceTree = "<group>"; };
+		4F1FC8491407441500C343D9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4F1FC84B1407441500C343D9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		4F1FC84D1407441600C343D9 /* PSTTreeGraph-Prefix.pch */ = {isa = PBXFileReference; path = "PSTTreeGraph-Prefix.pch"; sourceTree = "<group>"; };
+		4F1FC84E1407441600C343D9 /* PSTTreeGraphAppDelegate.h */ = {isa = PBXFileReference; path = PSTTreeGraphAppDelegate.h; sourceTree = "<group>"; };
+		4F1FC84F1407441600C343D9 /* PSTTreeGraphAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSTTreeGraphAppDelegate.m; sourceTree = "<group>"; };
+		4F1FC8521407441600C343D9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		4F1FC8541407441600C343D9 /* PSTTreeGraphViewController.h */ = {isa = PBXFileReference; path = PSTTreeGraphViewController.h; sourceTree = "<group>"; };
+		4F1FC8551407441600C343D9 /* PSTTreeGraphViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSTTreeGraphViewController.m; sourceTree = "<group>"; };
+		4F1FC8581407441600C343D9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PSTTreeGraphViewController.xib; sourceTree = "<group>"; };
+		4F1FC85F1407441600C343D9 /* PSTTreeGraphTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PSTTreeGraphTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F1FC8601407441600C343D9 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		4F1FC8691407441600C343D9 /* PSTTreeGraphTests-Info.plist */ = {isa = PBXFileReference; path = "PSTTreeGraphTests-Info.plist"; sourceTree = "<group>"; };
+		4F1FC86B1407441600C343D9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4F1FC86D1407441600C343D9 /* PSTTreeGraphTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSTTreeGraphTests.h; sourceTree = "<group>"; };
+		4F1FC86F1407441600C343D9 /* PSTTreeGraphTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSTTreeGraphTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4F1FC8381407441500C343D9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F1FC8401407441500C343D9 /* UIKit.framework in Frameworks */,
+				4F1FC8421407441500C343D9 /* Foundation.framework in Frameworks */,
+				4F1FC8441407441500C343D9 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4F1FC85B1407441600C343D9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F1FC8611407441600C343D9 /* SenTestingKit.framework in Frameworks */,
+				4F1FC8621407441600C343D9 /* UIKit.framework in Frameworks */,
+				4F1FC8631407441600C343D9 /* Foundation.framework in Frameworks */,
+				4F1FC8641407441600C343D9 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4F1FC8301407441500C343D9 = {
+			isa = PBXGroup;
+			children = (
+				4F1FC8451407441500C343D9 /* PSTTreeGraph */,
+				4F1FC8671407441600C343D9 /* PSTTreeGraphTests */,
+				4F1FC83E1407441500C343D9 /* Frameworks */,
+				4F1FC83C1407441500C343D9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4F1FC83C1407441500C343D9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4F1FC83B1407441500C343D9 /* PSTTreeGraph.app */,
+				4F1FC85F1407441600C343D9 /* PSTTreeGraphTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4F1FC83E1407441500C343D9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4F1FC83F1407441500C343D9 /* UIKit.framework */,
+				4F1FC8411407441500C343D9 /* Foundation.framework */,
+				4F1FC8431407441500C343D9 /* CoreGraphics.framework */,
+				4F1FC8601407441600C343D9 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4F1FC8451407441500C343D9 /* PSTTreeGraph */ = {
+			isa = PBXGroup;
+			children = (
+				4F1FC84E1407441600C343D9 /* PSTTreeGraphAppDelegate.h */,
+				4F1FC84F1407441600C343D9 /* PSTTreeGraphAppDelegate.m */,
+				4F1FC8511407441600C343D9 /* MainWindow.xib */,
+				4F1FC8541407441600C343D9 /* PSTTreeGraphViewController.h */,
+				4F1FC8551407441600C343D9 /* PSTTreeGraphViewController.m */,
+				4F1FC8571407441600C343D9 /* PSTTreeGraphViewController.xib */,
+				4F1FC8461407441500C343D9 /* Supporting Files */,
+			);
+			path = PSTTreeGraph;
+			sourceTree = "<group>";
+		};
+		4F1FC8461407441500C343D9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4F1FC8471407441500C343D9 /* PSTTreeGraph-Info.plist */,
+				4F1FC8481407441500C343D9 /* InfoPlist.strings */,
+				4F1FC84B1407441500C343D9 /* main.m */,
+				4F1FC84D1407441600C343D9 /* PSTTreeGraph-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4F1FC8671407441600C343D9 /* PSTTreeGraphTests */ = {
+			isa = PBXGroup;
+			children = (
+				4F1FC86D1407441600C343D9 /* PSTTreeGraphTests.h */,
+				4F1FC86F1407441600C343D9 /* PSTTreeGraphTests.m */,
+				4F1FC8681407441600C343D9 /* Supporting Files */,
+			);
+			path = PSTTreeGraphTests;
+			sourceTree = "<group>";
+		};
+		4F1FC8681407441600C343D9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4F1FC8691407441600C343D9 /* PSTTreeGraphTests-Info.plist */,
+				4F1FC86A1407441600C343D9 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4F1FC83A1407441500C343D9 /* PSTTreeGraph */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4F1FC8731407441600C343D9 /* Build configuration list for PBXNativeTarget "PSTTreeGraph" */;
+			buildPhases = (
+				4F1FC8371407441500C343D9 /* Sources */,
+				4F1FC8381407441500C343D9 /* Frameworks */,
+				4F1FC8391407441500C343D9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PSTTreeGraph;
+			productName = PSTTreeGraph;
+			productReference = 4F1FC83B1407441500C343D9 /* PSTTreeGraph.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4F1FC85E1407441600C343D9 /* PSTTreeGraphTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4F1FC8761407441600C343D9 /* Build configuration list for PBXNativeTarget "PSTTreeGraphTests" */;
+			buildPhases = (
+				4F1FC85A1407441600C343D9 /* Sources */,
+				4F1FC85B1407441600C343D9 /* Frameworks */,
+				4F1FC85C1407441600C343D9 /* Resources */,
+				4F1FC85D1407441600C343D9 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4F1FC8661407441600C343D9 /* PBXTargetDependency */,
+			);
+			name = PSTTreeGraphTests;
+			productName = PSTTreeGraphTests;
+			productReference = 4F1FC85F1407441600C343D9 /* PSTTreeGraphTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4F1FC8321407441500C343D9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "Preston Software";
+			};
+			buildConfigurationList = 4F1FC8351407441500C343D9 /* Build configuration list for PBXProject "PSTTreeGraph" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 4F1FC8301407441500C343D9;
+			productRefGroup = 4F1FC83C1407441500C343D9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4F1FC83A1407441500C343D9 /* PSTTreeGraph */,
+				4F1FC85E1407441600C343D9 /* PSTTreeGraphTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4F1FC8391407441500C343D9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F1FC84A1407441500C343D9 /* InfoPlist.strings in Resources */,
+				4F1FC8531407441600C343D9 /* MainWindow.xib in Resources */,
+				4F1FC8591407441600C343D9 /* PSTTreeGraphViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4F1FC85C1407441600C343D9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F1FC86C1407441600C343D9 /* InfoPlist.strings in Resources */,
+				4F1FC86E1407441600C343D9 /* PSTTreeGraphTests.h in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4F1FC85D1407441600C343D9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4F1FC8371407441500C343D9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F1FC84C1407441500C343D9 /* main.m in Sources */,
+				4F1FC8501407441600C343D9 /* PSTTreeGraphAppDelegate.m in Sources */,
+				4F1FC8561407441600C343D9 /* PSTTreeGraphViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4F1FC85A1407441600C343D9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F1FC8701407441600C343D9 /* PSTTreeGraphTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4F1FC8661407441600C343D9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4F1FC83A1407441500C343D9 /* PSTTreeGraph */;
+			targetProxy = 4F1FC8651407441600C343D9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		4F1FC8481407441500C343D9 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4F1FC8491407441500C343D9 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		4F1FC8511407441600C343D9 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4F1FC8521407441600C343D9 /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		4F1FC8571407441600C343D9 /* PSTTreeGraphViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4F1FC8581407441600C343D9 /* en */,
+			);
+			name = PSTTreeGraphViewController.xib;
+			sourceTree = "<group>";
+		};
+		4F1FC86A1407441600C343D9 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4F1FC86B1407441600C343D9 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4F1FC8711407441600C343D9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		4F1FC8721407441600C343D9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4F1FC8741407441600C343D9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PSTTreeGraph/PSTTreeGraph-Prefix.pch";
+				INFOPLIST_FILE = "PSTTreeGraph/PSTTreeGraph-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		4F1FC8751407441600C343D9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PSTTreeGraph/PSTTreeGraph-Prefix.pch";
+				INFOPLIST_FILE = "PSTTreeGraph/PSTTreeGraph-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		4F1FC8771407441600C343D9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PSTTreeGraph.app/PSTTreeGraph";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PSTTreeGraph/PSTTreeGraph-Prefix.pch";
+				INFOPLIST_FILE = "PSTTreeGraphTests/PSTTreeGraphTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		4F1FC8781407441600C343D9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PSTTreeGraph.app/PSTTreeGraph";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PSTTreeGraph/PSTTreeGraph-Prefix.pch";
+				INFOPLIST_FILE = "PSTTreeGraphTests/PSTTreeGraphTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4F1FC8351407441500C343D9 /* Build configuration list for PBXProject "PSTTreeGraph" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4F1FC8711407441600C343D9 /* Debug */,
+				4F1FC8721407441600C343D9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4F1FC8731407441600C343D9 /* Build configuration list for PBXNativeTarget "PSTTreeGraph" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4F1FC8741407441600C343D9 /* Debug */,
+				4F1FC8751407441600C343D9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		4F1FC8761407441600C343D9 /* Build configuration list for PBXNativeTarget "PSTTreeGraphTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4F1FC8771407441600C343D9 /* Debug */,
+				4F1FC8781407441600C343D9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4F1FC8321407441500C343D9 /* Project object */;
+}
