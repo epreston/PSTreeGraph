@@ -8,6 +8,9 @@ Thumbs.db
 # Backup files
 *~.nib
 
+# Generated Docs
+Documentation/*
+
 # Xcode Specific Files
 build/*
 *.pbxuser

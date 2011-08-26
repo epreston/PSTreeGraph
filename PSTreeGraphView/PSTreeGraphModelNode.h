@@ -14,19 +14,19 @@
 
 #import <Foundation/Foundation.h>
 
-// The model nodes used with a TreeGraph are required to conform to the this protocol, 
-// which enables the TreeGraph to navigate the model tree to find related nodes.
+/// The model nodes used with a TreeGraph are required to conform to the this protocol, 
+/// which enables the TreeGraph to navigate the model tree to find related nodes.
 
 @protocol PSTreeGraphModelNode <NSObject>
 
 @required
 
-// The model node's parent node, or nil if it doesn't have a parent node.
+/// The model node's parent node, or nil if it doesn't have a parent node.
 
 - (id <PSTreeGraphModelNode> )parentModelNode;
 
-// The model node's child nodes.  If the node has no children, this should return an 
-// empty array ([NSArray array]), not nil.
+/// The model node's child nodes.  If the node has no children, this should return an 
+/// empty array ([NSArray array]), not nil.
 
 - (NSArray *) childModelNodes;
 
@@ -38,7 +38,7 @@
 
 @required
 
-// The delegate will configure the nodeView with the modelNode provided.
+/// The delegate will configure the nodeView with the modelNode provided.
 
 - (void) configureNodeView:(UIView *)nodeView withModelNode:(id <PSTreeGraphModelNode> )modelNode;
 

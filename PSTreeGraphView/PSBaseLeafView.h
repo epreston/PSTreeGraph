@@ -15,8 +15,8 @@
 #import <UIKit/UIKit.h>
 
 
-// Draws background fill and a stroked, optionally rounded rectangular shape.  Serves as a container
-// for other views (in our case, we use a ContainerView as the root of each node subtree).
+/// Draws background fill and a stroked, optionally rounded rectangular shape.  Serves as a container
+/// for other views (in our case, we use a ContainerView as the root of each node subtree).
  
 @interface PSBaseLeafView : UIView
 {
@@ -34,16 +34,16 @@
 
 #pragma mark - Styling
 
-//The color of the ContainerView's stroked border.
+/// The color of the ContainerView's stroked border.
 @property (nonatomic, copy) UIColor *borderColor;
 
-//The width of the ContainerView's stroked border.  May be zero.
+/// The width of the ContainerView's stroked border.  May be zero.
 @property (nonatomic, assign) CGFloat borderWidth;
 
-//The radius of the ContainerView's rounded corners.  May be zero.
+/// The radius of the ContainerView's rounded corners.  May be zero.
 @property (nonatomic, assign) CGFloat cornerRadius;
 
-//The fill color for the ContainerView's interior.
+/// The fill color for the ContainerView's interior.
 @property (nonatomic, copy) UIColor *fillColor;
 
 
