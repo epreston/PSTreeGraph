@@ -79,11 +79,7 @@
 
 /// Returns YES if this subtree needs relayout.
  
-- (BOOL) needsGraphLayout;
-
-/// Marks this subtree as needing relayout.
- 
-- (void) setNeedsGraphLayout;
+@property (nonatomic, assign) BOOL needsGraphLayout;
 
 /// Recursively marks this subtree, and all of its descendants, as needing relayout.
  

@@ -85,9 +85,7 @@
 
 #pragma mark - Node View Nib Specification 
 
-- (NSString *)nodeViewNibName {
-    return nodeViewNibName;
-}
+@synthesize nodeViewNibName;
 
 - (void)setNodeViewNibName:(NSString *)newName {
     if (nodeViewNibName != newName) {
@@ -102,9 +100,7 @@
     }
 }
 
-- (NSBundle *)nodeViewNibBundle {
-    return nodeViewNibBundle;
-}
+@synthesize nodeViewNibBundle;
 
 - (void) setNodeViewNibBundle:(NSBundle *)newBundle {
     if (nodeViewNibBundle != newBundle) {
@@ -349,10 +345,7 @@
 	
 }
 
-- (PSTreeGraphOrientationStyle) treeGraphOrientation 
-{
-    return treeGraphOrientation;
-}
+@synthesize treeGraphOrientation;
 
 - (void) setTreeGraphOrientation:(PSTreeGraphOrientationStyle)newTreeGraphOrientation 
 {
@@ -362,10 +355,7 @@
     }
 }
 
-- (BOOL) resizesToFillEnclosingScrollView 
-{
-    return resizesToFillEnclosingScrollView;
-}
+@synthesize resizesToFillEnclosingScrollView;
 
 - (void) setResizesToFillEnclosingScrollView:(BOOL)flag 
 {
@@ -529,10 +519,7 @@
 
 #pragma mark - Data Source
 
-- (id <PSTreeGraphModelNode> ) modelRoot 
-{
-    return modelRoot;
-}
+@synthesize modelRoot;
 
 - (void) setModelRoot:(id <PSTreeGraphModelNode> )newModelRoot 
 {    
@@ -786,10 +773,7 @@
 //    }
 //}
 
-- (UIColor *) connectingLineColor 
-{
-    return connectingLineColor;
-}
+@synthesize connectingLineColor;
 
 - (void) setConnectingLineColor:(UIColor *)newConnectingLineColor 
 {
@@ -800,10 +784,7 @@
     }
 }
 
-- (CGFloat) contentMargin 
-{
-    return contentMargin;
-}
+@synthesize contentMargin;
 
 - (void) setContentMargin:(CGFloat)newContentMargin 
 {
@@ -814,10 +795,7 @@
     }
 }
 
-- (CGFloat) parentChildSpacing 
-{
-    return parentChildSpacing;
-}
+@synthesize parentChildSpacing;
 
 - (void) setParentChildSpacing:(CGFloat)newParentChildSpacing 
 {
@@ -828,10 +806,7 @@
     }
 }
 
-- (CGFloat) siblingSpacing 
-{
-    return siblingSpacing;
-}
+@synthesize siblingSpacing;
 
 - (void) setSiblingSpacing:(CGFloat)newSiblingSpacing 
 {
@@ -842,10 +817,7 @@
     }
 }
 
-- (PSTreeGraphConnectingLineStyle) connectingLineStyle 
-{
-    return connectingLineStyle;
-}
+@synthesize connectingLineStyle;
 
 - (void) setConnectingLineStyle:(PSTreeGraphConnectingLineStyle)newConnectingLineStyle 
 {
@@ -855,10 +827,7 @@
     }
 }
 
-- (CGFloat) connectingLineWidth 
-{
-    return connectingLineWidth;
-}
+@synthesize connectingLineWidth;
 
 - (void)setConnectingLineWidth:(CGFloat)newConnectingLineWidth {
     if (connectingLineWidth != newConnectingLineWidth) {
@@ -867,10 +836,7 @@
     }
 }
 
-- (BOOL) showsSubtreeFrames 
-{
-    return showsSubtreeFrames;
-}
+@synthesize showsSubtreeFrames;
 
 - (void) setShowsSubtreeFrames:(BOOL)newShowsSubtreeFrames 
 {
@@ -960,6 +926,8 @@
 {    
 	// iOS 4.0 and above ONLY
 	// [cachedNodeViewNib release];
+    
+    self.delegate = nil;
 	
     [nodeViewNibBundle release];
     [nodeViewNibName release];

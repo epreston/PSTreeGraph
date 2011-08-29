@@ -120,7 +120,6 @@
     
 	CGPoint rootIntersection = CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
 
-
 	
     // Align the line to get exact pixel coverage, for sharper rendering.
 	//    basePoint = [self convertPointToBase:rootIntersection];

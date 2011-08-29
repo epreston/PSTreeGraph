@@ -97,19 +97,11 @@ static CGFloat subtreeBorderWidth(void)
 
 #pragma mark - Layout
 
-- (BOOL) needsGraphLayout 
-{
-    return needsGraphLayout;
-}
-
-- (void) setNeedsGraphLayout 
-{
-    needsGraphLayout = YES;
-}
+@synthesize needsGraphLayout;
 
 - (void) recursiveSetNeedsGraphLayout 
 {
-    [self setNeedsGraphLayout];
+    [self setNeedsGraphLayout:YES];
     for (UIView *subview in [self subviews]) {
         if ([subview isKindOfClass:[PSBaseSubtreeView class]]) {
             [(PSBaseSubtreeView *)subview recursiveSetNeedsGraphLayout];
@@ -394,10 +386,7 @@ static CGFloat subtreeBorderWidth(void)
     return selfTargetSize;
 }
 
-- (BOOL) isExpanded 
-{
-    return expanded;
-}
+@synthesize expanded;
 
 - (void) setExpanded:(BOOL)flag 
 {

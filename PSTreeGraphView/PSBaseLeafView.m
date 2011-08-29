@@ -133,10 +133,7 @@
 
 #pragma mark - Styling 
 
-- (UIColor*) borderColor 
-{
-    return borderColor;
-}
+@synthesize borderColor;
 
 - (void) setBorderColor:(UIColor *)color 
 {
@@ -147,10 +144,7 @@
     }
 }
 
-- (CGFloat) borderWidth 
-{
-    return borderWidth;
-}
+@synthesize borderWidth;
 
 - (void) setBorderWidth:(CGFloat)width 
 {
@@ -160,10 +154,7 @@
     }
 }
 
-- (CGFloat)cornerRadius 
-{
-    return cornerRadius;
-}
+@synthesize cornerRadius;
 
 - (void) setCornerRadius:(CGFloat)radius 
 {
@@ -173,10 +164,7 @@
     }
 }
 
-- (UIColor*) fillColor 
-{
-    return fillColor;
-}
+@synthesize fillColor;
 
 - (void) setFillColor:(UIColor *)color 
 {
@@ -190,10 +178,7 @@
 
 #pragma mark - Selection State
 
-- (BOOL) showingSelected 
-{
-    return showingSelected;
-}
+@synthesize showingSelected;
 
 - (void) setShowingSelected:(BOOL)newShowingSelected 
 {
