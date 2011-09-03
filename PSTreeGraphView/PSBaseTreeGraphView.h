@@ -44,7 +44,8 @@ typedef NSInteger PSTreeGraphOrientationStyle;
 
 
 
-@interface PSBaseTreeGraphView : UIView {
+@interface PSBaseTreeGraphView : UIView 
+{
     
 @private
 	// Model

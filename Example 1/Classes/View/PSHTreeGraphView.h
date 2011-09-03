@@ -11,7 +11,8 @@
 
 #import "PSBaseTreeGraphView.h"
 
-@interface PSHTreeGraphView : PSBaseTreeGraphView {
+@interface PSHTreeGraphView : PSBaseTreeGraphView 
+{
     // TODO: Place project specific code, extentions here.
 }
 

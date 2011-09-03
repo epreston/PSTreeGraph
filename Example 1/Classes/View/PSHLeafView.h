@@ -11,8 +11,11 @@
 
 #import "PSBaseLeafView.h"
 
-@interface PSHLeafView : PSBaseLeafView {
-
+@interface PSHLeafView : PSBaseLeafView 
+{
+    
+@private
+    
 	// Interface
 	UIButton *expandButton;
 	UILabel *titleLabel;

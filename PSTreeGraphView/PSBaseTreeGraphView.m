@@ -35,7 +35,7 @@
 
 - (void) configureDetaults 
 {
-	[self setBackgroundColor: [UIColor colorWithRed:0.55 green:0.76 blue:0.93 alpha:1.0]];
+	[self setBackgroundColor: [UIColor colorWithRed:0.55f green:0.76f blue:0.93f alpha:1.0f]];
 	//[self setClipsToBounds:YES];
 	
 	// Initialize ivars directly.  As a rule, it's best to avoid invoking accessors from an -init... method,
@@ -43,17 +43,17 @@
 	
 	modelNodeToSubtreeViewMapTable = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
 	connectingLineColor = [[UIColor blackColor] retain];
-	contentMargin = 20.0;
-	parentChildSpacing = 50.0;
-	siblingSpacing = 10.0;
+	contentMargin = 20.0f;
+	parentChildSpacing = 50.0f;
+	siblingSpacing = 10.0f;
 	animatesLayout = YES;
 	resizesToFillEnclosingScrollView = YES;
 	treeGraphOrientation = PSTreeGraphOrientationStyleHorizontal ;
 	layoutAnimationSuppressed = NO;
 	connectingLineStyle = PSTreeGraphConnectingLineStyleOrthogonal ;
-	connectingLineWidth = 1.0;
+	connectingLineWidth = 1.0f;
 	showsSubtreeFrames = NO;
-	minimumFrameSize = CGSizeMake(2.0 * contentMargin, 2.0 * contentMargin);
+	minimumFrameSize = CGSizeMake(2.0f * contentMargin, 2.0f * contentMargin);
 	selectedModelNodes = [[NSMutableSet alloc] init];
 	
 	// [self setLayerContentsRedrawPolicy:UIViewLayerContentsRedrawNever];
@@ -74,6 +74,23 @@
 	[self configureDetaults];
 }
 
+#pragma mark - Resource Management
+
+- (void) dealloc 
+{
+	// iOS 4.0 and above ONLY
+	// [cachedNodeViewNib release];
+    
+    self.delegate = nil;
+	
+    [nodeViewNibBundle release];
+    [nodeViewNibName release];
+    [selectedModelNodes release];
+    [modelRoot release];
+    [modelNodeToSubtreeViewMapTable release];
+    // [backgroundColor release];
+    [super dealloc];
+}
 
 #pragma mark - Root SubtreeView Access
 
@@ -87,7 +104,8 @@
 
 @synthesize nodeViewNibName;
 
-- (void)setNodeViewNibName:(NSString *)newName {
+- (void)setNodeViewNibName:(NSString *)newName 
+{
     if (nodeViewNibName != newName) {
         
 		// iOS 4.0 and above ONLY
@@ -102,7 +120,8 @@
 
 @synthesize nodeViewNibBundle;
 
-- (void) setNodeViewNibBundle:(NSBundle *)newBundle {
+- (void) setNodeViewNibBundle:(NSBundle *)newBundle 
+{
     if (nodeViewNibBundle != newBundle) {
         
 		// iOS 4.0 and above ONLY
@@ -203,8 +222,8 @@
 
 #pragma mark - Graph Building
 
-- (PSBaseSubtreeView *) newGraphForModelNode:(id <PSTreeGraphModelNode> )modelNode {
-    
+- (PSBaseSubtreeView *) newGraphForModelNode:(id <PSTreeGraphModelNode> )modelNode
+{
     NSParameterAssert(modelNode);
 	
     PSBaseSubtreeView *subtreeView = [[PSBaseSubtreeView alloc] initWithModelNode:modelNode];
@@ -917,25 +936,6 @@
         }
         return nil;
     }
-}
-
-
-#pragma mark - Resource Management
-
-- (void) dealloc 
-{    
-	// iOS 4.0 and above ONLY
-	// [cachedNodeViewNib release];
-    
-    self.delegate = nil;
-	
-    [nodeViewNibBundle release];
-    [nodeViewNibName release];
-    [selectedModelNodes release];
-    [modelRoot release];
-    [modelNodeToSubtreeViewMapTable release];
-    // [backgroundColor release];
-    [super dealloc];
 }
 
 @end
