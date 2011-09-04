@@ -38,6 +38,7 @@
     // State
     BOOL expanded;                          // YES if this subtree is expanded to show its descendants; NO if it's been
                                             // collapsed to show just its root node
+    
     BOOL needsGraphLayout;                  // YES if this SubtreeView needs to position its child views and assess its
                                             // size; NO if we're sure its layout is up to date
 }

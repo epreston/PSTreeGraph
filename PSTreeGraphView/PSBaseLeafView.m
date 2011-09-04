@@ -85,7 +85,6 @@
     self = [super initWithFrame:newFrame];
     if (self) {
 		[self configureDetaults];
-        // [self setLayerContentsRedrawPolicy:UIViewLayerContentsRedrawNever];
     }
     return self;
 }
@@ -97,51 +96,15 @@
 }
 
 
-#pragma mark - Drawing
-
-// Since we set each ContainerView's layerContentsRedrawPolicy to UIViewLayerContentsRedrawNever,
-// this -drawRect: method will only be invoked if the ContainerView is window-backed.  If the
-// ContainerView is layer-backed, the layer's appearance properties, as configured in
-// -updateLayerAppearanceToMatchContainerView above, provide this drawing for us.
- 
-//- (void)drawRect:(CGRect)rect {
-//    float halfBorderWidth = 0.5 * [self borderWidth];
-//    CGRect borderRect = CGRectInset([self bounds], halfBorderWidth, halfBorderWidth);
-//    CGFloat effectiveRadius = MAX(0.0, [self cornerRadius] - halfBorderWidth); 
-//	
-//	// CALayer's cornerRadius applies to its overall shape, with its border (if any) extending
-//	// for borderWidth pixels from there.  A srtroked UIBezierPath extends by half the path's 
-//	// line width to either side of the ideal path.  To produce rendered results that closely 
-//	// match those in layer-backed mode, since ContainerView is optimized to leverage CALayer's 
-//	// programmatic drawing capabilities when layer-backed, we need to inset the path we're going
-//	// to stroke by half the border width.
-//    
-//	UIBezierPath *borderStrokePath = [UIBezierPath bezierPathWithRoundedRect:borderRect cornerRadius:effectiveRadius];
-//	
-//    // Fill background.
-//    [(showingSelected ? [UIColor yellowColor] : [self fillColor]) set];
-//    [borderStrokePath fill];
-//	
-//    // Stroke border.
-//    if (halfBorderWidth > 0.0) {
-//        [borderStrokePath setLineWidth:[self borderWidth]];
-//        [[self borderColor] set];
-//        [borderStrokePath stroke];
-//    }
-//}
-
-
 #pragma mark - Styling 
 
 @synthesize borderColor;
 
 - (void) setBorderColor:(UIColor *)color 
 {
-    if (borderColor != color) {
-        [borderColor release];
-        borderColor = [[color copy] retain];
-        [self updateLayerAppearanceToMatchContainerView];
-    }
+    [borderColor release];
+    borderColor = [color retain];
+    [self updateLayerAppearanceToMatchContainerView];
 }
 
 @synthesize borderWidth;
@@ -168,11 +131,9 @@
 
 - (void) setFillColor:(UIColor *)color 
 {
-    if (fillColor != color) {
-        [fillColor release];
-        fillColor = [[color copy] retain];
-        [self updateLayerAppearanceToMatchContainerView];
-    }
+    [fillColor release];
+    fillColor = [[color copy] retain];
+    [self updateLayerAppearanceToMatchContainerView];
 }
 
 

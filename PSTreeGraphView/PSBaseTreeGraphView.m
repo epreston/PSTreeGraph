@@ -396,23 +396,6 @@
     }
 }
 
-- (void) willMoveToSuperview:(UIView *)newSuperview 
-{
-    // Ask to be notified when our superview's frame size changes (if it's an NSClipView, which is a pretty
-	// good indication that this TreeGraph is an UIScrollView's documentView), so that we can automatically 
-	// resize to always fill the UIScrollView's content area.
-	
-	//    UIView *oldSuperview = [self superview];
-	//    if (oldSuperview) {
-	//        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIViewFrameDidChangeNotification object:oldSuperview];
-	//    }
-	//    if (newSuperview && [newSuperview isKindOfClass:[NSClipView class]]) {
-	//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(parentClipViewDidResize:) name:UIViewFrameDidChangeNotification object:newSuperview];
-	//    }
-	
-    [super willMoveToSuperview:newSuperview];
-}
-
 - (void) layoutSubviews 
 {	
     // Do graph layout if we need to.
@@ -520,20 +503,6 @@
 {
     [self scrollModelNodesToVisible:[self selectedModelNodes]];
 }
-
-
-#pragma mark - Drawing
-
-// TreeGraph always completely fills its bounds with its backgroundColor, so as long
-// as the TreeGraph's backgroundColor is opaque, the TreeGraph can be considered opaque.
-// Returning YES from this method is usually an easy, high-reward optimization in 
-// window-backed mode, as it enables AppKit to skip drawing content behind the view 
-// that the view would just paint over.
- 
-
-//- (BOOL)isOpaque {
-//    return ( CGColorGetAlpha([[self backgroundColor] CGColor]) < 1.0) ? NO : YES;
-//}
 
 
 #pragma mark - Data Source
@@ -697,38 +666,6 @@
 //}
 
 
-#pragma mark - Mouse Event Handling
-
-// Always receive -mouseDown: messages for clicks that occur in a TreeGraph, even if the click
-// is one that's activating the window.  This lets the user start interacting with the TreeGraph's
-// contents without having to click again.
-//
-//- (BOOL)acceptsFirstMouse {
-//    return YES;
-//}
-//
-////User clicked the main mouse button inside the TreeGraph.
-//
-//- (void)mouseDown:(NSEvent *)theEvent {
-//
-//    // Identify the mdoel node (if any) that the user clicked, and make it the new selection.
-//    CGPoint viewPoint = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-//    id<TreeGraphModelNode> hitModelNode = [self modelNodeAtPoint:viewPoint];
-//    [self setSelectedModelNodes:(hitModelNode ? [NSSet setWithObject:hitModelNode] : [NSSet set])];
-//
-//    // Make the TreeGraph the window's firstResponder when clicked.
-//    [[self window] makeFirstResponder:self];
-//}
-//
-//- (void)rightMouseDown:(NSEvent *)theEvent {
-//    // For debugging: Dump a compact description of the tree.
-//    if (modelRoot) {
-//        SubtreeView *rootSubtreeView = [self rootSubtreeView];
-//        NSLog(@"Tree=\n%@", [rootSubtreeView treeSummaryWithDepth:0]);
-//    }
-//}
-
-
 #pragma mark - Gesture Event Handling
 
 //- (void)beginGestureWithEvent:(NSEvent *)event {
@@ -771,26 +708,6 @@
 // appearance change.  In other respects, these are unremarkable accessor methods that follow standard accessor 
 // conventions.
 
-
-//- (UIColor *)backgroundColor {
-//    return backgroundColor;
-//}
-//
-//- (void)setBackgroundColor:(UIColor *)newBackgroundColor {
-//    if (backgroundColor != newBackgroundColor && newBackgroundColor) {
-//        [backgroundColor release];
-//        //[backgroundColor initWithCGColor:newBackgroundColor.CGColor];
-//		
-//		backgroundColor = [newBackgroundColor retain];
-//		
-//        CALayer *layer = [self layer];
-//        if (layer) {
-//            [layer setBackgroundColor:[backgroundColor CGColor]];
-//        } else {
-//            [self setNeedsDisplay];
-//        }
-//    }
-//}
 
 @synthesize connectingLineColor;
 

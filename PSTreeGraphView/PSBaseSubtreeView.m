@@ -424,25 +424,6 @@ static CGFloat subtreeBorderWidth(void)
 
 #pragma mark - Drawing
 
-//- (void)drawRect:(CGRect)dirtyRect {
-//	
-//	// Stroke the path with the appropriate color and line width.
-//    PSBaseTreeGraphView *treeGraph = [self enclosingTreeView];
-//	
-//	// Fill background.
-//    [[treeGraph backgroundColor] set];
-//    UIRectFill(dirtyRect);
-//	
-//    // DEBUG: Stroke bounds if requested. In practice, SubtreeViews don't normally draw anything.
-//    if ( [treeGraph showsSubtreeFrames] ) {
-//        CGFloat strokeWidth = subtreeBorderWidth();
-//        UIBezierPath *path = [UIBezierPath bezierPathWithRect:CGRectInset([self bounds], 0.5 * strokeWidth, 0.5 * strokeWidth)];
-//        [path setLineWidth:strokeWidth];
-//        [subtreeBorderColor() setStroke];
-//        [path stroke];
-//    }
-//}
-
 - (void) updateSubtreeBorder 
 {
     CALayer *layer = [self layer];
