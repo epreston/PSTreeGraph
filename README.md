@@ -23,7 +23,12 @@ This project follows the [SemVer](http://semver.org/) standard. The API may chan
 The goal of PSTreeGraph is to build a high-quality UI control designed specifically for the iPad.  The inspiration / structure comes from WWDC 2010 Session 141, “Crafting Custom Cocoa Views”, an extremely valuable and informative presentation that has proven to be applicable (see this project) to other platforms.
 
 
-# Known improvements
+# Known Issues
+
+See [Issues](https://github.com/epreston/PSTreeGraph/issues).
+
+
+# Known Improvements
 
 See [Milestones](https://github.com/epreston/PSTreeGraph/issues/milestones?with_issues=no).
 
