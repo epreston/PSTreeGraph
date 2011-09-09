@@ -31,3 +31,7 @@ xcuserdata
 
 # old skool
 .svn
+
+#new skewl
+.hgignore
+.hg
