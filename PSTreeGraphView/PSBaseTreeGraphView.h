@@ -188,9 +188,9 @@ typedef NSInteger PSTreeGraphOrientationStyle;
 
 /// A TreeGraph's minimumFrameSize is the size needed to accommodate its content (as currently 
 /// laid out) and margins.  Changes to the TreeGraph's content, layout, or margins will update 
-/// this.  When a TreeGraph is the documentView of an NSScrollView, its actual frame may be larger
+/// this.  When a TreeGraph is the documentView of an UIScrollView, its actual frame may be larger
 /// than its minimumFrameSize, since we automatically expand the TreeGraph to always be at least 
-/// as large as the NSScrollView's clip area (contentView) to provide a nicer user experience.
+/// as large as the UIScrollView's clip area (contentView) to provide a nicer user experience.
  
 @property (nonatomic, assign) CGSize minimumFrameSize;
 
@@ -288,7 +288,7 @@ typedef NSInteger PSTreeGraphOrientationStyle;
 
 /// The stroke color for node connecting lines.
  
-@property (nonatomic, copy) UIColor *connectingLineColor;
+@property (nonatomic, retain) UIColor *connectingLineColor;
 
 /// The width for node connecting lines.
  

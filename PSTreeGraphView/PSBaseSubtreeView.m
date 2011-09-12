@@ -25,12 +25,12 @@
 
 static UIColor *subtreeBorderColor(void) 
 {
-    return [[UIColor colorWithRed:0.0 green:0.5 blue:0.0 alpha:1.0] retain];
+    return [[UIColor colorWithRed:0.0f green:0.5f blue:0.0f alpha:1.0f] retain];
 }
 
 static CGFloat subtreeBorderWidth(void) 
 {
-    return 2.0;
+    return 2.0f;
 }
 
 
@@ -42,6 +42,40 @@ static CGFloat subtreeBorderWidth(void)
 @synthesize modelNode;
 @synthesize nodeView;
 
+@synthesize expanded;
+
+- (void) setExpanded:(BOOL)flag 
+{
+    if (expanded != flag) {
+		
+        // Remember this SubtreeView's new state.
+        expanded = flag;
+		
+        // Notify the TreeGraph we need layout.
+        [[self enclosingTreeGraph] setNeedsGraphLayout];
+		
+        // Expand or collapse subtrees recursively.
+        for (UIView *subview in [self subviews]) {
+            if ([subview isKindOfClass:[PSBaseSubtreeView class]]) {
+                [(PSBaseSubtreeView *)subview setExpanded:expanded];
+            }
+        }
+    }
+}
+
+- (IBAction) toggleExpansion:(id)sender 
+{
+	[UIView beginAnimations:@"TreeNodeExpansion" context:nil];
+	// [UIView setAnimationDuration:0.5];
+	[UIView setAnimationBeginsFromCurrentState:YES];
+	// [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+	
+    [self setExpanded:![self isExpanded]];
+	
+    [[self enclosingTreeGraph] layoutGraphIfNeeded];
+	
+	[UIView commitAnimations];
+}
 
 - (BOOL) isLeaf 
 {
@@ -55,7 +89,7 @@ static CGFloat subtreeBorderWidth(void)
 {    
     NSParameterAssert(newModelNode);
     
-    self = [super initWithFrame:CGRectMake(10, 10, 100, 25)];
+    self = [super initWithFrame:CGRectMake(10.0f, 10.0f, 100.0f, 25.0f)];
     if (self) {
 		
         // Initialize ivars directly.  As a rule, it's best to avoid invoking accessors from an -init... 
@@ -68,7 +102,7 @@ static CGFloat subtreeBorderWidth(void)
 		// with the explicit layout we do, so we switch it off for SubtreeView instances.
         [self setAutoresizesSubviews:NO];
 		
-        modelNode = [newModelNode retain];
+        self.modelNode = newModelNode;
         connectorsView = [[PSBaseBranchView alloc] initWithFrame:CGRectZero];
         if (connectorsView) {
             [connectorsView setAutoresizesSubviews:YES];
@@ -92,6 +126,16 @@ static CGFloat subtreeBorderWidth(void)
         ancestor = [ancestor superview];
     }
     return nil;
+}
+
+#pragma mark - Resource Management
+
+- (void) dealloc 
+{
+	//    [nodeView release]; // not retained, since an IBOutlet
+    [connectorsView release];
+    [modelNode release];
+    [super dealloc];
 }
 
 
@@ -148,14 +192,14 @@ static CGFloat subtreeBorderWidth(void)
         NSInteger count = [subviews count];
         NSInteger index;
         NSUInteger subtreeViewCount = 0;
-        CGFloat maxWidth = 0.0;
-		CGFloat maxHeight = 0.0;
+        CGFloat maxWidth = 0.0f;
+		CGFloat maxHeight = 0.0f;
         CGPoint nextSubtreeViewOrigin = CGPointZero;
 		
 		if ( treeDirection == PSTreeGraphOrientationStyleHorizontal ) {
-			nextSubtreeViewOrigin = CGPointMake(rootNodeViewSize.width + parentChildSpacing, 0.0);
+			nextSubtreeViewOrigin = CGPointMake(rootNodeViewSize.width + parentChildSpacing, 0.0f);
 		} else {
-			nextSubtreeViewOrigin = CGPointMake(0.0, rootNodeViewSize.height + parentChildSpacing);
+			nextSubtreeViewOrigin = CGPointMake(0.0f, rootNodeViewSize.height + parentChildSpacing);
 		}
 
 		
@@ -215,8 +259,8 @@ static CGFloat subtreeBorderWidth(void)
 		// We have N child SubtreeViews, but only (N-1) gaps between them, so subtract 1 increment of 
 		// siblingSpacing that was added by the loop above.
 		
-		CGFloat totalHeight = 0.0;
-		CGFloat totalWidth = 0.0;
+		CGFloat totalHeight = 0.0f;
+		CGFloat totalWidth = 0.0f;
 		
 		if ( treeDirection == PSTreeGraphOrientationStyleHorizontal ) {
 			totalHeight = nextSubtreeViewOrigin.y;
@@ -256,11 +300,11 @@ static CGFloat subtreeBorderWidth(void)
 			CGPoint nodeViewOrigin = CGPointZero;
 			if ( treeDirection == PSTreeGraphOrientationStyleHorizontal ) {
 				// Position our nodeView vertically centered along the left edge of our new bounds.
-				nodeViewOrigin = CGPointMake(0.0, 0.5 * (selfTargetSize.height - rootNodeViewSize.height));
+				nodeViewOrigin = CGPointMake(0.0f, 0.5f * (selfTargetSize.height - rootNodeViewSize.height));
 				
 			} else {
 				// Position our nodeView horizontally centered along the top edge of our new bounds.
-				nodeViewOrigin = CGPointMake(0.5 * (selfTargetSize.width - rootNodeViewSize.width), 0.0);
+				nodeViewOrigin = CGPointMake(0.5f * (selfTargetSize.width - rootNodeViewSize.width), 0.0f);
 			}
 
 			// Pixel-align its position to keep its rendering crisp.
@@ -292,11 +336,11 @@ static CGFloat subtreeBorderWidth(void)
 			
 			if ( treeDirection == PSTreeGraphOrientationStyleHorizontal ) {
 				connectorsView.frame = CGRectMake(rootNodeViewSize.width, 
-												  0.0, 
+												  0.0f, 
 												  parentChildSpacing, 
 												  selfTargetSize.height );
 			} else {
-				connectorsView.frame = CGRectMake(0.0, 
+				connectorsView.frame = CGRectMake(0.0f, 
 												  rootNodeViewSize.height, 
 												  selfTargetSize.width,
 												  parentChildSpacing );	
@@ -318,8 +362,8 @@ static CGFloat subtreeBorderWidth(void)
 									selfTargetSize.width, 
 									selfTargetSize.height );
 			
-			nodeView.frame = CGRectMake(0.0,
-										0.0,
+			nodeView.frame = CGRectMake(0.0f,
+										0.0f,
 										nodeView.frame.size.width, 
 										nodeView.frame.size.height );
 			
@@ -340,8 +384,8 @@ static CGFloat subtreeBorderWidth(void)
 				
                 [(PSBaseSubtreeView *)subview layoutGraphIfNeeded];
                 
-				subview.frame = CGRectMake(0.0,
-										   0.0,
+				subview.frame = CGRectMake(0.0f,
+										   0.0f,
 										   subview.frame.size.width, 
 										   subview.frame.size.height );
 				
@@ -356,13 +400,13 @@ static CGFloat subtreeBorderWidth(void)
 				
 				
 				if ( treeDirection == PSTreeGraphOrientationStyleHorizontal ) {
-					connectorsView.frame = CGRectMake(0.0, 
-													  0.5 * selfTargetSize.height, 
-													  0, 0 );
+					connectorsView.frame = CGRectMake(0.0f, 
+													  0.5f * selfTargetSize.height, 
+													  0.0f, 0.0f );
 				} else {
-					connectorsView.frame = CGRectMake(0.5 * selfTargetSize.width, 
-													  0.0,
-													  0, 0 );
+					connectorsView.frame = CGRectMake(0.5f * selfTargetSize.width, 
+													  0.0f,
+													  0.0f, 0.0f );
 				}
 
 				
@@ -370,8 +414,8 @@ static CGFloat subtreeBorderWidth(void)
 				
             } else if (subview == nodeView) {
 				
-				subview.frame = CGRectMake(0.0, 
-										   0.0, 
+				subview.frame = CGRectMake(0.0f, 
+										   0.0f, 
 										   selfTargetSize.width, 
 										   selfTargetSize.height );
 				
@@ -384,41 +428,6 @@ static CGFloat subtreeBorderWidth(void)
 	
     // Return our new size.
     return selfTargetSize;
-}
-
-@synthesize expanded;
-
-- (void) setExpanded:(BOOL)flag 
-{
-    if (expanded != flag) {
-		
-        // Remember this SubtreeView's new state.
-        expanded = flag;
-		
-        // Notify the TreeGraph we need layout.
-        [[self enclosingTreeGraph] setNeedsGraphLayout];
-		
-        // Expand or collapse subtrees recursively.
-        for (UIView *subview in [self subviews]) {
-            if ([subview isKindOfClass:[PSBaseSubtreeView class]]) {
-                [(PSBaseSubtreeView *)subview setExpanded:expanded];
-            }
-        }
-    }
-}
-
-- (IBAction) toggleExpansion:(id)sender 
-{
-	[UIView beginAnimations:@"TreeNodeExpansion" context:nil];
-	// [UIView setAnimationDuration:0.5];
-	[UIView setAnimationBeginsFromCurrentState:YES];
-	// [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-	
-    [self setExpanded:![self isExpanded]];
-	
-    [[self enclosingTreeGraph] layoutGraphIfNeeded];
-	
-	[UIView commitAnimations];
 }
 
 
@@ -561,7 +570,7 @@ static CGFloat subtreeBorderWidth(void)
 
 #pragma mark - Debugging
 
-- (NSString *) description 
+- (NSString *) description
 {
     return [NSString stringWithFormat:@"SubtreeView<%@>", [modelNode description]];
 }
@@ -587,17 +596,6 @@ static CGFloat subtreeBorderWidth(void)
         }
     }
     return description;
-}
-
-
-#pragma mark - Resource Management
-
-- (void) dealloc 
-{
-	//    [nodeView release]; // not retained, since an IBOutlet
-    [connectorsView release];
-    [modelNode release];
-    [super dealloc];
 }
 
 

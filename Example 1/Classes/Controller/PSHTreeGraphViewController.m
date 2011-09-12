@@ -22,10 +22,7 @@
 
 @synthesize treeGraphView;
 
-- (NSString *) rootClassName 
-{
-    return rootClassName;
-}
+@synthesize rootClassName;
 
 - (void) setRootClassName:(NSString *)newRootClassName 
 {    

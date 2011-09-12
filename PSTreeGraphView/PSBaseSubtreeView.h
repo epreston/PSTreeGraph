@@ -32,15 +32,17 @@
     id <PSTreeGraphModelNode> modelNode;    // the model node that nodeView represents
 	
     // Views
-    UIView *nodeView;                       // the subview of this SubtreeView that shows a representation of the modelNode
+    UIView *nodeView;                       // the subview of this SubtreeView that shows a representation
+                                            // of the modelNode
+    
     PSBaseBranchView *connectorsView;		// the view that shows connections from nodeView to its child nodes
 	
     // State
-    BOOL expanded;                          // YES if this subtree is expanded to show its descendants; NO if it's been
-                                            // collapsed to show just its root node
+    BOOL expanded;                          // YES if this subtree is expanded to show its descendants; 
+                                            // NO if it's been collapsed to show just its root node
     
-    BOOL needsGraphLayout;                  // YES if this SubtreeView needs to position its child views and assess its
-                                            // size; NO if we're sure its layout is up to date
+    BOOL needsGraphLayout;                  // YES if this SubtreeView needs to position its child views 
+                                            // and assess its size; NO if we're sure its layout is up to date
 }
 
 /// Initializes a SubtreeView with the associated modelNode.  This is SubtreeView's designated initializer.

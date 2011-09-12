@@ -17,6 +17,15 @@
 #import "PSBaseTreeGraphView.h"
 
 
+
+@interface PSBaseBranchView ()
+
+- (UIBezierPath *) directConnectionsPath;
+- (UIBezierPath *) orthogonalConnectionsPath;
+
+@end
+
+
 @implementation PSBaseBranchView
 
 

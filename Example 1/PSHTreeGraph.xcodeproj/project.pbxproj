@@ -357,7 +357,6 @@
 				GCC_PREFIX_HEADER = PSHTreeGraph_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_PARAMETER = NO;
 				INFOPLIST_FILE = "PSHTreeGraph-Info.plist";
 				PRODUCT_NAME = PSHTreeGraph;
 			};
@@ -373,7 +372,6 @@
 				GCC_PREFIX_HEADER = PSHTreeGraph_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_PARAMETER = NO;
 				INFOPLIST_FILE = "PSHTreeGraph-Info.plist";
 				PRODUCT_NAME = PSHTreeGraph;
 				VALIDATE_PRODUCT = YES;
@@ -383,26 +381,12 @@
 		4F0E109B1407EB46009B9214 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				COPY_PHASE_STRIP = NO;
-				DEBUGGING_SYMBOLS = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				ONLY_ACTIVE_ARCH = YES;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
@@ -411,17 +395,8 @@
 		4F0E109C1407EB46009B9214 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
@@ -435,6 +410,8 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -450,6 +427,8 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
@@ -477,6 +456,7 @@
 				4F0E109C1407EB46009B9214 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "PSHTreeGraph" */ = {
 			isa = XCConfigurationList;

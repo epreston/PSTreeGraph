@@ -274,14 +274,21 @@
 			
             // Recurse to create a SubtreeView for each descendant of modelNode.
             NSArray *childModelNodes = [modelNode childModelNodes];
-            for (id <PSTreeGraphModelNode> childModelNode in childModelNodes) {
-                PSBaseSubtreeView *childSubtreeView = [self newGraphForModelNode:childModelNode];
-                if (childSubtreeView) {
-                    
-					// Add the child subtreeView behind the parent subtreeView's nodeView (so that when we
-					// collapse the subtree, its nodeView will remain frontmost).
-                    
-					[subtreeView insertSubview:childSubtreeView belowSubview:[subtreeView nodeView]];
+            
+            NSAssert(childModelNodes != nil, 
+                     @"childModelNodes should return an empty array ([NSArray array]), not nil.");
+            
+            if (childModelNodes != nil) {
+                for (id <PSTreeGraphModelNode> childModelNode in childModelNodes) {
+                    PSBaseSubtreeView *childSubtreeView = [self newGraphForModelNode:childModelNode];
+                    if (childSubtreeView != nil) {
+                        
+                        // Add the child subtreeView behind the parent subtreeView's nodeView (so that when we
+                        // collapse the subtree, its nodeView will remain frontmost).
+                        
+                        [subtreeView insertSubview:childSubtreeView belowSubview:[subtreeView nodeView]];
+                        [childSubtreeView release];
+                    }
                 }
             }
 			
@@ -302,6 +309,7 @@
         PSBaseSubtreeView *rootSubtreeView = [self newGraphForModelNode:root];
         if (rootSubtreeView) {
             [self addSubview:rootSubtreeView];
+            [rootSubtreeView release];
         }
     }
 }
@@ -650,7 +658,8 @@
     [self moveToNearestChild:sender];
 }
 
-//- (void)keyDown:(NSEvent *)theEvent {
+//- (void) keyDown:(NSEvent *)theEvent 
+//{
 //    NSString *characters = [theEvent characters];
 //    if (characters && [characters length] > 0) {
 //        switch ([characters characterAtIndex:0]) {
@@ -668,23 +677,23 @@
 
 #pragma mark - Gesture Event Handling
 
-//- (void)beginGestureWithEvent:(NSEvent *)event {
+//- (void) beginGestureWithEvent:(NSEvent *)event {
 //    // Temporarily suspend layout animations during handling of a gesture sequence.
 //    [self setLayoutAnimationSuppressed:YES];
 //}
 //
-//- (void)endGestureWithEvent:(NSEvent *)event {
+//- (void) endGestureWithEvent:(NSEvent *)event {
 //    // Re-enable layout animations at the end of a gesture sequence.
 //    [self setLayoutAnimationSuppressed:NO];
 //}
 //
-//- (void)magnifyWithEvent:(NSEvent *)event {
+//- (void) magnifyWithEvent:(NSEvent *)event {
 //    CGFloat spacing = [self parentChildSpacing];
 //    spacing = spacing * (1.0 + [event magnification]);
 //    [self setParentChildSpacing:spacing];
 //}
 //
-//- (void)swipeWithEvent:(NSEvent *)event {
+//- (void) swipeWithEvent:(NSEvent *)event {
 //    // Expand or collapse the entire tree according to the direction of the swipe.  
 //    // (An alternative behavior might be to identify node under mouse, and 
 //    // collapse/expand that instead of root node.)
@@ -715,7 +724,7 @@
 {
     if (connectingLineColor != newConnectingLineColor) {
         [connectingLineColor release];
-        connectingLineColor = [newConnectingLineColor copy];
+        connectingLineColor = [newConnectingLineColor retain];
         [[self rootSubtreeView] recursiveSetConnectorsViewsNeedDisplay];
     }
 }
@@ -842,7 +851,11 @@
         // Find modelNode's position in its parent node's array of children.
         id <PSTreeGraphModelNode> parent = [modelNode parentModelNode];
         NSArray *siblings = [parent childModelNodes];
-        if (siblings) {
+        
+        NSAssert(siblings != nil, 
+                 @"childModelNodes should return an empty array ([NSArray array]), not nil.");
+        
+        if (siblings != nil) {
             NSInteger index = [siblings indexOfObject:modelNode];
             if (index != NSNotFound) {
                 index += relativeIndex;
