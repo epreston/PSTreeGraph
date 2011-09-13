@@ -44,14 +44,14 @@
         // CGFloat scaleFactor = [[self window] userSpaceScaleFactor];
 		CGFloat scaleFactor = 1.0f;
 		
-        [layer setBorderWidth:(borderWidth * scaleFactor)];
-        if (borderWidth > 0.0f) {
-            [layer setBorderColor:[borderColor CGColor]];
+        [layer setBorderWidth:(_borderWidth * scaleFactor)];
+        if (_borderWidth > 0.0f) {
+            [layer setBorderColor:[_borderColor CGColor]];
         }
 		
-        [layer setCornerRadius:(cornerRadius * scaleFactor)];
+        [layer setCornerRadius:(_cornerRadius * scaleFactor)];
 		
-		if ( showingSelected ) {
+		if ( _showingSelected ) {
 			[layer setBackgroundColor:[[UIColor yellowColor] CGColor] ];
 		} else {
 			[layer setBackgroundColor:[[self fillColor] CGColor] ];
@@ -71,11 +71,11 @@
 	// Initialize ivars directly.  As a rule, it's best to avoid invoking accessors from an -init...
 	// method, since they may wrongly expect the instance to be fully formed.
 	
-	borderColor = [[UIColor colorWithRed:1.0f green:0.8f blue:0.4f alpha:1.0f] retain];
-	borderWidth = 3.0f;
-	cornerRadius = 8.0f;
-	fillColor = [[UIColor colorWithRed:1.0f green:0.5f blue:0.0f alpha:1.0f] retain];
-    showingSelected = NO;
+	_borderColor = [[UIColor colorWithRed:1.0f green:0.8f blue:0.4f alpha:1.0f] retain];
+	_borderWidth = 3.0f;
+	_cornerRadius = 8.0f;
+	_fillColor = [[UIColor colorWithRed:1.0f green:0.5f blue:0.0f alpha:1.0f] retain];
+    _showingSelected = NO;
 	
 	[self updateLayerAppearanceToMatchContainerView];
 }
@@ -98,53 +98,57 @@
 
 #pragma mark - Styling 
 
-@synthesize borderColor;
+@synthesize borderColor = _borderColor;
 
 - (void) setBorderColor:(UIColor *)color 
 {
-    [borderColor release];
-    borderColor = [color retain];
-    [self updateLayerAppearanceToMatchContainerView];
+    if (_borderColor != color) {
+        [_borderColor release];
+        _borderColor = [color retain];
+        [self updateLayerAppearanceToMatchContainerView];
+    }
 }
 
-@synthesize borderWidth;
+@synthesize borderWidth = _borderWidth;
 
 - (void) setBorderWidth:(CGFloat)width 
 {
-    if (borderWidth != width) {
-        borderWidth = width;
+    if (_borderWidth != width) {
+        _borderWidth = width;
         [self updateLayerAppearanceToMatchContainerView];
     }
 }
 
-@synthesize cornerRadius;
+@synthesize cornerRadius = _cornerRadius;
 
 - (void) setCornerRadius:(CGFloat)radius 
 {
-    if (cornerRadius != radius) {
-        cornerRadius = radius;
+    if (_cornerRadius != radius) {
+        _cornerRadius = radius;
         [self updateLayerAppearanceToMatchContainerView];
     }
 }
 
-@synthesize fillColor;
+@synthesize fillColor = _fillColor;
 
 - (void) setFillColor:(UIColor *)color 
 {
-    [fillColor release];
-    fillColor = [[color copy] retain];
-    [self updateLayerAppearanceToMatchContainerView];
+    if (_fillColor != color) {
+        [_fillColor release];
+        _fillColor = [color retain];
+        [self updateLayerAppearanceToMatchContainerView];
+    }
 }
 
 
 #pragma mark - Selection State
 
-@synthesize showingSelected;
+@synthesize showingSelected = _showingSelected;
 
 - (void) setShowingSelected:(BOOL)newShowingSelected 
 {
-    if (showingSelected != newShowingSelected) {
-        showingSelected = newShowingSelected;
+    if (_showingSelected != newShowingSelected) {
+        _showingSelected = newShowingSelected;
         [self updateLayerAppearanceToMatchContainerView];
     }
 }
@@ -154,8 +158,8 @@
 
 - (void) dealloc 
 {
-    [borderColor release];
-    [fillColor release];
+    [_borderColor release];
+    [_fillColor release];
 	
     [super dealloc];
 }

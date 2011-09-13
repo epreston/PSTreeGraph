@@ -49,45 +49,45 @@ typedef NSInteger PSTreeGraphOrientationStyle;
     
 @private
 	// Model
-    id <PSTreeGraphModelNode> modelRoot;
+    id <PSTreeGraphModelNode> _modelRoot;
 	
 	// Delegate
-	id <PSTreeGraphDelegate> delegate;
+	id <PSTreeGraphDelegate> _delegate;
 	
     // Model Object -> SubtreeView Mapping
-	NSMutableDictionary *modelNodeToSubtreeViewMapTable;
+	NSMutableDictionary *_modelNodeToSubtreeViewMapTable;
 	
     // Node View Nib Specification
-    NSString *nodeViewNibName;
-    NSBundle *nodeViewNibBundle;
+    NSString *_nodeViewNibName;
+    NSBundle *_nodeViewNibBundle;
 	
     // Selection State
-    NSMutableSet *selectedModelNodes;
+    NSSet *_selectedModelNodes;
 	
     // Layout State
-    CGSize minimumFrameSize;
+    CGSize _minimumFrameSize;
 	
     // Animation Support
-    BOOL animatesLayout;
-    BOOL layoutAnimationSuppressed;
+    BOOL _animatesLayout;
+    BOOL _layoutAnimationSuppressed;
 	
     // Layout Metrics
-    CGFloat contentMargin;
-    CGFloat parentChildSpacing;
-    CGFloat siblingSpacing;
+    CGFloat _contentMargin;
+    CGFloat _parentChildSpacing;
+    CGFloat _siblingSpacing;
 	
     // Layout Behavior
-    BOOL resizesToFillEnclosingScrollView;
-	PSTreeGraphOrientationStyle treeGraphOrientation;
+    BOOL _resizesToFillEnclosingScrollView;
+	PSTreeGraphOrientationStyle _treeGraphOrientation;
 	
     // Styling
     // UIColor *backgroundColor;
 	
-    UIColor *connectingLineColor;
-    CGFloat connectingLineWidth;
-    PSTreeGraphConnectingLineStyle connectingLineStyle;
+    UIColor *_connectingLineColor;
+    CGFloat _connectingLineWidth;
+    PSTreeGraphConnectingLineStyle _connectingLineStyle;
 	
-    BOOL showsSubtreeFrames;
+    BOOL _showsSubtreeFrames;
 	
 	// iOS 4 and above ONLY
     // UINib *cachedNodeViewNib;
@@ -181,7 +181,7 @@ typedef NSInteger PSTreeGraphOrientationStyle;
 /// returns the model node at the root of the collapsed subtree.  If there is no model node 
 /// at the given point, returns nil.
  
-- (id <PSTreeGraphModelNode> )modelNodeAtPoint:(CGPoint)p;
+- (id <PSTreeGraphModelNode> ) modelNodeAtPoint:(CGPoint)p;
 
 
 #pragma mark - Sizing and Layout

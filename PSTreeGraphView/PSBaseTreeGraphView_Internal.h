@@ -42,7 +42,7 @@
 
 // Returns YES if modelNode is a descendant of possibleAncestor, NO if not.
 //
-// Raises an exception if either modelNode or possibleAncestor is nil.
+// Neither modelNode or possibleAncestor should be nil.
 
 - (BOOL) modelNode:(id <PSTreeGraphModelNode> )modelNode 
     isDescendantOf:(id <PSTreeGraphModelNode> )possibleAncestor;
@@ -52,7 +52,7 @@
 // Returns NO if not.  TreeGraph uses this determination to avoid traversing nodes above its 
 // assigned modelRoot (if there are any).  
 //
-// Raises an exception if modelNode is nil.
+// modelNode should not be nil.
 
 - (BOOL) modelNodeIsInAssignedTree:(id <PSTreeGraphModelNode> )modelNode;
 
@@ -65,7 +65,8 @@
 // (That is: If the given modelNode is the TreeGraph's modelRoot, this method returns nil, even if 
 // the requested sibling exists.)  
 //
-// Raises an exception if modelNode is nil, or if modelNode is not within the subtree assigned to the TreeGraph.
+// Checks modelNode is nil, or if modelNode is not within the subtree assigned to the TreeGraph.
+// 
 
 - (id<PSTreeGraphModelNode>) siblingOfModelNode:(id <PSTreeGraphModelNode> )modelNode 
                                 atRelativeIndex:(NSInteger)relativeIndex;

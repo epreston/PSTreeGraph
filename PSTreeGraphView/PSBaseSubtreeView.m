@@ -39,17 +39,17 @@ static CGFloat subtreeBorderWidth(void)
 
 #pragma mark - Attributes
 
-@synthesize modelNode;
-@synthesize nodeView;
+@synthesize modelNode = _modelNode;
+@synthesize nodeView = _nodeView;
 
-@synthesize expanded;
+@synthesize expanded = _expanded;
 
 - (void) setExpanded:(BOOL)flag 
 {
-    if (expanded != flag) {
+    if (_expanded != flag) {
 		
         // Remember this SubtreeView's new state.
-        expanded = flag;
+        _expanded = flag;
 		
         // Notify the TreeGraph we need layout.
         [[self enclosingTreeGraph] setNeedsGraphLayout];
@@ -57,7 +57,7 @@ static CGFloat subtreeBorderWidth(void)
         // Expand or collapse subtrees recursively.
         for (UIView *subview in [self subviews]) {
             if ([subview isKindOfClass:[PSBaseSubtreeView class]]) {
-                [(PSBaseSubtreeView *)subview setExpanded:expanded];
+                [(PSBaseSubtreeView *)subview setExpanded:_expanded];
             }
         }
     }
@@ -95,21 +95,21 @@ static CGFloat subtreeBorderWidth(void)
         // Initialize ivars directly.  As a rule, it's best to avoid invoking accessors from an -init... 
 		// method, since they may wrongly expect the instance to be fully formed.
 		
-        expanded = YES;
-        needsGraphLayout = YES;
+        _expanded = YES;
+        _needsGraphLayout = YES;
 		
         // autoresizesSubviews defaults to YES.  We don't want autoresizing, which would interfere
 		// with the explicit layout we do, so we switch it off for SubtreeView instances.
         [self setAutoresizesSubviews:NO];
 		
         self.modelNode = newModelNode;
-        connectorsView = [[PSBaseBranchView alloc] initWithFrame:CGRectZero];
-        if (connectorsView) {
-            [connectorsView setAutoresizesSubviews:YES];
-			[connectorsView setContentMode:UIViewContentModeRedraw]; // if we dont redraw lines, they get out of place
-			[connectorsView setOpaque:YES];
+        _connectorsView = [[PSBaseBranchView alloc] initWithFrame:CGRectZero];
+        if (_connectorsView) {
+            [_connectorsView setAutoresizesSubviews:YES];
+			[_connectorsView setContentMode:UIViewContentModeRedraw]; // if we dont redraw lines, they get out of place
+			[_connectorsView setOpaque:YES];
             
-			[self addSubview:connectorsView];
+			[self addSubview:_connectorsView];
         }
     }
     return self;
@@ -133,15 +133,16 @@ static CGFloat subtreeBorderWidth(void)
 - (void) dealloc 
 {
 	//    [nodeView release]; // not retained, since an IBOutlet
-    [connectorsView release];
-    [modelNode release];
+    [_connectorsView release];
+    [_modelNode release];
+    
     [super dealloc];
 }
 
 
 #pragma mark - Layout
 
-@synthesize needsGraphLayout;
+@synthesize needsGraphLayout = _needsGraphLayout;
 
 - (void) recursiveSetNeedsGraphLayout 
 {
@@ -158,14 +159,14 @@ static CGFloat subtreeBorderWidth(void)
     // TODO: Node size is hardwired for now, but the layout algorithm could accommodate variable-sized nodes
 	// if we implement size-to-fit for nodes.
 	
-    return [nodeView frame].size;
+    return [self.nodeView frame].size;
 }
 
 - (CGSize) layoutGraphIfNeeded 
 {
     CGSize selfTargetSize;
 	
-    if (!needsGraphLayout)
+    if ( !self.needsGraphLayout )
         return [self frame].size;
 	
     PSBaseTreeGraphView *treeGraph = [self enclosingTreeGraph];
@@ -182,7 +183,7 @@ static CGFloat subtreeBorderWidth(void)
 	
     CGSize rootNodeViewSize = [self sizeNodeViewToFitContent];
 	
-    if ([self isExpanded]) {
+    if ( [self isExpanded] ) {
 		
         // Recurse to lay out each of our child SubtreeViews (and their non-collapsed descendants in turn).
 		// Knowing the sizes of our child SubtreeViews will tell us what size this SubtreeView needs to be
@@ -317,10 +318,10 @@ static CGFloat subtreeBorderWidth(void)
             // [(animateLayout ? [nodeView animator] : nodeView) setFrameOrigin:nodeViewOrigin];
 			// [nodeView setCenter:nodeViewOrigin];
 			
-			nodeView.frame = CGRectMake(nodeViewOrigin.x, 
+			self.nodeView.frame = CGRectMake(nodeViewOrigin.x, 
 										nodeViewOrigin.y, 
-										nodeView.frame.size.width, 
-										nodeView.frame.size.height );
+										self.nodeView.frame.size.width, 
+										self.nodeView.frame.size.height );
 			
             // Position, show our connectorsView and button.
 			
@@ -335,12 +336,12 @@ static CGFloat subtreeBorderWidth(void)
 			//[connectorsView setFrameSize:CGSizeMake(parentChildSpacing, selfTargetSize.height)];
 			
 			if ( treeDirection == PSTreeGraphOrientationStyleHorizontal ) {
-				connectorsView.frame = CGRectMake(rootNodeViewSize.width, 
+				_connectorsView.frame = CGRectMake(rootNodeViewSize.width, 
 												  0.0f, 
 												  parentChildSpacing, 
 												  selfTargetSize.height );
 			} else {
-				connectorsView.frame = CGRectMake(0.0f, 
+				_connectorsView.frame = CGRectMake(0.0f, 
 												  rootNodeViewSize.height, 
 												  selfTargetSize.width,
 												  parentChildSpacing );	
@@ -349,7 +350,7 @@ static CGFloat subtreeBorderWidth(void)
 			
 			// connectorsView.contentMode = UIViewContentModeRedraw;
 			
-			[connectorsView setHidden:NO];
+			[_connectorsView setHidden:NO];
 			
         } else {
             // No SubtreeViews; this is a leaf node.  
@@ -362,12 +363,12 @@ static CGFloat subtreeBorderWidth(void)
 									selfTargetSize.width, 
 									selfTargetSize.height );
 			
-			nodeView.frame = CGRectMake(0.0f,
+			self.nodeView.frame = CGRectMake(0.0f,
 										0.0f,
-										nodeView.frame.size.width, 
-										nodeView.frame.size.height );
+										self.nodeView.frame.size.width, 
+										self.nodeView.frame.size.height );
 			
-            [connectorsView setHidden:YES];
+            [_connectorsView setHidden:YES];
         }
     } else {
         // This node is collapsed.
@@ -391,7 +392,7 @@ static CGFloat subtreeBorderWidth(void)
 				
 				[subview setHidden:YES];
 				
-            } else if (subview == connectorsView) {
+            } else if (subview == _connectorsView) {
 				
                 // [connectorsView setLayerContentsRedrawPolicy:UIViewLayerContentsRedrawNever];
                 // [(animateLayout ? [connectorsView animator] : connectorsView) setFrameSize:CGSizeZero];
@@ -400,11 +401,11 @@ static CGFloat subtreeBorderWidth(void)
 				
 				
 				if ( treeDirection == PSTreeGraphOrientationStyleHorizontal ) {
-					connectorsView.frame = CGRectMake(0.0f, 
+					_connectorsView.frame = CGRectMake(0.0f, 
 													  0.5f * selfTargetSize.height, 
 													  0.0f, 0.0f );
 				} else {
-					connectorsView.frame = CGRectMake(0.5f * selfTargetSize.width, 
+					_connectorsView.frame = CGRectMake(0.5f * selfTargetSize.width, 
 													  0.0f,
 													  0.0f, 0.0f );
 				}
@@ -412,7 +413,7 @@ static CGFloat subtreeBorderWidth(void)
 				
 				[subview setHidden:YES];
 				
-            } else if (subview == nodeView) {
+            } else if (subview == _nodeView) {
 				
 				subview.frame = CGRectMake(0.0f, 
 										   0.0f, 
@@ -424,7 +425,7 @@ static CGFloat subtreeBorderWidth(void)
     }
 	
     // Mark as having completed layout.
-    needsGraphLayout = NO;
+    self.needsGraphLayout = NO;
 	
     // Return our new size.
     return selfTargetSize;
@@ -464,7 +465,7 @@ static CGFloat subtreeBorderWidth(void)
 - (void) recursiveSetConnectorsViewsNeedDisplay 
 {
     // Mark this SubtreeView's connectorsView as needing display.
-    [connectorsView setNeedsDisplay];
+    [_connectorsView setNeedsDisplay];
 	
     // Recurse for descendant SubtreeViews.
     NSArray *subviews = [self subviews];
@@ -570,14 +571,17 @@ static CGFloat subtreeBorderWidth(void)
 
 #pragma mark - Debugging
 
+// These methods access private member variables so they do not invoke app logic.  We only
+// want to dump the current state.  Change this if these properties are synthesized.
+
 - (NSString *) description
 {
-    return [NSString stringWithFormat:@"SubtreeView<%@>", [modelNode description]];
+    return [NSString stringWithFormat:@"SubtreeView<%@>", [_modelNode description]];
 }
 
 - (NSString *) nodeSummary 
 {
-    return [NSString stringWithFormat:@"f=%@ %@", NSStringFromCGRect([nodeView frame]), [modelNode description]];
+    return [NSString stringWithFormat:@"f=%@ %@", NSStringFromCGRect([_nodeView frame]), [_modelNode description]];
 }
 
 - (NSString *) treeSummaryWithDepth:(NSInteger)depth 
