@@ -63,18 +63,23 @@ static CGFloat subtreeBorderWidth(void)
     }
 }
 
-- (IBAction) toggleExpansion:(id)sender 
+- (IBAction) toggleExpansion:(id)sender
 {
 	[UIView beginAnimations:@"TreeNodeExpansion" context:nil];
-	// [UIView setAnimationDuration:0.5];
+//    [UIView setAnimationDuration:8.0];
 	[UIView setAnimationBeginsFromCurrentState:YES];
-	// [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
 	
     [self setExpanded:![self isExpanded]];
 	
     [[self enclosingTreeGraph] layoutGraphIfNeeded];
-	
-	[UIView commitAnimations];
+    
+    if ( [self modelNode] != nil ) {
+        NSSet *visibleSet = [NSSet setWithObject:[self modelNode]];
+        [[self enclosingTreeGraph] scrollModelNodesToVisible:visibleSet animated:NO];
+    }
+    
+    [UIView commitAnimations];
 }
 
 - (BOOL) isLeaf 
@@ -202,8 +207,6 @@ static CGFloat subtreeBorderWidth(void)
 		} else {
 			nextSubtreeViewOrigin = CGPointMake(0.0f, rootNodeViewSize.height + parentChildSpacing);
 		}
-
-		
 
         for (index = count - 1; index >= 0; index--) {
             UIView *subview = [subviews objectAtIndex:index];
@@ -568,6 +571,32 @@ static CGFloat subtreeBorderWidth(void)
     return [subtreeViewWithClosestNodeView modelNode];
 }
 
+- (id <PSTreeGraphModelNode> ) modelNodeClosestToX:(CGFloat)x 
+{    
+	// Do a simple linear search of our subviews, ignoring non-SubtreeViews.  If performance was ever
+    // an issue for this code, we could take advantage of knowing the layout order of the nodes to do
+    // a sort of binary search.
+	
+    NSArray *subviews = [self subviews];
+    PSBaseSubtreeView *subtreeViewWithClosestNodeView = nil;
+    CGFloat closestNodeViewDistance = MAXFLOAT;
+	
+    for (UIView *subview in subviews) {
+        if ([subview isKindOfClass:[PSBaseSubtreeView class]]) {
+            UIView *childNodeView = [(PSBaseSubtreeView *)subview nodeView];
+            if (childNodeView) {
+                CGRect rect = [self convertRect:[childNodeView bounds] fromView:childNodeView];
+                CGFloat nodeViewDistance = fabs(x - CGRectGetMidX(rect));
+                if (nodeViewDistance < closestNodeViewDistance) {
+                    closestNodeViewDistance = nodeViewDistance;
+                    subtreeViewWithClosestNodeView = (PSBaseSubtreeView *)subview;
+                }
+            }
+        }
+    }
+	
+    return [subtreeViewWithClosestNodeView modelNode];
+}
 
 #pragma mark - Debugging
 

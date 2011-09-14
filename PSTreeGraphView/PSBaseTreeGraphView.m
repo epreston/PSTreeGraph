@@ -55,6 +55,11 @@
 	_showsSubtreeFrames = NO;
 	_minimumFrameSize = CGSizeMake(2.0f * _contentMargin, 2.0f * _contentMargin);
 	_selectedModelNodes = [[NSMutableSet alloc] init];
+    
+    // If this has been configured by the XIB, leave it during initialization.
+    if (_inputView == nil) {
+        _inputView = [[UIView alloc] initWithFrame:CGRectZero];
+    }
 	
 	// [self setLayerContentsRedrawPolicy:UIViewLayerContentsRedrawNever];
 }
@@ -83,6 +88,7 @@
     
     self.delegate = nil;
 	
+    [_inputView release];
     [_nodeViewNibBundle release];
     [_nodeViewNibName release];
     [_selectedModelNodes release];
@@ -155,7 +161,7 @@
 
 // The unordered set of model nodes that are currently selected in the TreeGraph.  When 
 // no nodes are selected, this is an empty NSSet.  It will never be nil (and attempting
-// to set it to nil will raise an exception).
+// to set it to nil is not allowed.).
  
 @synthesize selectedModelNodes = _selectedModelNodes;
 
@@ -361,6 +367,7 @@
     }
 	
     // [(animateLayout ? [rootSubtreeView animator] : rootSubtreeView) setFrameOrigin:newOrigin];
+    
 	rootSubtreeView.frame = CGRectMake(newOrigin.x, 
 									   newOrigin.y, 
 									   rootSubtreeView.frame.size.width, 
@@ -396,6 +403,7 @@
 	if ( enclosingScrollView && [enclosingScrollView isKindOfClass:[UIScrollView class]] ) {
         [self updateFrameSizeForContentAndClipView];
         [self updateRootSubtreeViewPositionForSize:[[self rootSubtreeView] frame].size];
+        [self scrollSelectedModelNodesToVisibleAnimated:NO];
     }
 }
 
@@ -403,11 +411,6 @@
 {	
     // Do graph layout if we need to.
     [self layoutGraphIfNeeded];
-	
-    // Always call up to [super viewWillDraw], either before or after doing your work, to continue 
-	// the -viewWillDraw recursion for descendant views.
-	
-    [super layoutSubviews];
 }
 
 - (CGSize) layoutGraphIfNeeded 
@@ -468,26 +471,36 @@
     }
 }
 
+
+#pragma mark - Scrolling
+
 - (CGRect) boundsOfModelNodes:(NSSet *)modelNodes 
 {
     CGRect boundingBox = CGRectZero;
+    BOOL   firstNodeFound = NO;
     for (id <PSTreeGraphModelNode> modelNode in modelNodes) {
         PSBaseSubtreeView *subtreeView = [self subtreeViewForModelNode:modelNode];
-        if (subtreeView && [subtreeView isExpanded]) {
+        if ( subtreeView && (subtreeView.hidden == NO) ) {
             UIView *nodeView = [subtreeView nodeView];
             if (nodeView) {
                 CGRect rect = [self convertRect:[nodeView bounds] fromView:nodeView];
-                boundingBox = CGRectUnion(boundingBox, rect);
+                
+                if (!firstNodeFound) {
+                    // The first node found gives us the starting boundingBox, after
+                    // that we take the take union of each successive node.
+                    boundingBox = rect;
+                    firstNodeFound = YES;
+                } else {
+                    boundingBox = CGRectUnion(boundingBox, rect);
+                }
+                
             }
         }
     }
     return boundingBox;
 }
 
-
-#pragma mark - Scrolling
-
-- (void) scrollModelNodesToVisible:(NSSet *)modelNodes 
+- (void) scrollModelNodesToVisible:(NSSet *)modelNodes animated:(BOOL)animated
 {
     CGRect targetRect = [self boundsOfModelNodes:modelNodes];
     if (!CGRectIsEmpty(targetRect)) {
@@ -495,16 +508,18 @@
 		
 		UIScrollView *parentScroll = (UIScrollView *)[self superview];
 		
-		if ( parentScroll ) {
-			[parentScroll scrollRectToVisible:CGRectInset(targetRect, -padding, -padding) animated:YES];
+		if ( parentScroll && [parentScroll isKindOfClass:[UIScrollView class]] ) {
+            targetRect = CGRectInset(targetRect, -padding, -padding);
+//            NSLog(@"Scrolling to target rect: %@", NSStringFromCGRect(targetRect) );
+			[parentScroll scrollRectToVisible:targetRect animated:animated];
 		}
         
     }
 }
 
-- (void) scrollSelectedModelNodesToVisible 
+- (void) scrollSelectedModelNodesToVisibleAnimated:(BOOL)animated
 {
-    [self scrollModelNodesToVisible:[self selectedModelNodes]];
+    [self scrollModelNodesToVisible:[self selectedModelNodes] animated:animated];
 }
 
 
@@ -530,13 +545,13 @@
         // Discard and reload content.
         [self buildGraph];
         [self setNeedsDisplay];
+        [[self rootSubtreeView] resursiveSetSubtreeBordersNeedDisplay];
+        [self layoutGraphIfNeeded];
 		
         // Start with modelRoot selected.
         if ( _modelRoot ) {
-			[[self rootSubtreeView] resursiveSetSubtreeBordersNeedDisplay];
-			
             [self setSelectedModelNodes:[NSSet setWithObject:_modelRoot]];
-            [self scrollSelectedModelNodesToVisible];
+            [self scrollSelectedModelNodesToVisibleAnimated:NO];
         }
     }
 }
@@ -544,17 +559,19 @@
 
 #pragma mark - Node Hit-Testing
 
-// Returns the model node under the given point, which must be expressed in the TreeGraph's interior (bounds)
-// coordinate space.  If there is a collapsed subtree at the given point, returns the model node at the root
-// of the collapsed subtree.  If there is no model node at the given point, returns nil.
+// Returns the model node under the given point, which must be expressed in the 
+// TreeGraph's interior (bounds) coordinate space.  If there is a collapsed subtree at the 
+// given point, returns the model node at the root of the collapsed subtree.  If there is
+// no model node at the given point, returns nil.
  
 - (id <PSTreeGraphModelNode> ) modelNodeAtPoint:(CGPoint)p 
 {
-    // Since we've composed our content using views (SubtreeViews and enclosed nodeViews), we can use 
-    // UIView's -hitTest: method to easily identify our deepest descendant view under the given point.  
-    // We rely on the front-to-back order of hit-testing to ensure that we return the root of a collapsed
-    // subtree, instead of one of its descendant nodes.  (To do this, we must make sure, when collapsing a
-    // subtree, to keep the SubtreeView's nodeView frontmost among its siblings.)
+    // Since we've composed our content using views (SubtreeViews and enclosed nodeViews),
+    // we can use UIView's -hitTest: method to easily identify our deepest descendant view 
+    // under the given point. We rely on the front-to-back order of hit-testing to ensure 
+    // that we return the root of a collapsed subtree, instead of one of its descendant nodes.
+    // (To do this, we must make sure, when collapsing a subtree, to keep the SubtreeView's 
+    // nodeView frontmost among its siblings.)
     
     PSBaseSubtreeView *rootSubtreeView = [self rootSubtreeView];
     CGPoint subviewPoint = [self convertPoint:p toView:rootSubtreeView];
@@ -564,14 +581,31 @@
 }
 
 
-#pragma mark - Key Event Handling
+#pragma mark - Input and Navigation
 
-// Make TreeGraphs able to -becomeFirstResponder, so they can receive key events.
- 
-- (BOOL) acceptsFirstResponder 
+@synthesize inputView = _inputView;
+
+
+- (BOOL) canBecomeFirstResponder 
 {
+    // Make TreeGraphs able to -canBecomeFirstResponder, so they can receive key events.
     return YES;
 }
+
+-(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event 
+{
+
+    UITouch *touch = [touches anyObject];
+    CGPoint viewPoint = [touch locationInView:self];
+    
+    // Identify the mdoel node (if any) that the user clicked, and make it the new selection.
+    id <PSTreeGraphModelNode>  hitModelNode = [self modelNodeAtPoint:viewPoint];
+    [self setSelectedModelNodes:(hitModelNode ? [NSSet setWithObject:hitModelNode] : [NSSet set])];
+    
+    // Respond to touch and become first responder.
+    [self becomeFirstResponder];
+} 
+
 
 - (void) moveToSiblingByRelativeIndex:(NSInteger)relativeIndex 
 {
@@ -587,10 +621,10 @@
     }
 	
     // Scroll new selection to visible.
-    [self scrollSelectedModelNodesToVisible];
+    [self scrollSelectedModelNodesToVisibleAnimated:YES];
 }
 
-- (void) moveToParent:(id)sender 
+- (IBAction) moveToParent:(id)sender 
 {
     id <PSTreeGraphModelNode> modelNode = [self singleSelectedModelNode];
     if (modelNode) {
@@ -606,10 +640,10 @@
     }
 	
     // Scroll new selection to visible.
-    [self scrollSelectedModelNodesToVisible];
+    [self scrollSelectedModelNodesToVisibleAnimated:YES];
 }
 
-- (void) moveToNearestChild:(id)sender 
+- (IBAction) moveToNearestChild:(id)sender 
 {
     id <PSTreeGraphModelNode> modelNode = [self singleSelectedModelNode];
     if (modelNode) {
@@ -618,8 +652,13 @@
             UIView *nodeView = [subtreeView nodeView];
             if (nodeView) {
                 CGRect nodeViewFrame = [nodeView frame];
-                id <PSTreeGraphModelNode> nearestChild = [subtreeView modelNodeClosestToY:CGRectGetMidY(nodeViewFrame)];
-                if (nearestChild) {
+                id <PSTreeGraphModelNode> nearestChild = nil;
+                if ( self.treeGraphOrientation == PSTreeGraphOrientationStyleHorizontal ) {
+                    nearestChild = [subtreeView modelNodeClosestToY:CGRectGetMidY(nodeViewFrame)];
+                } else {
+                    nearestChild = [subtreeView modelNodeClosestToX:CGRectGetMidX(nodeViewFrame)];
+                }
+                if (nearestChild != nil) {
                     [self setSelectedModelNodes:[NSSet setWithObject:nearestChild]];
                 }
             }
@@ -630,44 +669,91 @@
     }
 	
     // Scroll new selection to visible.
-    [self scrollSelectedModelNodesToVisible];
+    [self scrollSelectedModelNodesToVisibleAnimated:YES];
 }
 
 - (void) moveUp:(id)sender 
 {
-    [self moveToSiblingByRelativeIndex:-1];
+    if ( self.treeGraphOrientation == PSTreeGraphOrientationStyleHorizontal ) {
+        [self moveToSiblingByRelativeIndex:1];
+    } else {
+        [self moveToParent:sender];
+    }
+    
 }
 
 - (void) moveDown:(id)sender 
 {
-    [self moveToSiblingByRelativeIndex:1];
+    if ( self.treeGraphOrientation == PSTreeGraphOrientationStyleHorizontal ) {
+        [self moveToSiblingByRelativeIndex:-1];
+    } else {
+        [self moveToNearestChild:sender];
+    }
+   
 }
 
 - (void) moveLeft:(id)sender 
 {
-    [self moveToParent:sender];
+    if ( self.treeGraphOrientation == PSTreeGraphOrientationStyleHorizontal ) {
+        [self moveToParent:sender];
+    } else {
+        [self moveToSiblingByRelativeIndex:1];
+    }
+    
 }
 
 - (void) moveRight:(id)sender 
 {
-    [self moveToNearestChild:sender];
+    if ( self.treeGraphOrientation == PSTreeGraphOrientationStyleHorizontal ) {
+        [self moveToNearestChild:sender];
+    } else {
+        [self moveToSiblingByRelativeIndex:-1];
+    }
+    
 }
 
-//- (void) keyDown:(NSEvent *)theEvent 
-//{
-//    NSString *characters = [theEvent characters];
-//    if (characters && [characters length] > 0) {
-//        switch ([characters characterAtIndex:0]) {
-//            case ' ':
-//                [self toggleExpansionOfSelectedModelNodes:self];
-//                break;
-//
-//            default:
-//                [super keyDown:theEvent];
-//                break;
-//        }
-//    }
-//}
+
+#pragma mark UIKeyInput Protocol Methods
+
+- (BOOL)hasText 
+{
+    if ( [self modelRoot] != nil ) {
+        return YES;
+    }
+    return NO;
+}
+
+- (void)insertText:(NSString *)theText 
+{
+    if (theText && [theText length] > 0) {
+        switch ([theText characterAtIndex:0]) {
+            case ' ':
+                [self toggleExpansionOfSelectedModelNodes:self];
+                break;
+            case 'w':
+                [self moveUp:self];
+                break;
+            case 'a':
+                [self moveLeft:self];
+                break;
+            case 's':
+                [self moveDown:self];
+                break;
+            case 'd':
+                [self moveRight:self];
+                break;
+
+            default:
+                // Input from keyboard or other device not handled.
+                break;
+        }
+    }
+}
+
+- (void)deleteBackward 
+{
+    [self moveLeft:nil];
+}
 
 
 #pragma mark - Gesture Event Handling

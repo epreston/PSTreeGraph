@@ -131,6 +131,10 @@
  
 - ( id <PSTreeGraphModelNode> ) modelNodeClosestToY:(CGFloat)y;
 
+/// Returns the visible model node that is closest to the specified x coordinate, where "x" is specified in the
+/// SubtreeView's interior (bounds) coordinate space.
+
+- ( id <PSTreeGraphModelNode> ) modelNodeClosestToX:(CGFloat)x;
 
 #pragma mark - Debugging
 

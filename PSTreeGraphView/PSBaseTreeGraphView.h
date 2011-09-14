@@ -44,7 +44,7 @@ typedef NSInteger PSTreeGraphOrientationStyle;
 
 
 
-@interface PSBaseTreeGraphView : UIView 
+@interface PSBaseTreeGraphView : UIView <UIKeyInput>
 {
     
 @private
@@ -87,10 +87,14 @@ typedef NSInteger PSTreeGraphOrientationStyle;
     CGFloat _connectingLineWidth;
     PSTreeGraphConnectingLineStyle _connectingLineStyle;
 	
+    // A debug feature that outlines the view hiarchy.
     BOOL _showsSubtreeFrames;
 	
 	// iOS 4 and above ONLY
     // UINib *cachedNodeViewNib;
+    
+    // Custom input view support
+    UIView *_inputView;
 }
 
 
@@ -164,7 +168,7 @@ typedef NSInteger PSTreeGraphOrientationStyle;
 @property (nonatomic, copy) NSSet *selectedModelNodes;
 
 /// Convenience accessor that returns the selected node, if exactly one node is currently 
-/// selected.  Returns nil if zero, or more than one, nodees are currently selected.
+/// selected.  Returns nil if zero, or more than one, nodes are currently selected.
  
 @property (nonatomic, readonly) id <PSTreeGraphModelNode> singleSelectedModelNode;
 
@@ -244,11 +248,11 @@ typedef NSInteger PSTreeGraphOrientationStyle;
 
 /// Does a [self scrollRectToVisible:] with the bounding box of the specified model nodes.
  
-- (void) scrollModelNodesToVisible:(NSSet *)modelNodes;
+- (void) scrollModelNodesToVisible:(NSSet *)modelNodes animated:(BOOL)animated;
 
 /// Does a [self scrollRectToVisible:] with the bounding box of the selected model nodes.
  
-- (void) scrollSelectedModelNodesToVisible;
+- (void) scrollSelectedModelNodesToVisibleAnimated:(BOOL)animated;
 
 
 #pragma mark - Animation Support
@@ -303,5 +307,36 @@ typedef NSInteger PSTreeGraphOrientationStyle;
  
 @property (nonatomic, assign) BOOL showsSubtreeFrames;
 
+
+#pragma mark - Input and Navigation
+
+/// Custom input view for navigation.  
+///
+/// By default, this control supports a hardware keyboard unless this property is assigned
+/// to another input view.
+///
+/// More Info:
+/// 
+/// A placeholder view is created to so the default keyboard is not presented to the user.
+/// When a hardware keyboard is attached, touching the TreeGraph makes it first responder
+/// and certain keyboard shortcuts become available for navigation. ie. the space bar 
+/// expands and collapses the current selection. The following keys; w, a, s, d, navigate
+/// relative to the graph.
+///
+/// Custom navigation can be added by assigning a custom UIView to inputView, and linking
+/// it up to some of the actions below.
+
+@property (nonatomic, retain) IBOutlet UIView *inputView;
+
+// Model relative navigation
+- (void) moveToSiblingByRelativeIndex:(NSInteger)relativeIndex;
+- (IBAction) moveToParent:(id)sender;
+- (IBAction) moveToNearestChild:(id)sender;
+
+// Graph relative navigation
+- (IBAction) moveUp:(id)sender;
+- (IBAction) moveDown:(id)sender;
+- (IBAction) moveLeft:(id)sender;
+- (IBAction) moveRight:(id)sender;
 
 @end

@@ -53,8 +53,8 @@
 	
     // Specify a starting root class to inspect on launch.
     [self setRootClassName:@"UIControl"];
+    
 }
-
 
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
