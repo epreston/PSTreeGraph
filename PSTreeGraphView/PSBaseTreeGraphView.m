@@ -84,7 +84,7 @@
 - (void) dealloc 
 {
 	// iOS 4.0 and above ONLY
-	// [cachedNodeViewNib release];
+	[_cachedNodeViewNib release];
     
     self.delegate = nil;
 	
@@ -115,7 +115,7 @@
     if (_nodeViewNibName != newName) {
         
 		// iOS 4.0 and above ONLY
-		// [self setCachedNodeViewNib:nil];
+		[self setCachedNodeViewNib:nil];
 		
         [_nodeViewNibName release];
         _nodeViewNibName = [newName copy];
@@ -131,7 +131,7 @@
     if (_nodeViewNibBundle != newBundle) {
         
 		// iOS 4.0 and above ONLY
-		// [self setCachedNodeViewNib:nil];
+		[self setCachedNodeViewNib:nil];
 		
         [_nodeViewNibBundle release];
         _nodeViewNibBundle = [newBundle retain];
@@ -143,18 +143,29 @@
 
 #pragma mark - Node View Nib Caching
 
-// iOS 4.0 and above ONLY
+// iOS 4.0 and above ONLY - 
 
-//- (UINib *)cachedNodeViewNib {
-//    return cachedNodeViewNib;
-//}
-//
-//- (void)setCachedNodeViewNib:(UINib *)newNib {
-//    if (cachedNodeViewNib != newNib) {
-//        [cachedNodeViewNib release];
-//        cachedNodeViewNib = [newNib retain];
+- (UINib *)cachedNodeViewNib {
+    return _cachedNodeViewNib;
+    
+    // If 3.x Support required, change references to UINib to ID (careful not to modify
+    // the one below.) uncomment the following code, test. Note: Does not check for valid
+    // [self nodeViewNibName].
+    
+//    if (!_cachedNodeViewNib) {
+//        Class cls = NSClassFromString(@"UINib");
+//        if ([cls respondsToSelector:@selector(nibWithNibName:bundle:)]) {
+//            _cachedNodeViewNib = [[cls nibWithNibName:[self nodeViewNibName] bundle:[NSBundle mainBundle]] retain];
+//        }
 //    }
-//}
+}
+
+- (void)setCachedNodeViewNib:(UINib *)newNib {
+    if (_cachedNodeViewNib != newNib) {
+        [_cachedNodeViewNib release];
+        _cachedNodeViewNib = [newNib retain];
+    }
+}
 
 
 #pragma mark - Selection State
@@ -232,34 +243,24 @@
     PSBaseSubtreeView *subtreeView = [[PSBaseSubtreeView alloc] initWithModelNode:modelNode];
     if (subtreeView) {
 		
-		
         // Get nib from which to load nodeView.
-        // NSNib *nodeViewNib = [self cachedNodeViewNib];
+        UINib *nodeViewNib = [self cachedNodeViewNib];
 		
-		//        if (nodeViewNib == nil) {
-		//            NSString *nibName = [self nodeViewNibName];
-		//            NSAssert(nibName != nil, @"You must set a non-nil nodeViewNibName for TreeGraph to be able to build its view tree");
-		//            if (nibName != nil) {
-		//                nodeViewNib = [[NSNib alloc] initWithNibNamed:[self nodeViewNibName] bundle:[self nodeViewNibBundle]];
-		//                [self setCachedNodeViewNib:nodeViewNib];
-		//            }
-		//        }
+        if (nodeViewNib == nil) {
+            NSString *nibName = [self nodeViewNibName];
+            NSAssert(nibName != nil, 
+                     @"You must set a non-nil nodeViewNibName for TreeGraph to be able to build its view tree");
+            if (nibName != nil) {
+                nodeViewNib = [UINib nibWithNibName:[self nodeViewNibName] bundle:[NSBundle mainBundle]];
+                [self setCachedNodeViewNib:nodeViewNib];
+            }
+        }
 		
-		NSArray *nibViews = nil;
-		NSString *nibName = [self nodeViewNibName];
-        
-		NSAssert(nibName != nil, @"You must set a non-nil nodeViewNibName for TreeGraph to be able to build its view tree");
-        
-		if (nibName != nil) {
-			
-			// nibViews = [[self nodeViewNibBundle] loadNibNamed:[self nodeViewNibName] owner:subtreeView options:nil];
-			nibViews = [[NSBundle mainBundle] loadNibNamed:[self nodeViewNibName] owner:subtreeView options:nil];
-		}
-		
-        // Instantiate the nib to create our nodeView and associate it with the subtreeView (the nib's owner).
-        // TODO: Keep track of topLevelObjects, to release later.
-        
-		//if ([nodeViewNib instantiateNibWithOwner:subtreeView topLevelObjects:nil]) {
+        NSArray *nibViews = nil;
+        if (nodeViewNib != nil) {
+            // Instantiate the nib to create our nodeView and associate it with the subtreeView (the nib's owner).
+            nibViews = [nodeViewNib instantiateWithOwner:subtreeView options:nil];
+        }
 		
 		if ( nibViews ) {
 			
@@ -305,6 +306,9 @@
 
 - (void) buildGraph 
 {	
+    // Auto release pool
+    NSAutoreleasePool *subPool = [[NSAutoreleasePool alloc] init];
+    
     // Traverse the model tree, building a SubtreeView for each model node.
     id <PSTreeGraphModelNode> root = [self modelRoot];
     if (root) {
@@ -314,6 +318,9 @@
             [rootSubtreeView release];
         }
     }
+    
+    // Drain the pool
+    [subPool drain];
 }
 
 
@@ -342,7 +349,10 @@
         newFrameSize = newMinimumFrameSize;
     }
 	
-	self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, newFrameSize.width, newFrameSize.height );
+	self.frame = CGRectMake(self.frame.origin.x, 
+                            self.frame.origin.y, 
+                            newFrameSize.width, 
+                            newFrameSize.height );
 	
 }
 
@@ -357,13 +367,16 @@
         CGRect bounds = [self bounds];
 		
 		if ( [self treeGraphOrientation] == PSTreeGraphOrientationStyleHorizontal ) {
-			newOrigin = CGPointMake([self contentMargin], 0.5 * (bounds.size.height - rootSubtreeViewSize.height));
+			newOrigin = CGPointMake([self contentMargin], 
+                                    0.5 * (bounds.size.height - rootSubtreeViewSize.height));
 		} else {
-			newOrigin = CGPointMake(0.5 * (bounds.size.width - rootSubtreeViewSize.width), [self contentMargin]);
+			newOrigin = CGPointMake(0.5 * (bounds.size.width - rootSubtreeViewSize.width),
+                                    [self contentMargin]);
 		}
 
     } else {
-        newOrigin = CGPointMake([self contentMargin], [self contentMargin]);
+        newOrigin = CGPointMake([self contentMargin], 
+                                [self contentMargin]);
     }
 	
     // [(animateLayout ? [rootSubtreeView animator] : rootSubtreeView) setFrameOrigin:newOrigin];
@@ -594,7 +607,6 @@
 
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event 
 {
-
     UITouch *touch = [touches anyObject];
     CGPoint viewPoint = [touch locationInView:self];
     
@@ -629,7 +641,7 @@
     id <PSTreeGraphModelNode> modelNode = [self singleSelectedModelNode];
     if (modelNode) {
         if (modelNode != [self modelRoot]) {
-            id<PSTreeGraphModelNode> parent = [modelNode parentModelNode];
+            id <PSTreeGraphModelNode> parent = [modelNode parentModelNode];
             if (parent) {
                 [self setSelectedModelNodes:[NSSet setWithObject:parent]];
             }
@@ -725,6 +737,7 @@
 
 - (void)insertText:(NSString *)theText 
 {
+    // Hardware keyboard, desktop keyboard in simulator support.
     if (theText && [theText length] > 0) {
         switch ([theText characterAtIndex:0]) {
             case ' ':
@@ -948,5 +961,6 @@
         return nil;
     }
 }
+
 
 @end

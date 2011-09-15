@@ -91,7 +91,7 @@ typedef NSInteger PSTreeGraphOrientationStyle;
     BOOL _showsSubtreeFrames;
 	
 	// iOS 4 and above ONLY
-    // UINib *cachedNodeViewNib;
+    UINib *_cachedNodeViewNib;
     
     // Custom input view support
     UIView *_inputView;

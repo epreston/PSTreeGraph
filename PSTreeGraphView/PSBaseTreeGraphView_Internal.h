@@ -78,8 +78,8 @@
 
 // Returns an UINib instance created from the TreeGraphs's nodeViewNibName and nodeViewNibBundle.  
 // We automatically let go of the cachedNodeViewNib when either of these properties changes.  
-// Keeping a cached NSNib instance helps speed up repeated instantiation of node views.
+// Keeping a cached UINib instance helps speed up repeated instantiation of node views.
 
-// @property (nonatomic, retain) UINib *cachedNodeViewNib;
+@property (nonatomic, retain) UINib *cachedNodeViewNib;
 
 @end
