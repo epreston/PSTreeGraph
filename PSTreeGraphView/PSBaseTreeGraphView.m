@@ -124,22 +124,6 @@
     }
 }
 
-@synthesize nodeViewNibBundle = _nodeViewNibBundle;
-
-- (void) setNodeViewNibBundle:(NSBundle *)newBundle 
-{
-    if (_nodeViewNibBundle != newBundle) {
-        
-		// iOS 4.0 and above ONLY
-		[self setCachedNodeViewNib:nil];
-		
-        [_nodeViewNibBundle release];
-        _nodeViewNibBundle = [newBundle retain];
-		
-        // TODO: Tear down and (later) rebuild view tree.
-    }
-}
-
 
 #pragma mark - Node View Nib Caching
 

@@ -148,12 +148,6 @@ typedef enum {
  
 @property (nonatomic, copy) NSString *nodeViewNibName;
 
-/// The NSBundle from which the .nib named by nodeViewNibName can be loaded.  May be nil, in which
-/// case we follow the usual UIKit-implemented rules for automatically finding the named .nib 
-/// file.
- 
-@property (nonatomic, retain) NSBundle *nodeViewNibBundle;
-
 
 #pragma mark - Selection State
 
