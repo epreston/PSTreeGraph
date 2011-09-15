@@ -29,8 +29,6 @@ See [Milestones](https://github.com/epreston/PSTreeGraph/issues/milestones?with_
 
 There are many places where PSTreeGraph could be improved:
 
-* Add Cached NIB Support.  The node views are loaded from a nib file that defines their layout. In IOS 4 and above, nib caching was introduced for things like UITableView cells. This control would benefit from this feature.
-
 * Use GCD to load model data asyncronously.  This control uses a simple protocol implemented by each node in the data model so the control can walk the tree. This can be loaded asynchronously to avoid blocking the main thread when displaying large graphs.
 
 * Cache the bezier path used to render lines in each subtree.  The bezier path used to render the lines between each node in the graph can be cached to improve performance.
