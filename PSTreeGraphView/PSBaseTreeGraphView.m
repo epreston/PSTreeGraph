@@ -431,17 +431,15 @@
     PSBaseSubtreeView *rootSubtreeView = [self rootSubtreeView];
     if ([self needsGraphLayout] && [self modelRoot]) {
 		
-        // TODO: Build graph tree if needed.
-		
         // Do recursive graph layout, starting at our rootSubtreeView.
         CGSize rootSubtreeViewSize = [rootSubtreeView layoutGraphIfNeeded];
 		
         // Compute self's new minimumFrameSize.  Make sure it's pixel-integral.
         CGFloat margin = [self contentMargin];
-        CGSize minimumBoundsSize = CGSizeMake(rootSubtreeViewSize.width + 2.0 * margin, rootSubtreeViewSize.height + 2.0 * margin);
+        CGSize minimumBoundsSize = CGSizeMake(rootSubtreeViewSize.width + 2.0 * margin,
+                                              rootSubtreeViewSize.height + 2.0 * margin);
 		
 		[self setMinimumFrameSize:minimumBoundsSize];
-		
 		
         // Set the TreeGraph's frame size.
         [self updateFrameSizeForContentAndClipView];
@@ -463,7 +461,6 @@
 - (void) setNeedsGraphLayout 
 {
     [[self rootSubtreeView] recursiveSetNeedsGraphLayout];
-    [self setNeedsDisplay];
 }
 
 - (void) collapseRoot 
@@ -506,10 +503,10 @@
                 } else {
                     boundingBox = CGRectUnion(boundingBox, rect);
                 }
-                
             }
         }
     }
+    
     return boundingBox;
 }
 
@@ -526,7 +523,6 @@
 //            NSLog(@"Scrolling to target rect: %@", NSStringFromCGRect(targetRect) );
 			[parentScroll scrollRectToVisible:targetRect animated:animated];
 		}
-        
     }
 }
 

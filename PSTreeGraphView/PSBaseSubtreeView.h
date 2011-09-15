@@ -6,9 +6,9 @@
 //  Copyright 2010 Preston Software. All rights reserved.
 //
 //
-// This is a port of the sample code from Max OS X to iOS (iPad).
+//  This is a port of the sample code from Max OS X to iOS (iPad).
 //
-// WWDC 2010 Session 141, “Crafting Custom Cocoa Views”
+//  WWDC 2010 Session 141, “Crafting Custom Cocoa Views”
 //
 
 
@@ -16,12 +16,14 @@
 
 #import "PSTreeGraphModelNode.h"
 
+
 @class PSBaseBranchView;
 @class PSBaseTreeGraphView;
 
 
-/// A SubtreeView draws nothing itself (unless showsSubtreeFrames is set to YES for the enclosingTreeGraph), but
-/// provides a local coordinate frame and grouping mechanism for a graph subtree, and implements subtree layout.
+/// A SubtreeView draws nothing itself (unless showsSubtreeFrames is set to YES for 
+/// the enclosingTreeGraph), but provides a local coordinate frame and grouping mechanism
+/// for a graph subtree, and implements subtree layout.
  
 
 @interface PSBaseSubtreeView : UIView

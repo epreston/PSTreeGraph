@@ -6,9 +6,9 @@
 //  Copyright 2010 Preston Software. All rights reserved.
 //
 //
-// This is a port of the sample code from Max OS X to iOS (iPad).
+//  This is a port of the sample code from Max OS X to iOS (iPad).
 //
-// WWDC 2010 Session 141, “Crafting Custom Cocoa Views”
+//  WWDC 2010 Session 141, “Crafting Custom Cocoa Views”
 //
 
 
@@ -19,21 +19,18 @@
 
 // A TreeGraph's nodes may be connected by either "direct" or "orthogonal" lines.
  
-enum PSTreeGraphConnectingLineStyle {
+typedef enum {
     PSTreeGraphConnectingLineStyleDirect = 0,
-    PSTreeGraphConnectingLineStyleOrthogonal = 1
-};
-typedef NSInteger PSTreeGraphConnectingLineStyle;
+    PSTreeGraphConnectingLineStyleOrthogonal = 1,
+} PSTreeGraphConnectingLineStyle;
 
 
 // A TreeGraph's orientation may be either "horizontal" or "vertical".
 
-enum PSTreeGraphOrientationStyle {
+typedef enum {
     PSTreeGraphOrientationStyleHorizontal = 0,
-    PSTreeGraphOrientationStyleVertical = 1
-};
-typedef NSInteger PSTreeGraphOrientationStyle;
-
+    PSTreeGraphOrientationStyleVertical = 1,
+} PSTreeGraphOrientationStyle;
 
 
 @class PSBaseSubtreeView;

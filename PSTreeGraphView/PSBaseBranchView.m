@@ -6,9 +6,9 @@
 //  Copyright 2010 Preston Software. All rights reserved.
 //
 //
-// This is a port of the sample code from Max OS X to iOS (iPad).
+//  This is a port of the sample code from Max OS X to iOS (iPad).
 //
-// WWDC 2010 Session 141, “Crafting Custom Cocoa Views”
+//  WWDC 2010 Session 141, “Crafting Custom Cocoa Views”
 //
 
 
@@ -52,9 +52,11 @@
 	PSTreeGraphOrientationStyle treeDirection = [[self enclosingTreeGraph] treeGraphOrientation];
     
 	if ( treeDirection == PSTreeGraphOrientationStyleHorizontal ) {
-		rootPoint = CGPointMake(CGRectGetMinX(bounds), CGRectGetMidY(bounds));
+		rootPoint = CGPointMake(CGRectGetMinX(bounds), 
+                                CGRectGetMidY(bounds));
 	} else {
-		rootPoint = CGPointMake(CGRectGetMidX(bounds), CGRectGetMinY(bounds));
+		rootPoint = CGPointMake(CGRectGetMidX(bounds), 
+                                CGRectGetMinY(bounds));
 	}
 
     // Create a single bezier path that we'll use to stroke all the lines.
@@ -70,9 +72,11 @@
 				CGPoint targetPoint = CGPointZero;
 				
 				if ( treeDirection == PSTreeGraphOrientationStyleHorizontal ) {
-					targetPoint = [self convertPoint:CGPointMake(CGRectGetMinX(subviewBounds), CGRectGetMidY(subviewBounds)) fromView:subview];
+					targetPoint = [self convertPoint:CGPointMake(CGRectGetMinX(subviewBounds), CGRectGetMidY(subviewBounds)) 
+                                            fromView:subview];
 				} else {
-					targetPoint = [self convertPoint:CGPointMake(CGRectGetMidX(subviewBounds), CGRectGetMinY(subviewBounds)) fromView:subview];
+					targetPoint = [self convertPoint:CGPointMake(CGRectGetMidX(subviewBounds), CGRectGetMinY(subviewBounds)) 
+                                            fromView:subview];
 				}
 
                 [path moveToPoint:rootPoint];
@@ -111,9 +115,11 @@
 	CGPoint rootPoint = CGPointZero;
 	if ( treeDirection == PSTreeGraphOrientationStyleHorizontal ) {
 		// Compute point at right edge of root node, from which its connecting line to the vertical line will emerge.
-		rootPoint = CGPointMake(CGRectGetMinX(bounds), CGRectGetMidY(bounds));
+		rootPoint = CGPointMake(CGRectGetMinX(bounds), 
+                                CGRectGetMidY(bounds));
 	} else {
-		rootPoint = CGPointMake(CGRectGetMidX(bounds), CGRectGetMinY(bounds));
+		rootPoint = CGPointMake(CGRectGetMidX(bounds), 
+                                CGRectGetMinY(bounds));
 	}
 
 	
@@ -124,8 +130,8 @@
 	//    rootPoint = [self convertPointFromBase:basePoint];
 	
 	
-	// Compute point (really, we're just interested in the x value) at which line from root node intersects the
-	// vertical connecting line.
+	// Compute point (really, we're just interested in the x value) at which line 
+    // from root node intersects the vertical connecting line.
     
 	CGPoint rootIntersection = CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
 
@@ -161,9 +167,11 @@
 				CGPoint targetPoint = CGPointZero;
 				
 				if ( treeDirection == PSTreeGraphOrientationStyleHorizontal ) {
-					targetPoint = [self convertPoint:CGPointMake(CGRectGetMinX(subviewBounds), CGRectGetMidY(subviewBounds)) fromView:subview];
+					targetPoint = [self convertPoint:CGPointMake(CGRectGetMinX(subviewBounds), CGRectGetMidY(subviewBounds)) 
+                                            fromView:subview];
 				} else {
-					targetPoint = [self convertPoint:CGPointMake(CGRectGetMidX(subviewBounds), CGRectGetMinY(subviewBounds)) fromView:subview];
+					targetPoint = [self convertPoint:CGPointMake(CGRectGetMidX(subviewBounds), CGRectGetMinY(subviewBounds)) 
+                                            fromView:subview];
 				}
 
                 // Align the line to get exact pixel coverage, for sharper rendering.
@@ -222,7 +230,7 @@
 }
 
 - (void) drawRect:(CGRect)dirtyRect 
-{
+{    
     // Build the set of lines to stroke, according to our enclosingTreeGraph's connectingLineStyle.
     UIBezierPath *path = nil;
 	
