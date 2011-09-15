@@ -38,9 +38,7 @@ There are many places where PSTreeGraph could be improved:
 
 # Documentation
 
-You can generate documentation with [doxygen](http://www.doxygen.org). The example project includes a documentation build target.
-
-Documentation is a work in progress.
+You can generate documentation with [doxygen](http://www.doxygen.org). The example project includes a documentation build target to do this within Xcode.    For more details, see the [Documentation](https://github.com/epreston/PSTreeGraph/wiki/Documentation) page in this projects wiki.
 
 
 # Copyright and License
