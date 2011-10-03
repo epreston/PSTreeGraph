@@ -14,8 +14,8 @@
 @implementation PSHTreeGraphAppDelegate
 
 
-@synthesize window;
-@synthesize viewController;
+@synthesize window = window_;
+@synthesize viewController = viewController_;
 
 
 #pragma mark - Application Lifecycle
@@ -23,8 +23,8 @@
 - (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions 
 {    
     // Override point for customization after app launch. 
-    [window addSubview:viewController.view];
-    [window makeKeyAndVisible];
+    [window_ addSubview:viewController_.view];
+    [window_ makeKeyAndVisible];
 
 	return YES;
 }
@@ -62,8 +62,8 @@
 
 - (void) dealloc 
 {
-    [viewController release];
-    [window release];
+    [viewController_ release];
+    [window_ release];
     [super dealloc];
 }
 

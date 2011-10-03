@@ -22,13 +22,13 @@
 {
 	
 @private
-    UIColor    *_borderColor;
-    CGFloat     _borderWidth;
-    CGFloat     _cornerRadius;
+    UIColor    *borderColor_;
+    CGFloat     borderWidth_;
+    CGFloat     cornerRadius_;
 	
-    UIColor    *_fillColor;
+    UIColor    *fillColor_;
 	
-    BOOL        _showingSelected;
+    BOOL        showingSelected_;
 }
 
 

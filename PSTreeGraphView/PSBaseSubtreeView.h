@@ -31,19 +31,19 @@
 	
 @private
     // Model
-    id <PSTreeGraphModelNode> _modelNode;   // the model node that nodeView represents
+    id <PSTreeGraphModelNode> modelNode_;   // the model node that nodeView represents
 	
     // Views
-    UIView *_nodeView;                      // the subview of this SubtreeView that shows a representation
+    UIView *nodeView_;                      // the subview of this SubtreeView that shows a representation
                                             // of the modelNode
     
-    PSBaseBranchView *_connectorsView;		// the view that shows connections from nodeView to its child nodes
+    PSBaseBranchView *connectorsView_;		// the view that shows connections from nodeView to its child nodes
 	
     // State
-    BOOL _expanded;                         // YES if this subtree is expanded to show its descendants; 
+    BOOL expanded_;                         // YES if this subtree is expanded to show its descendants; 
                                             // NO if it's been collapsed to show just its root node
     
-    BOOL _needsGraphLayout;                 // YES if this SubtreeView needs to position its child views 
+    BOOL needsGraphLayout_;                 // YES if this SubtreeView needs to position its child views 
                                             // and assess its size; NO if we're sure its layout is up to date
 }
 

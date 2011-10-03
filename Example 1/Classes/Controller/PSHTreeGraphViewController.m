@@ -20,20 +20,19 @@
 
 #pragma mark - Property Accessors
 
-@synthesize treeGraphView;
-
-@synthesize rootClassName;
+@synthesize treeGraphView = treeGraphView_;
+@synthesize rootClassName = rootClassName_;
 
 - (void) setRootClassName:(NSString *)newRootClassName 
 {    
     NSParameterAssert(newRootClassName != nil);
     
-    if (![rootClassName isEqualToString:newRootClassName]) {
-        [rootClassName release];
-        rootClassName = [newRootClassName copy];
+    if (![rootClassName_ isEqualToString:newRootClassName]) {
+        [rootClassName_ release];
+        rootClassName_ = [newRootClassName copy];
 		
         // Get an ObjCClassWrapper for the named Objective-C Class, and set it as the TreeGraph's root.
-        [treeGraphView setModelRoot:[ObjCClassWrapper wrapperForClassNamed:rootClassName]];
+        [treeGraphView_ setModelRoot:[ObjCClassWrapper wrapperForClassNamed:rootClassName_]];
     }
 }
 
@@ -46,10 +45,10 @@
     [super viewDidLoad];
 	
 	// Set the delegate to self.
-	[treeGraphView setDelegate:self];
+	[self.treeGraphView setDelegate:self];
 	
 	// Specify a .nib file for the TreeGraph to load each time it needs to create a new node view.
-    [treeGraphView setNodeViewNibName:@"ObjCClassTreeNodeView"];
+    [self.treeGraphView setNodeViewNibName:@"ObjCClassTreeNodeView"];
 	
     // Specify a starting root class to inspect on launch.
     [self setRootClassName:@"UIControl"];
@@ -66,7 +65,7 @@
                                          duration:(NSTimeInterval)duration 
 {    
 	// Keep the view in sync
-	[treeGraphView parentClipViewDidResize:nil];
+	[self.treeGraphView parentClipViewDidResize:nil];
 }
 
 
@@ -112,7 +111,7 @@
 
 - (void) dealloc 
 {
-	[rootClassName release];
+	[rootClassName_ release];
     [super dealloc];
 }
 

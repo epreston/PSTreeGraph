@@ -17,9 +17,9 @@
 @private
     
 	// Interface
-	UIButton *expandButton;
-	UILabel *titleLabel;
-	UILabel *detailLabel;
+	UIButton *expandButton_;
+	UILabel *titleLabel_;
+	UILabel *detailLabel_;
 }
 
 @property (nonatomic, assign) IBOutlet UIButton *expandButton;

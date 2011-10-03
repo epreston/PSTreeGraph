@@ -12,8 +12,8 @@
 @class PSHTreeGraphViewController;
 
 @interface PSHTreeGraphAppDelegate : NSObject <UIApplicationDelegate> {
-    UIWindow *window;
-    PSHTreeGraphViewController *viewController;
+    UIWindow *window_;
+    PSHTreeGraphViewController *viewController_;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;

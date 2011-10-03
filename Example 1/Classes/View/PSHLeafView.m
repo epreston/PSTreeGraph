@@ -12,7 +12,9 @@
 
 @implementation PSHLeafView
 
-@synthesize expandButton, titleLabel, detailLabel;
+@synthesize expandButton = expandButton_;
+@synthesize titleLabel = titleLabel_;
+@synthesize detailLabel = detailLabel_;
 
 - (id) initWithFrame:(CGRect)frame 
 {

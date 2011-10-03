@@ -23,12 +23,21 @@
 #import <QuartzCore/QuartzCore.h>
 
 
+@interface PSBaseTreeGraphView ()
+
+- (void) configureDetaults;
+- (PSBaseSubtreeView *) newGraphForModelNode:(id <PSTreeGraphModelNode> )modelNode;
+- (void) buildGraph;
+
+@end
+
+
 @implementation PSBaseTreeGraphView
 
-@synthesize delegate = _delegate;
-@synthesize animatesLayout = _animatesLayout;
-@synthesize layoutAnimationSuppressed = _layoutAnimationSuppressed;
-@synthesize minimumFrameSize = _minimumFrameSize;
+@synthesize delegate = delegate_;
+@synthesize animatesLayout = animatesLayout_;
+@synthesize layoutAnimationSuppressed = layoutAnimationSuppressed_;
+@synthesize minimumFrameSize = minimumFrameSize_;
 
 
 #pragma mark - Creating Instances
@@ -41,24 +50,24 @@
 	// Initialize ivars directly.  As a rule, it's best to avoid invoking accessors from an -init... method,
 	// since they may wrongly expect the instance to be fully formed.
 	
-	_modelNodeToSubtreeViewMapTable = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
-	_connectingLineColor = [[UIColor blackColor] retain];
-	_contentMargin = 20.0f;
-	_parentChildSpacing = 50.0f;
-	_siblingSpacing = 10.0f;
-	_animatesLayout = YES;
-	_resizesToFillEnclosingScrollView = YES;
-	_treeGraphOrientation = PSTreeGraphOrientationStyleHorizontal ;
-	_layoutAnimationSuppressed = NO;
-	_connectingLineStyle = PSTreeGraphConnectingLineStyleOrthogonal ;
-	_connectingLineWidth = 1.0f;
-	_showsSubtreeFrames = NO;
-	_minimumFrameSize = CGSizeMake(2.0f * _contentMargin, 2.0f * _contentMargin);
-	_selectedModelNodes = [[NSMutableSet alloc] init];
+	modelNodeToSubtreeViewMapTable_ = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
+	connectingLineColor_ = [[UIColor blackColor] retain];
+	contentMargin_ = 20.0f;
+	parentChildSpacing_ = 50.0f;
+	siblingSpacing_ = 10.0f;
+	animatesLayout_ = YES;
+	resizesToFillEnclosingScrollView_ = YES;
+	treeGraphOrientation_ = PSTreeGraphOrientationStyleHorizontal ;
+	layoutAnimationSuppressed_ = NO;
+	connectingLineStyle_ = PSTreeGraphConnectingLineStyleOrthogonal ;
+	connectingLineWidth_ = 1.0f;
+	showsSubtreeFrames_ = NO;
+	minimumFrameSize_ = CGSizeMake(2.0f * contentMargin_, 2.0f * contentMargin_);
+	selectedModelNodes_ = [[NSMutableSet alloc] init];
     
     // If this has been configured by the XIB, leave it during initialization.
-    if (_inputView == nil) {
-        _inputView = [[UIView alloc] initWithFrame:CGRectZero];
+    if (inputView_ == nil) {
+        inputView_ = [[UIView alloc] initWithFrame:CGRectZero];
     }
 	
 	// [self setLayerContentsRedrawPolicy:UIViewLayerContentsRedrawNever];
@@ -84,16 +93,16 @@
 - (void) dealloc 
 {
 	// iOS 4.0 and above ONLY
-	[_cachedNodeViewNib release];
+	[cachedNodeViewNib_ release];
     
     self.delegate = nil;
 	
-    [_inputView release];
-    [_nodeViewNibBundle release];
-    [_nodeViewNibName release];
-    [_selectedModelNodes release];
-    [_modelRoot release];
-    [_modelNodeToSubtreeViewMapTable release];
+    [inputView_ release];
+    [nodeViewNibBundle_ release];
+    [nodeViewNibName_ release];
+    [selectedModelNodes_ release];
+    [modelRoot_ release];
+    [modelNodeToSubtreeViewMapTable_ release];
     // [backgroundColor release];
     [super dealloc];
 }
@@ -106,48 +115,48 @@
 }
 
 
-#pragma mark - Node View Nib Specification 
-
-@synthesize nodeViewNibName = _nodeViewNibName;
-
-- (void)setNodeViewNibName:(NSString *)newName 
-{
-    if (_nodeViewNibName != newName) {
-        
-		// iOS 4.0 and above ONLY
-		[self setCachedNodeViewNib:nil];
-		
-        [_nodeViewNibName release];
-        _nodeViewNibName = [newName copy];
-		
-        // TODO: Tear down and (later) rebuild view tree.
-    }
-}
-
-
 #pragma mark - Node View Nib Caching
 
 // iOS 4.0 and above ONLY - 
 
 - (UINib *)cachedNodeViewNib {
-    return _cachedNodeViewNib;
+    return cachedNodeViewNib_;
     
     // If 3.x Support required, change references to UINib to ID (careful not to modify
     // the one below.) uncomment the following code, test. Note: Does not check for valid
     // [self nodeViewNibName].
     
-//    if (!_cachedNodeViewNib) {
-//        Class cls = NSClassFromString(@"UINib");
-//        if ([cls respondsToSelector:@selector(nibWithNibName:bundle:)]) {
-//            _cachedNodeViewNib = [[cls nibWithNibName:[self nodeViewNibName] bundle:[NSBundle mainBundle]] retain];
-//        }
-//    }
+    //    if (!_cachedNodeViewNib) {
+    //        Class cls = NSClassFromString(@"UINib");
+    //        if ([cls respondsToSelector:@selector(nibWithNibName:bundle:)]) {
+    //            _cachedNodeViewNib = [[cls nibWithNibName:[self nodeViewNibName] bundle:[NSBundle mainBundle]] retain];
+    //        }
+    //    }
 }
 
 - (void)setCachedNodeViewNib:(UINib *)newNib {
-    if (_cachedNodeViewNib != newNib) {
-        [_cachedNodeViewNib release];
-        _cachedNodeViewNib = [newNib retain];
+    if (cachedNodeViewNib_ != newNib) {
+        [cachedNodeViewNib_ release];
+        cachedNodeViewNib_ = [newNib retain];
+    }
+}
+
+
+#pragma mark - Node View Nib Specification 
+
+@synthesize nodeViewNibName = nodeViewNibName_;
+
+- (void)setNodeViewNibName:(NSString *)newName 
+{
+    if (nodeViewNibName_ != newName) {
+        
+		// iOS 4.0 and above ONLY
+		[self setCachedNodeViewNib:nil];
+		
+        [nodeViewNibName_ release];
+        nodeViewNibName_ = [newName copy];
+		
+        // TODO: Tear down and (later) rebuild view tree.
     }
 }
 
@@ -158,7 +167,7 @@
 // no nodes are selected, this is an empty NSSet.  It will never be nil (and attempting
 // to set it to nil is not allowed.).
  
-@synthesize selectedModelNodes = _selectedModelNodes;
+@synthesize selectedModelNodes = selectedModelNodes_;
 
 - (void) setSelectedModelNodes:(NSSet *)newSelectedModelNodes 
 {
@@ -169,25 +178,25 @@
         NSAssert([self modelNodeIsInAssignedTree:modelNode], @"modelNode is not in the tree");
     }
 	
-    if (_selectedModelNodes != newSelectedModelNodes) {
+    if (selectedModelNodes_ != newSelectedModelNodes) {
         
 		// Determine which nodes are changing selection state (either becoming selected, or ceasing to 
         // be selected), and mark affected areas as needing display.  Take the union of the previous and
         // new selected node sets, subtract the set of nodes that are in both the old and new selection,
         // and the result is the set of nodes whose selection state is changing.
 		
-        NSMutableSet *combinedSet = [_selectedModelNodes mutableCopy];
+        NSMutableSet *combinedSet = [selectedModelNodes_ mutableCopy];
         [combinedSet unionSet:newSelectedModelNodes];
 		
-        NSMutableSet *intersectionSet = [_selectedModelNodes mutableCopy];
+        NSMutableSet *intersectionSet = [selectedModelNodes_ mutableCopy];
         [intersectionSet intersectSet:newSelectedModelNodes];
 		
         NSMutableSet *differenceSet = [combinedSet mutableCopy];
         [differenceSet minusSet:intersectionSet];
 		
         // Discard the old selectedModelNodes set and replace it with the new one.
-        [_selectedModelNodes release];
-        _selectedModelNodes = [newSelectedModelNodes mutableCopy];
+        [selectedModelNodes_ release];
+        selectedModelNodes_ = [newSelectedModelNodes mutableCopy];
 		
         for (id <PSTreeGraphModelNode> modelNode in differenceSet) {
             PSBaseSubtreeView *subtreeView = [self subtreeViewForModelNode:modelNode];
@@ -372,22 +381,22 @@
 	
 }
 
-@synthesize treeGraphOrientation = _treeGraphOrientation;
+@synthesize treeGraphOrientation = treeGraphOrientation_;
 
 - (void) setTreeGraphOrientation:(PSTreeGraphOrientationStyle)newTreeGraphOrientation 
 {
-    if (_treeGraphOrientation != newTreeGraphOrientation) {
-        _treeGraphOrientation = newTreeGraphOrientation;
+    if (treeGraphOrientation_ != newTreeGraphOrientation) {
+        treeGraphOrientation_ = newTreeGraphOrientation;
         [[self rootSubtreeView] recursiveSetConnectorsViewsNeedDisplay];
     }
 }
 
-@synthesize resizesToFillEnclosingScrollView = _resizesToFillEnclosingScrollView;
+@synthesize resizesToFillEnclosingScrollView = resizesToFillEnclosingScrollView_;
 
 - (void) setResizesToFillEnclosingScrollView:(BOOL)flag 
 {
-    if (_resizesToFillEnclosingScrollView != flag) {
-        _resizesToFillEnclosingScrollView = flag;
+    if (resizesToFillEnclosingScrollView_ != flag) {
+        resizesToFillEnclosingScrollView_ = flag;
         [self updateFrameSizeForContentAndClipView];
         [self updateRootSubtreeViewPositionForSize:[[self rootSubtreeView] frame].size];
     }
@@ -518,22 +527,22 @@
 
 #pragma mark - Data Source
 
-@synthesize modelRoot = _modelRoot;
+@synthesize modelRoot = modelRoot_;
 
 - (void) setModelRoot:(id <PSTreeGraphModelNode> )newModelRoot 
 {    
     NSParameterAssert(newModelRoot == nil || [newModelRoot conformsToProtocol:@protocol(PSTreeGraphModelNode)]);
     
-    if ( _modelRoot != newModelRoot ) {
+    if ( modelRoot_ != newModelRoot ) {
         PSBaseSubtreeView *rootSubtreeView = [self rootSubtreeView];
         [rootSubtreeView removeFromSuperview];
-        [_modelNodeToSubtreeViewMapTable removeAllObjects];
+        [modelNodeToSubtreeViewMapTable_ removeAllObjects];
 		
         // Discard any previous selection.
         [self setSelectedModelNodes:[NSSet set]];
 		
         // Switch to new modelRoot.
-        _modelRoot = newModelRoot;
+        modelRoot_ = newModelRoot;
 		
         // Discard and reload content.
         [self buildGraph];
@@ -542,8 +551,8 @@
         [self layoutGraphIfNeeded];
 		
         // Start with modelRoot selected.
-        if ( _modelRoot ) {
-            [self setSelectedModelNodes:[NSSet setWithObject:_modelRoot]];
+        if ( modelRoot_ ) {
+            [self setSelectedModelNodes:[NSSet setWithObject:modelRoot_]];
             [self scrollSelectedModelNodesToVisibleAnimated:NO];
         }
     }
@@ -576,7 +585,7 @@
 
 #pragma mark - Input and Navigation
 
-@synthesize inputView = _inputView;
+@synthesize inputView = inputView_;
 
 
 - (BOOL) canBecomeFirstResponder 
@@ -792,75 +801,75 @@
 // conventions.
 
 
-@synthesize connectingLineColor = _connectingLineColor;
+@synthesize connectingLineColor = connectingLineColor_;
 
 - (void) setConnectingLineColor:(UIColor *)newConnectingLineColor 
 {
-    if (_connectingLineColor != newConnectingLineColor) {
-        [_connectingLineColor release];
-        _connectingLineColor = [newConnectingLineColor retain];
+    if (connectingLineColor_ != newConnectingLineColor) {
+        [connectingLineColor_ release];
+        connectingLineColor_ = [newConnectingLineColor retain];
         [[self rootSubtreeView] recursiveSetConnectorsViewsNeedDisplay];
     }
 }
 
-@synthesize contentMargin = _contentMargin;
+@synthesize contentMargin = contentMargin_;
 
 - (void) setContentMargin:(CGFloat)newContentMargin 
 {
-    if (_contentMargin != newContentMargin) {
-        _contentMargin = newContentMargin;
+    if (contentMargin_ != newContentMargin) {
+        contentMargin_ = newContentMargin;
         [self setNeedsGraphLayout];
         [[self layer] displayIfNeeded];
     }
 }
 
-@synthesize parentChildSpacing = _parentChildSpacing;
+@synthesize parentChildSpacing = parentChildSpacing_;
 
 - (void) setParentChildSpacing:(CGFloat)newParentChildSpacing 
 {
-    if (_parentChildSpacing != newParentChildSpacing) {
-        _parentChildSpacing = newParentChildSpacing;
+    if (parentChildSpacing_ != newParentChildSpacing) {
+        parentChildSpacing_ = newParentChildSpacing;
         [self setNeedsGraphLayout];
         [[self layer] displayIfNeeded];
     }
 }
 
-@synthesize siblingSpacing = _siblingSpacing;
+@synthesize siblingSpacing = siblingSpacing_;
 
 - (void) setSiblingSpacing:(CGFloat)newSiblingSpacing 
 {
-    if (_siblingSpacing != newSiblingSpacing) {
-        _siblingSpacing = newSiblingSpacing;
+    if (siblingSpacing_ != newSiblingSpacing) {
+        siblingSpacing_ = newSiblingSpacing;
         [self setNeedsGraphLayout];
         [[self layer] displayIfNeeded];
     }
 }
 
-@synthesize connectingLineStyle = _connectingLineStyle;
+@synthesize connectingLineStyle = connectingLineStyle_;
 
 - (void) setConnectingLineStyle:(PSTreeGraphConnectingLineStyle)newConnectingLineStyle 
 {
-    if (_connectingLineStyle != newConnectingLineStyle) {
-        _connectingLineStyle = newConnectingLineStyle;
+    if (connectingLineStyle_ != newConnectingLineStyle) {
+        connectingLineStyle_ = newConnectingLineStyle;
         [[self rootSubtreeView] recursiveSetConnectorsViewsNeedDisplay];
     }
 }
 
-@synthesize connectingLineWidth = _connectingLineWidth;
+@synthesize connectingLineWidth = connectingLineWidth_;
 
 - (void)setConnectingLineWidth:(CGFloat)newConnectingLineWidth {
-    if (_connectingLineWidth != newConnectingLineWidth) {
-        _connectingLineWidth = newConnectingLineWidth;
+    if (connectingLineWidth_ != newConnectingLineWidth) {
+        connectingLineWidth_ = newConnectingLineWidth;
         [[self rootSubtreeView] recursiveSetConnectorsViewsNeedDisplay];
     }
 }
 
-@synthesize showsSubtreeFrames = _showsSubtreeFrames;
+@synthesize showsSubtreeFrames = showsSubtreeFrames_;
 
 - (void) setShowsSubtreeFrames:(BOOL)newShowsSubtreeFrames 
 {
-    if (_showsSubtreeFrames != newShowsSubtreeFrames) {
-        _showsSubtreeFrames = newShowsSubtreeFrames;
+    if (showsSubtreeFrames_ != newShowsSubtreeFrames) {
+        showsSubtreeFrames_ = newShowsSubtreeFrames;
         [[self rootSubtreeView] resursiveSetSubtreeBordersNeedDisplay];
     }
 }
@@ -876,12 +885,12 @@
 
 - (PSBaseSubtreeView *) subtreeViewForModelNode:(id)modelNode 
 {
-    return [_modelNodeToSubtreeViewMapTable objectForKey:modelNode];
+    return [modelNodeToSubtreeViewMapTable_ objectForKey:modelNode];
 }
 
 - (void) setSubtreeView:(PSBaseSubtreeView *)subtreeView forModelNode:(id)modelNode 
 {
-    [_modelNodeToSubtreeViewMapTable setObject:subtreeView forKey:modelNode];
+    [modelNodeToSubtreeViewMapTable_ setObject:subtreeView forKey:modelNode];
 }
 
 

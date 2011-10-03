@@ -13,9 +13,12 @@
 
 @class PSBaseTreeGraphView;
 
-@interface PSHTreeGraphViewController : UIViewController <PSTreeGraphDelegate> {
-	PSBaseTreeGraphView *treeGraphView;
-	NSString *rootClassName;
+@interface PSHTreeGraphViewController : UIViewController <PSTreeGraphDelegate> 
+{
+
+@private
+	PSBaseTreeGraphView *treeGraphView_;
+	NSString *rootClassName_;
 }
 
 // The TreeGraph

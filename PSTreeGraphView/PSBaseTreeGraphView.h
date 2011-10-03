@@ -46,52 +46,52 @@ typedef enum {
     
 @private
 	// Model
-    id <PSTreeGraphModelNode> _modelRoot;
+    id <PSTreeGraphModelNode> modelRoot_;
 	
 	// Delegate
-	id <PSTreeGraphDelegate> _delegate;
+	id <PSTreeGraphDelegate> delegate_;
 	
     // Model Object -> SubtreeView Mapping
-	NSMutableDictionary *_modelNodeToSubtreeViewMapTable;
+	NSMutableDictionary *modelNodeToSubtreeViewMapTable_;
 	
     // Node View Nib Specification
-    NSString *_nodeViewNibName;
-    NSBundle *_nodeViewNibBundle;
+    NSString *nodeViewNibName_;
+    NSBundle *nodeViewNibBundle_;
 	
     // Selection State
-    NSSet *_selectedModelNodes;
+    NSSet *selectedModelNodes_;
 	
     // Layout State
-    CGSize _minimumFrameSize;
+    CGSize minimumFrameSize_;
 	
     // Animation Support
-    BOOL _animatesLayout;
-    BOOL _layoutAnimationSuppressed;
+    BOOL animatesLayout_;
+    BOOL layoutAnimationSuppressed_;
 	
     // Layout Metrics
-    CGFloat _contentMargin;
-    CGFloat _parentChildSpacing;
-    CGFloat _siblingSpacing;
+    CGFloat contentMargin_;
+    CGFloat parentChildSpacing_;
+    CGFloat siblingSpacing_;
 	
     // Layout Behavior
-    BOOL _resizesToFillEnclosingScrollView;
-	PSTreeGraphOrientationStyle _treeGraphOrientation;
+    BOOL resizesToFillEnclosingScrollView_;
+	PSTreeGraphOrientationStyle treeGraphOrientation_;
 	
     // Styling
     // UIColor *backgroundColor;
 	
-    UIColor *_connectingLineColor;
-    CGFloat _connectingLineWidth;
-    PSTreeGraphConnectingLineStyle _connectingLineStyle;
+    UIColor *connectingLineColor_;
+    CGFloat connectingLineWidth_;
+    PSTreeGraphConnectingLineStyle connectingLineStyle_;
 	
     // A debug feature that outlines the view hiarchy.
-    BOOL _showsSubtreeFrames;
+    BOOL showsSubtreeFrames_;
 	
 	// iOS 4 and above ONLY
-    UINib *_cachedNodeViewNib;
+    UINib *cachedNodeViewNib_;
     
     // Custom input view support
-    UIView *_inputView;
+    UIView *inputView_;
 }
 
 
