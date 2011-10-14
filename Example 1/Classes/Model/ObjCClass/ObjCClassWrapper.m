@@ -28,6 +28,8 @@ static NSInteger CompareClassNames(id classA, id classB, void* context)
 @implementation ObjCClassWrapper
 
 
+#pragma mark - NSCopying
+
 - (id) copyWithZone:(NSZone *)zone 
 {
     return [self retain];
