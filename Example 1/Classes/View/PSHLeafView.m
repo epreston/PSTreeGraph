@@ -16,10 +16,22 @@
 @synthesize titleLabel = titleLabel_;
 @synthesize detailLabel = detailLabel_;
 
-- (id) initWithFrame:(CGRect)frame 
+
+#pragma mark - NSCoding
+
+- (id) initWithCoder:(NSCoder *)decoder 
 {
-    if ((self = [super initWithFrame:frame])) {
-        // Initialization code
+    self = [super initWithCoder:decoder];
+    if (self) {
+        
+        // Initialization code, leaf views are always loaded from the corresponding XIB.
+        // Be sure to set the view class to your subclass in interface builder.
+        
+        // Example: Inverse the color scheme
+        
+//        self.fillColor = [UIColor yellowColor];
+//        self.selectionColor = [UIColor orangeColor];
+        
     }
     return self;
 }

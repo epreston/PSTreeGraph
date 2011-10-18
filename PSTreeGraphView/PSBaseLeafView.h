@@ -11,12 +11,11 @@
 //  WWDC 2010 Session 141, “Crafting Custom Cocoa Views”
 //
 
-
 #import <UIKit/UIKit.h>
 
 
-/// Draws background fill and a stroked, optionally rounded rectangular shape.  Serves as a container
-/// for other views (in our case, we use a ContainerView as the root of each node subtree).
+/// Draws background fill and a stroked, optionally rounded rectangular shape.  This is meant
+/// to be a subclass for project specific node views loaded from a nib file.
  
 @interface PSBaseLeafView : UIView
 {
@@ -27,6 +26,7 @@
     CGFloat     cornerRadius_;
 	
     UIColor    *fillColor_;
+    UIColor    *selectionColor_;
 	
     BOOL        showingSelected_;
 }
@@ -46,9 +46,12 @@
 /// The fill color for the ContainerView's interior.
 @property (nonatomic, retain) UIColor *fillColor;
 
+/// The fill color for the ContainerView's interior when selected.
+@property (nonatomic, retain) UIColor *selectionColor;
+
 
 #pragma mark - Selection State
 
-@property (nonatomic, assign) BOOL showingSelected;
+@property (nonatomic, assign, getter=isShowingSelected) BOOL showingSelected;
 
 @end

@@ -11,9 +11,7 @@
 //  WWDC 2010 Session 141, “Crafting Custom Cocoa Views”
 //
 
-
 #import "PSBaseLeafView.h"
-
 
 // for CALayer definition
 #import <QuartzCore/QuartzCore.h>
@@ -29,91 +27,6 @@
 
 
 @implementation PSBaseLeafView
-
-
-#pragma mark - Update Layer
-
-- (void) updateLayerAppearanceToMatchContainerView 
-{
-    CALayer *layer = [self layer];
-    if (layer) {
-		
-        // Disable implicit animations during these layer property changes, to make them take effect immediately.
-        // BOOL actionsWereDisabled = [CATransaction disableActions];
-        // [CATransaction setDisableActions:YES];
-		
-        // Apply the ContainerView's appearance properties to its backing layer.  
-        // Important: While UIView metrics are conventionally expressed in points, CALayer metrics are
-        // expressed in pixels.  To produce the correct borderWidth and cornerRadius to apply to the 
-        // layer, we must multiply by the window's userSpaceScaleFactor (which is normally 1.0, but may
-        // be larger on a higher-resolution display) to yield pixel units.
-		
-		// [layer setBackgroundColor:[[self fillColor] CGColor] ];
-		
-        // CGFloat scaleFactor = [[self window] userSpaceScaleFactor];
-		CGFloat scaleFactor = 1.0f;
-		
-        [layer setBorderWidth:(borderWidth_ * scaleFactor)];
-        if (borderWidth_ > 0.0f) {
-            [layer setBorderColor:[borderColor_ CGColor]];
-        }
-		
-        [layer setCornerRadius:(cornerRadius_ * scaleFactor)];
-		
-		if ( showingSelected_ ) {
-			[layer setBackgroundColor:[[UIColor yellowColor] CGColor] ];
-		} else {
-			[layer setBackgroundColor:[[self fillColor] CGColor] ];
-		}
-		
-        // [CATransaction setDisableActions:actionsWereDisabled];
-    } else {
-		[self setNeedsDisplay];
-    }
-}
-
-
-#pragma mark - Initialization
-
-- (void) configureDetaults 
-{
-	// Initialize ivars directly.  As a rule, it's best to avoid invoking accessors from an -init...
-	// method, since they may wrongly expect the instance to be fully formed.
-	
-	borderColor_ = [[UIColor colorWithRed:1.0f green:0.8f blue:0.4f alpha:1.0f] retain];
-	borderWidth_ = 3.0f;
-	cornerRadius_ = 8.0f;
-	fillColor_ = [[UIColor colorWithRed:1.0f green:0.5f blue:0.0f alpha:1.0f] retain];
-    showingSelected_ = NO;
-	
-	[self updateLayerAppearanceToMatchContainerView];
-}
-
-- initWithFrame:(CGRect)newFrame 
-{
-    self = [super initWithFrame:newFrame];
-    if (self) {
-		[self configureDetaults];
-    }
-    return self;
-}
-
-- (void) awakeFromNib 
-{
-	[super awakeFromNib];
-    [self configureDetaults];
-}
-
-
-#pragma mark - Resource Management
-
-- (void) dealloc 
-{
-    [borderColor_ release];
-    [fillColor_ release];
-	
-    [super dealloc];
-}
 
 
 #pragma mark - Styling 
@@ -160,6 +73,17 @@
     }
 }
 
+@synthesize selectionColor = selectionColor_;
+
+- (void) setSelectionColor:(UIColor *)color
+{
+    if (selectionColor_ != color) {
+        [selectionColor_ release];
+        selectionColor_ = [color retain];
+        [self updateLayerAppearanceToMatchContainerView];
+    }
+}
+
 
 #pragma mark - Selection State
 
@@ -171,6 +95,127 @@
         showingSelected_ = newShowingSelected;
         [self updateLayerAppearanceToMatchContainerView];
     }
+}
+
+
+#pragma mark - Update Layer
+
+- (void) updateLayerAppearanceToMatchContainerView 
+{
+    CALayer *layer = [self layer];
+    if (layer) {
+		
+        // Disable implicit animations during these layer property changes, to make them take effect immediately.
+        
+        // BOOL actionsWereDisabled = [CATransaction disableActions];
+        // [CATransaction setDisableActions:YES];
+		
+        // Apply the ContainerView's appearance properties to its backing layer.  
+        // Important: While UIView metrics are conventionally expressed in points, CALayer metrics are
+        // expressed in pixels.  To produce the correct borderWidth and cornerRadius to apply to the 
+        // layer, we must multiply by the window's userSpaceScaleFactor (which is normally 1.0, but may
+        // be larger on a higher-resolution display) to yield pixel units.
+		
+        // CGFloat scaleFactor = [[self window] userSpaceScaleFactor];
+		CGFloat scaleFactor = 1.0f;
+		
+        [layer setBorderWidth:(borderWidth_ * scaleFactor)];
+        if (borderWidth_ > 0.0f) {
+            [layer setBorderColor:[borderColor_ CGColor]];
+        }
+		
+        [layer setCornerRadius:(cornerRadius_ * scaleFactor)];
+		
+		if ( showingSelected_ ) {
+			[layer setBackgroundColor:[[self selectionColor] CGColor] ];
+		} else {
+			[layer setBackgroundColor:[[self fillColor] CGColor] ];
+		}
+		
+        // [CATransaction setDisableActions:actionsWereDisabled];
+    } else {
+		[self setNeedsDisplay];
+    }
+}
+
+
+#pragma mark - Initialization
+
+- (void) configureDetaults 
+{
+	// Initialize ivars directly.  As a rule, it's best to avoid invoking accessors from an -init...
+	// method, since they may wrongly expect the instance to be fully formed.
+	
+	borderColor_ = [[UIColor colorWithRed:1.0 green:0.8 blue:0.4 alpha:1.0] retain];
+	borderWidth_ = 3.0;
+	cornerRadius_ = 8.0;
+	fillColor_ = [[UIColor colorWithRed:1.0 green:0.5 blue:0.0 alpha:1.0] retain];
+    selectionColor_ = [[UIColor colorWithRed:1.0 green:1.0 blue:0.0 alpha:1.0] retain];
+    showingSelected_ = NO;
+}
+
+
+#pragma mark - Resource Management
+
+- (void) dealloc 
+{
+    [borderColor_ release];
+    [fillColor_ release];
+    [selectionColor_ release];
+	
+    [super dealloc];
+}
+
+
+#pragma mark - UIView
+
+- initWithFrame:(CGRect)newFrame 
+{
+    self = [super initWithFrame:newFrame];
+    if (self) {
+		[self configureDetaults];
+        [self updateLayerAppearanceToMatchContainerView];
+    }
+    return self;
+}
+
+
+#pragma mark - NSCoding
+
+- (void) encodeWithCoder:(NSCoder *)encoder 
+{
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:borderColor_ forKey:@"borderColor"];
+    [encoder encodeFloat:borderWidth_ forKey:@"borderWidth"];
+    [encoder encodeFloat:cornerRadius_ forKey:@"cornerRadius"];
+    [encoder encodeObject:fillColor_ forKey:@"fillColor"];
+    [encoder encodeObject:selectionColor_ forKey:@"selectionColor"];
+    [encoder encodeBool:showingSelected_ forKey:@"showingSelected"];
+}
+
+- (id) initWithCoder:(NSCoder *)decoder 
+{
+    self = [super initWithCoder:decoder];
+    if (self) {
+        
+        [self configureDetaults];
+        
+        if ([decoder containsValueForKey:@"borderColor"])
+            borderColor_ = [[decoder decodeObjectForKey:@"borderColor"] retain];
+        if ([decoder containsValueForKey:@"borderWidth"])
+            borderWidth_ = [decoder decodeFloatForKey:@"borderWidth"];
+        if ([decoder containsValueForKey:@"cornerRadius"])
+            cornerRadius_ = [decoder decodeFloatForKey:@"cornerRadius"];
+        if ([decoder containsValueForKey:@"fillColor"])
+            fillColor_ = [[decoder decodeObjectForKey:@"fillColor"] retain];
+        if ([decoder containsValueForKey:@"selectionColor"])
+            selectionColor_ = [[decoder decodeObjectForKey:@"selectionColor"] retain];
+        if ([decoder containsValueForKey:@"showingSelected"])
+            showingSelected_ = [decoder decodeBoolForKey:@"showingSelected"];
+        
+        [self updateLayerAppearanceToMatchContainerView];
+    }
+    return self;
 }
 
 

@@ -102,7 +102,7 @@ static CGFloat subtreeBorderWidth(void)
 {    
     NSParameterAssert(newModelNode);
     
-    self = [super initWithFrame:CGRectMake(10.0f, 10.0f, 100.0f, 25.0f)];
+    self = [super initWithFrame:CGRectMake(10.0, 10.0, 100.0, 25.0)];
     if (self) {
 		
         // Initialize ivars directly.  As a rule, it's best to avoid invoking accessors from an -init... 

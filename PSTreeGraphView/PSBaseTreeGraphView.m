@@ -11,7 +11,6 @@
 //  WWDC 2010 Session 141, “Crafting Custom Cocoa Views”
 //
 
-
 #import "PSBaseTreeGraphView.h"
 #import "PSBaseTreeGraphView_Internal.h"
 #import "PSBaseSubtreeView.h"
@@ -40,30 +39,33 @@
 @synthesize minimumFrameSize = minimumFrameSize_;
 
 
-#pragma mark - Creating Instances
+#pragma mark - Initialization
 
 - (void) configureDetaults 
 {
-	[self setBackgroundColor: [UIColor colorWithRed:0.55f green:0.76f blue:0.93f alpha:1.0f]];
+	[self setBackgroundColor: [UIColor colorWithRed:0.55 green:0.76 blue:0.93 alpha:1.0]];
 	//[self setClipsToBounds:YES];
 	
 	// Initialize ivars directly.  As a rule, it's best to avoid invoking accessors from an -init... method,
 	// since they may wrongly expect the instance to be fully formed.
 	
-	modelNodeToSubtreeViewMapTable_ = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
+	// May be configured by user in code, loaded from NSCoder, etc
 	connectingLineColor_ = [[UIColor blackColor] retain];
-	contentMargin_ = 20.0f;
-	parentChildSpacing_ = 50.0f;
-	siblingSpacing_ = 10.0f;
+	contentMargin_ = 20.0;
+	parentChildSpacing_ = 50.0;
+	siblingSpacing_ = 10.0;
 	animatesLayout_ = YES;
 	resizesToFillEnclosingScrollView_ = YES;
 	treeGraphOrientation_ = PSTreeGraphOrientationStyleHorizontal ;
-	layoutAnimationSuppressed_ = NO;
 	connectingLineStyle_ = PSTreeGraphConnectingLineStyleOrthogonal ;
-	connectingLineWidth_ = 1.0f;
+	connectingLineWidth_ = 1.0;
+    
+    // Internal
+    layoutAnimationSuppressed_ = NO;
 	showsSubtreeFrames_ = NO;
-	minimumFrameSize_ = CGSizeMake(2.0f * contentMargin_, 2.0f * contentMargin_);
+	minimumFrameSize_ = CGSizeMake(2.0 * contentMargin_, 2.0 * contentMargin_);
 	selectedModelNodes_ = [[NSMutableSet alloc] init];
+    modelNodeToSubtreeViewMapTable_ = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
     
     // If this has been configured by the XIB, leave it during initialization.
     if (inputView_ == nil) {
@@ -73,20 +75,6 @@
 	// [self setLayerContentsRedrawPolicy:UIViewLayerContentsRedrawNever];
 }
 
-- (id) initWithFrame:(CGRect)frame 
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        [self configureDetaults];
-    }
-    return self;
-}
-
-- (void) awakeFromNib 
-{
-	[super awakeFromNib];
-	[self configureDetaults];
-}
 
 #pragma mark - Resource Management
 
@@ -98,7 +86,6 @@
     self.delegate = nil;
 	
     [inputView_ release];
-    [nodeViewNibBundle_ release];
     [nodeViewNibName_ release];
     [selectedModelNodes_ release];
     [modelRoot_ release];
@@ -106,6 +93,67 @@
     // [backgroundColor release];
     [super dealloc];
 }
+
+
+#pragma mark - UIView
+
+- (id) initWithFrame:(CGRect)frame 
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self configureDetaults];
+    }
+    return self;
+}
+
+
+#pragma mark - NSCoding
+
+- (void) encodeWithCoder:(NSCoder *)encoder 
+{
+    [super encodeWithCoder:encoder];
+    [encoder encodeBool:animatesLayout_ forKey:@"animatesLayout"];
+    [encoder encodeFloat:contentMargin_ forKey:@"contentMargin"];
+    [encoder encodeFloat:parentChildSpacing_ forKey:@"parentChildSpacing"];
+    [encoder encodeFloat:siblingSpacing_ forKey:@"siblingSpacing"];
+    [encoder encodeBool:resizesToFillEnclosingScrollView_ forKey:@"resizesToFillEnclosingScrollView"];
+    [encoder encodeObject:connectingLineColor_ forKey:@"connectingLineColor"];
+    [encoder encodeFloat:connectingLineWidth_ forKey:@"connectingLineWidth"];
+    
+    [encoder encodeInt:treeGraphOrientation_ forKey:@"treeGraphOrientation"];
+    [encoder encodeInt:connectingLineStyle_ forKey:@"connectingLineStyle"];
+}
+
+- (id) initWithCoder:(NSCoder *)decoder 
+{
+    self = [super initWithCoder:decoder];
+    if (self) {
+        
+        [self configureDetaults];
+        
+        if ([decoder containsValueForKey:@"animatesLayout"])
+            animatesLayout_ = [decoder decodeBoolForKey:@"animatesLayout"];
+        if ([decoder containsValueForKey:@"contentMargin"])
+            contentMargin_ = [decoder decodeFloatForKey:@"contentMargin"];
+        if ([decoder containsValueForKey:@"parentChildSpacing"])
+            parentChildSpacing_ = [decoder decodeFloatForKey:@"parentChildSpacing"];
+        if ([decoder containsValueForKey:@"siblingSpacing"])
+            siblingSpacing_ = [decoder decodeFloatForKey:@"siblingSpacing"];
+        if ([decoder containsValueForKey:@"resizesToFillEnclosingScrollView"])
+            resizesToFillEnclosingScrollView_ = [decoder decodeBoolForKey:@"resizesToFillEnclosingScrollView"];
+        if ([decoder containsValueForKey:@"connectingLineColor"])
+            connectingLineColor_ = [[decoder decodeObjectForKey:@"connectingLineColor"] retain];
+        if ([decoder containsValueForKey:@"connectingLineWidth"])
+            connectingLineWidth_ = [decoder decodeFloatForKey:@"connectingLineWidth"];
+        
+        if ([decoder containsValueForKey:@"treeGraphOrientation"])
+            treeGraphOrientation_ = [decoder decodeIntForKey:@"treeGraphOrientation"];
+        if ([decoder containsValueForKey:@"connectingLineStyle"])
+            connectingLineStyle_ = [decoder decodeIntForKey:@"connectingLineStyle"];
+    }
+    return self;
+}
+
 
 #pragma mark - Root SubtreeView Access
 
@@ -716,7 +764,7 @@
 
 #pragma mark UIKeyInput Protocol Methods
 
-- (BOOL)hasText 
+- (BOOL) hasText 
 {
     if ( [self modelRoot] != nil ) {
         return YES;

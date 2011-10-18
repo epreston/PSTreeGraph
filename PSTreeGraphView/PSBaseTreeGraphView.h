@@ -54,10 +54,6 @@ typedef enum {
     // Model Object -> SubtreeView Mapping
 	NSMutableDictionary *modelNodeToSubtreeViewMapTable_;
 	
-    // Node View Nib Specification
-    NSString *nodeViewNibName_;
-    NSBundle *nodeViewNibBundle_;
-	
     // Selection State
     NSSet *selectedModelNodes_;
 	
@@ -87,6 +83,9 @@ typedef enum {
     // A debug feature that outlines the view hiarchy.
     BOOL showsSubtreeFrames_;
 	
+    // Node View Nib Specification
+    NSString *nodeViewNibName_;
+    
 	// iOS 4 and above ONLY
     UINib *cachedNodeViewNib_;
     
@@ -112,7 +111,7 @@ typedef enum {
 /// Initializes a new TreeGraph instance.  (TreeGraph's designated initializer is the same as 
 /// UIView's: -initWithFrame:.)  The TreeGraph has default appearance properties and layout 
 /// metrics, but to have a usable TreeGraph with actual content, you need to specify a 
-/// nodeViewNibName, an optional nodeViewNibBundle, and a modelRoot.
+/// nodeViewNibName and a modelRoot.
  
 - (id) initWithFrame:(CGRect)frame;
 
