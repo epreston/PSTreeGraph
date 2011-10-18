@@ -27,6 +27,8 @@
 - (void) configureDetaults;
 - (PSBaseSubtreeView *) newGraphForModelNode:(id <PSTreeGraphModelNode> )modelNode;
 - (void) buildGraph;
+- (void) updateFrameSizeForContentAndClipView;
+- (void) updateRootSubtreeViewPositionForSize:(CGSize)rootSubtreeViewSize;
 
 @end
 
@@ -34,9 +36,112 @@
 @implementation PSBaseTreeGraphView
 
 @synthesize delegate = delegate_;
-@synthesize animatesLayout = animatesLayout_;
 @synthesize layoutAnimationSuppressed = layoutAnimationSuppressed_;
 @synthesize minimumFrameSize = minimumFrameSize_;
+
+#pragma mark - Styling
+
+// Getters and setters for TreeGraph's appearance-related properties: colors, metrics, etc.  We could almost 
+// auto-generate these using "@synthesize", but we want each setter to automatically mark the affected parts 
+// of the TreeGraph (and/or the descendant views that it's responsible for) as needing drawing to reflet the 
+// appearance change.  In other respects, these are unremarkable accessor methods that follow standard accessor 
+// conventions.
+
+@synthesize animatesLayout = animatesLayout_;
+
+@synthesize connectingLineColor = connectingLineColor_;
+
+- (void) setConnectingLineColor:(UIColor *)newConnectingLineColor 
+{
+    if (connectingLineColor_ != newConnectingLineColor) {
+        [connectingLineColor_ release];
+        connectingLineColor_ = [newConnectingLineColor retain];
+        [[self rootSubtreeView] recursiveSetConnectorsViewsNeedDisplay];
+    }
+}
+
+@synthesize contentMargin = contentMargin_;
+
+- (void) setContentMargin:(CGFloat)newContentMargin 
+{
+    if (contentMargin_ != newContentMargin) {
+        contentMargin_ = newContentMargin;
+        [self setNeedsGraphLayout];
+        [[self layer] displayIfNeeded];
+    }
+}
+
+@synthesize parentChildSpacing = parentChildSpacing_;
+
+- (void) setParentChildSpacing:(CGFloat)newParentChildSpacing 
+{
+    if (parentChildSpacing_ != newParentChildSpacing) {
+        parentChildSpacing_ = newParentChildSpacing;
+        [self setNeedsGraphLayout];
+        [[self layer] displayIfNeeded];
+    }
+}
+
+@synthesize siblingSpacing = siblingSpacing_;
+
+- (void) setSiblingSpacing:(CGFloat)newSiblingSpacing 
+{
+    if (siblingSpacing_ != newSiblingSpacing) {
+        siblingSpacing_ = newSiblingSpacing;
+        [self setNeedsGraphLayout];
+        [[self layer] displayIfNeeded];
+    }
+}
+
+@synthesize treeGraphOrientation = treeGraphOrientation_;
+
+- (void) setTreeGraphOrientation:(PSTreeGraphOrientationStyle)newTreeGraphOrientation 
+{
+    if (treeGraphOrientation_ != newTreeGraphOrientation) {
+        treeGraphOrientation_ = newTreeGraphOrientation;
+        [[self rootSubtreeView] recursiveSetConnectorsViewsNeedDisplay];
+    }
+}
+
+@synthesize connectingLineStyle = connectingLineStyle_;
+
+- (void) setConnectingLineStyle:(PSTreeGraphConnectingLineStyle)newConnectingLineStyle 
+{
+    if (connectingLineStyle_ != newConnectingLineStyle) {
+        connectingLineStyle_ = newConnectingLineStyle;
+        [[self rootSubtreeView] recursiveSetConnectorsViewsNeedDisplay];
+    }
+}
+
+@synthesize connectingLineWidth = connectingLineWidth_;
+
+- (void) setConnectingLineWidth:(CGFloat)newConnectingLineWidth {
+    if (connectingLineWidth_ != newConnectingLineWidth) {
+        connectingLineWidth_ = newConnectingLineWidth;
+        [[self rootSubtreeView] recursiveSetConnectorsViewsNeedDisplay];
+    }
+}
+
+@synthesize resizesToFillEnclosingScrollView = resizesToFillEnclosingScrollView_;
+
+- (void) setResizesToFillEnclosingScrollView:(BOOL)flag 
+{
+    if (resizesToFillEnclosingScrollView_ != flag) {
+        resizesToFillEnclosingScrollView_ = flag;
+        [self updateFrameSizeForContentAndClipView];
+        [self updateRootSubtreeViewPositionForSize:[[self rootSubtreeView] frame].size];
+    }
+}
+
+@synthesize showsSubtreeFrames = showsSubtreeFrames_; // DEBUG
+
+- (void) setShowsSubtreeFrames:(BOOL)newShowsSubtreeFrames 
+{
+    if (showsSubtreeFrames_ != newShowsSubtreeFrames) {
+        showsSubtreeFrames_ = newShowsSubtreeFrames;
+        [[self rootSubtreeView] resursiveSetSubtreeBordersNeedDisplay];
+    }
+}
 
 
 #pragma mark - Initialization
@@ -167,7 +272,7 @@
 
 // iOS 4.0 and above ONLY - 
 
-- (UINib *)cachedNodeViewNib {
+- (UINib *) cachedNodeViewNib {
     return cachedNodeViewNib_;
     
     // If 3.x Support required, change references to UINib to ID (careful not to modify
@@ -182,7 +287,7 @@
     //    }
 }
 
-- (void)setCachedNodeViewNib:(UINib *)newNib {
+- (void) setCachedNodeViewNib:(UINib *)newNib {
     if (cachedNodeViewNib_ != newNib) {
         [cachedNodeViewNib_ release];
         cachedNodeViewNib_ = [newNib retain];
@@ -194,7 +299,7 @@
 
 @synthesize nodeViewNibName = nodeViewNibName_;
 
-- (void)setNodeViewNibName:(NSString *)newName 
+- (void) setNodeViewNibName:(NSString *)newName 
 {
     if (nodeViewNibName_ != newName) {
         
@@ -429,27 +534,6 @@
 	
 }
 
-@synthesize treeGraphOrientation = treeGraphOrientation_;
-
-- (void) setTreeGraphOrientation:(PSTreeGraphOrientationStyle)newTreeGraphOrientation 
-{
-    if (treeGraphOrientation_ != newTreeGraphOrientation) {
-        treeGraphOrientation_ = newTreeGraphOrientation;
-        [[self rootSubtreeView] recursiveSetConnectorsViewsNeedDisplay];
-    }
-}
-
-@synthesize resizesToFillEnclosingScrollView = resizesToFillEnclosingScrollView_;
-
-- (void) setResizesToFillEnclosingScrollView:(BOOL)flag 
-{
-    if (resizesToFillEnclosingScrollView_ != flag) {
-        resizesToFillEnclosingScrollView_ = flag;
-        [self updateFrameSizeForContentAndClipView];
-        [self updateRootSubtreeViewPositionForSize:[[self rootSubtreeView] frame].size];
-    }
-}
-
 - (void) parentClipViewDidResize:(id)object 
 {
 	UIScrollView *enclosingScrollView = (UIScrollView *)[self superview];
@@ -635,7 +719,6 @@
 
 @synthesize inputView = inputView_;
 
-
 - (BOOL) canBecomeFirstResponder 
 {
     // Make TreeGraphs able to -canBecomeFirstResponder, so they can receive key events.
@@ -772,7 +855,7 @@
     return NO;
 }
 
-- (void)insertText:(NSString *)theText 
+- (void) insertText:(NSString *)theText 
 {
     // Hardware keyboard, desktop keyboard in simulator support.
     if (theText && [theText length] > 0) {
@@ -800,7 +883,7 @@
     }
 }
 
-- (void)deleteBackward 
+- (void) deleteBackward 
 {
     [self moveLeft:nil];
 }
@@ -839,88 +922,6 @@
 //    }
 //}
 
-
-#pragma mark - Styling
-
-// Getters and setters for TreeGraph's appearance-related properties: colors, metrics, etc.  We could almost 
-// auto-generate these using "@synthesize", but we want each setter to automatically mark the affected parts 
-// of the TreeGraph (and/or the descendant views that it's responsible for) as needing drawing to reflet the 
-// appearance change.  In other respects, these are unremarkable accessor methods that follow standard accessor 
-// conventions.
-
-
-@synthesize connectingLineColor = connectingLineColor_;
-
-- (void) setConnectingLineColor:(UIColor *)newConnectingLineColor 
-{
-    if (connectingLineColor_ != newConnectingLineColor) {
-        [connectingLineColor_ release];
-        connectingLineColor_ = [newConnectingLineColor retain];
-        [[self rootSubtreeView] recursiveSetConnectorsViewsNeedDisplay];
-    }
-}
-
-@synthesize contentMargin = contentMargin_;
-
-- (void) setContentMargin:(CGFloat)newContentMargin 
-{
-    if (contentMargin_ != newContentMargin) {
-        contentMargin_ = newContentMargin;
-        [self setNeedsGraphLayout];
-        [[self layer] displayIfNeeded];
-    }
-}
-
-@synthesize parentChildSpacing = parentChildSpacing_;
-
-- (void) setParentChildSpacing:(CGFloat)newParentChildSpacing 
-{
-    if (parentChildSpacing_ != newParentChildSpacing) {
-        parentChildSpacing_ = newParentChildSpacing;
-        [self setNeedsGraphLayout];
-        [[self layer] displayIfNeeded];
-    }
-}
-
-@synthesize siblingSpacing = siblingSpacing_;
-
-- (void) setSiblingSpacing:(CGFloat)newSiblingSpacing 
-{
-    if (siblingSpacing_ != newSiblingSpacing) {
-        siblingSpacing_ = newSiblingSpacing;
-        [self setNeedsGraphLayout];
-        [[self layer] displayIfNeeded];
-    }
-}
-
-@synthesize connectingLineStyle = connectingLineStyle_;
-
-- (void) setConnectingLineStyle:(PSTreeGraphConnectingLineStyle)newConnectingLineStyle 
-{
-    if (connectingLineStyle_ != newConnectingLineStyle) {
-        connectingLineStyle_ = newConnectingLineStyle;
-        [[self rootSubtreeView] recursiveSetConnectorsViewsNeedDisplay];
-    }
-}
-
-@synthesize connectingLineWidth = connectingLineWidth_;
-
-- (void)setConnectingLineWidth:(CGFloat)newConnectingLineWidth {
-    if (connectingLineWidth_ != newConnectingLineWidth) {
-        connectingLineWidth_ = newConnectingLineWidth;
-        [[self rootSubtreeView] recursiveSetConnectorsViewsNeedDisplay];
-    }
-}
-
-@synthesize showsSubtreeFrames = showsSubtreeFrames_;
-
-- (void) setShowsSubtreeFrames:(BOOL)newShowsSubtreeFrames 
-{
-    if (showsSubtreeFrames_ != newShowsSubtreeFrames) {
-        showsSubtreeFrames_ = newShowsSubtreeFrames;
-        [[self rootSubtreeView] resursiveSetSubtreeBordersNeedDisplay];
-    }
-}
 
 @end
 
