@@ -13,7 +13,7 @@
 
 @class PSBaseTreeGraphView;
 
-@interface PSHTreeGraphViewController : UIViewController <PSTreeGraphDelegate> 
+@interface PSHTreeGraphViewController : UIViewController <PSTreeGraphDelegate>
 {
 
 @private

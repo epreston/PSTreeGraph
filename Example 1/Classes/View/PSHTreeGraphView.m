@@ -15,12 +15,12 @@
 
 #pragma mark - UIView
 
-- (id) initWithFrame:(CGRect)frame 
+- (id) initWithFrame:(CGRect)frame
 {
     if ((self = [super initWithFrame:frame])) {
-        
+
         // Initialization code when created dynamicly
-        
+
     }
     return self;
 }
@@ -28,24 +28,24 @@
 
 #pragma mark - NSCoding
 
-- (id) initWithCoder:(NSCoder *)decoder 
+- (id) initWithCoder:(NSCoder *)decoder
 {
     self = [super initWithCoder:decoder];
     if (self) {
-        
+
         // Initialization code when loaded from XIB (this example)
-        
+
         // Example: Set a larger content margin than default.
-        
+
 //        self.contentMargin = 60.0;
-        
+
     }
     return self;
 }
 
 #pragma mark - Resource Management
 
-- (void) dealloc 
+- (void) dealloc
 {
     [super dealloc];
 }
