@@ -16,18 +16,18 @@
 
 /// Draws background fill and a stroked, optionally rounded rectangular shape.  This is meant
 /// to be a subclass for project specific node views loaded from a nib file.
- 
+
 @interface PSBaseLeafView : UIView
 {
-	
+
 @private
     UIColor    *borderColor_;
     CGFloat     borderWidth_;
     CGFloat     cornerRadius_;
-	
+
     UIColor    *fillColor_;
     UIColor    *selectionColor_;
-	
+
     BOOL        showingSelected_;
 }
 
