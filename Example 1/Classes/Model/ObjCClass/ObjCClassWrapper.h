@@ -23,7 +23,7 @@
 
 #pragma mark - Creating Instances
 
-// Returns an ObjCClassWrapper for the given Objective-C class.  ObjCClassWrapper maintains 
+// Returns an ObjCClassWrapper for the given Objective-C class.  ObjCClassWrapper maintains
 // a set of unique instances, so this will always return the same ObjCClassWrapper for a given Class.
 
 + (ObjCClassWrapper *) wrapperForClass:(Class)aClass;
@@ -44,7 +44,7 @@
 
 @property (nonatomic, readonly) ObjCClassWrapper *superclassWrapper;
 
-// An array of ObjCClassWrappers representing the wrappedClass' subclasses.  
+// An array of ObjCClassWrappers representing the wrappedClass' subclasses.
 // (For convenience, the subclasses are sorted by name.)
 
 @property (nonatomic, readonly) NSArray *subclasses;

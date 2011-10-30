@@ -13,20 +13,20 @@
 - (void)setUp
 {
     [super setUp];
-    
+
     // Set-up code here.
-    
+
     aBranch = [[PSBaseBranchView alloc] initWithFrame:CGRectZero];
     STAssertNotNil(aBranch, @"Couldn't create branch view.");
-    
+
 }
 
 - (void)tearDown
 {
     // Tear-down code here.
-    
+
     [aBranch release];
-    
+
     [super tearDown];
 }
 
