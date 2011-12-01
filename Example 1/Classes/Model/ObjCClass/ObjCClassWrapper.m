@@ -24,6 +24,16 @@ static NSInteger CompareClassNames(id classA, id classB, void* context)
 }
 
 
+@interface ObjCClassWrapper ()
+{
+    
+@private
+    Class wrappedClass;
+    NSMutableArray *subclassesCache;
+}
+
+@end
+
 
 @implementation ObjCClassWrapper
 

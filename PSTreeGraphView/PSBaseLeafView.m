@@ -17,8 +17,19 @@
 #import <QuartzCore/QuartzCore.h>
 
 
-
 @interface PSBaseLeafView ()
+{
+    
+@private
+    UIColor    *borderColor_;
+    CGFloat     borderWidth_;
+    CGFloat     cornerRadius_;
+    
+    UIColor    *fillColor_;
+    UIColor    *selectionColor_;
+    
+    BOOL        showingSelected_;
+}
 
 - (void) updateLayerAppearanceToMatchContainerView;
 - (void) configureDetaults;

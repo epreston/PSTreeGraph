@@ -35,6 +35,25 @@ static CGFloat subtreeBorderWidth(void)
 
 
 @interface PSBaseSubtreeView ()
+{
+    
+@private
+    // Model
+    id <PSTreeGraphModelNode> modelNode_;   // the model node that nodeView represents
+    
+    // Views
+    UIView *nodeView_;                      // the subview of this SubtreeView that shows a representation
+                                            // of the modelNode
+    
+    PSBaseBranchView *connectorsView_;		// the view that shows connections from nodeView to its child nodes
+    
+    // State
+    BOOL expanded_;                         // YES if this subtree is expanded to show its descendants;
+                                            // NO if it's been collapsed to show just its root node
+    
+    BOOL needsGraphLayout_;                 // YES if this SubtreeView needs to position its child views
+                                            // and assess its size; NO if we're sure its layout is up to date
+}
 
 - (CGSize) layoutExpandedGraph;
 - (CGSize) layoutCollapsedGraph;

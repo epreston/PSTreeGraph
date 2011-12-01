@@ -17,7 +17,6 @@
 #import "PSTreeGraphModelNode.h"
 
 
-@class PSBaseBranchView;
 @class PSBaseTreeGraphView;
 
 
@@ -27,25 +26,6 @@
 
 
 @interface PSBaseSubtreeView : UIView
-{
-
-@private
-    // Model
-    id <PSTreeGraphModelNode> modelNode_;   // the model node that nodeView represents
-
-    // Views
-    UIView *nodeView_;                      // the subview of this SubtreeView that shows a representation
-                                            // of the modelNode
-
-    PSBaseBranchView *connectorsView_;		// the view that shows connections from nodeView to its child nodes
-
-    // State
-    BOOL expanded_;                         // YES if this subtree is expanded to show its descendants;
-                                            // NO if it's been collapsed to show just its root node
-
-    BOOL needsGraphLayout_;                 // YES if this SubtreeView needs to position its child views
-                                            // and assess its size; NO if we're sure its layout is up to date
-}
 
 /// Initializes a SubtreeView with the associated modelNode.  This is SubtreeView's designated initializer.
 
@@ -53,7 +33,7 @@
 
 /// The root of the model subtree that this SubtreeView represents.
 
-@property (nonatomic, retain) id <PSTreeGraphModelNode> modelNode;
+@property (nonatomic, strong) id <PSTreeGraphModelNode> modelNode;
 
 /// The view that represents the modelNode.  Is a subview of SubtreeView, and may itself have descendant views.
 
@@ -137,6 +117,7 @@
 /// SubtreeView's interior (bounds) coordinate space.
 
 - ( id <PSTreeGraphModelNode> ) modelNodeClosestToX:(CGFloat)x;
+
 
 #pragma mark - Debugging
 

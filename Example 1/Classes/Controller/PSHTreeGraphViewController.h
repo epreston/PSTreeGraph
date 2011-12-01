@@ -13,20 +13,14 @@
 
 @class PSBaseTreeGraphView;
 
-@interface PSHTreeGraphViewController : UIViewController <PSTreeGraphDelegate>
-{
 
-@private
-	PSBaseTreeGraphView *treeGraphView_;
-	NSString *rootClassName_;
-}
+@interface PSHTreeGraphViewController : UIViewController <PSTreeGraphDelegate>
 
 // The TreeGraph
 @property(nonatomic, assign) IBOutlet PSBaseTreeGraphView *treeGraphView;
 
 // The name of the root class that the TreeGraph is currently showing.
 @property(nonatomic, copy) NSString *rootClassName;
-
 
 @end
 

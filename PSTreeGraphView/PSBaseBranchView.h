@@ -16,7 +16,6 @@
 
 @class PSBaseTreeGraphView;
 
-
 /// Each SubtreeView has a BranchView subview that draws the connecting lines between its root node
 /// and its child subtrees.
 

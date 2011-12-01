@@ -15,10 +15,6 @@
 // the PSTreeGraphModelNode protocol, so that we can use these as model nodes with a TreeGraph.
 
 @interface ObjCClassWrapper : NSObject <PSTreeGraphModelNode, NSCopying>
-{
-    Class wrappedClass;
-    NSMutableArray *subclassesCache;
-}
 
 
 #pragma mark - Creating Instances
@@ -36,7 +32,7 @@
 
 #pragma mark - Property Accessors
 
-// The wrappedClass' name (e.g. @"UIButton")
+// The wrappedClass' name (e.g. @"UIButton" or @"CALayer")
 
 @property (nonatomic, readonly) NSString *name;
 

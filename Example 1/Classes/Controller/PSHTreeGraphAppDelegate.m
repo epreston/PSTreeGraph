@@ -11,6 +11,17 @@
 #import "PSHTreeGraphViewController.h"
 
 
+@interface PSHTreeGraphAppDelegate () 
+{
+
+@private
+    UIWindow *window_;
+    PSHTreeGraphViewController *viewController_;
+}
+
+@end
+
+
 @implementation PSHTreeGraphAppDelegate
 
 

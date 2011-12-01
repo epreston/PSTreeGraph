@@ -11,16 +11,8 @@
 
 #import "PSBaseLeafView.h"
 
+
 @interface PSHLeafView : PSBaseLeafView
-{
-
-@private
-
-	// Interface
-	UIButton *expandButton_;
-	UILabel *titleLabel_;
-	UILabel *detailLabel_;
-}
 
 @property (nonatomic, assign) IBOutlet UIButton *expandButton;
 @property (nonatomic, assign) IBOutlet UILabel *titleLabel;

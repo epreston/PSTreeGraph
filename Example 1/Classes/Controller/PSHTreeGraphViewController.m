@@ -15,6 +15,17 @@
 #import "ObjCClassWrapper.h"
 
 
+@interface PSHTreeGraphViewController () 
+{
+
+@private
+	PSBaseTreeGraphView *treeGraphView_;
+	NSString *rootClassName_;
+}
+
+@end
+
+
 @implementation PSHTreeGraphViewController
 
 

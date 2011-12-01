@@ -13,8 +13,6 @@
 
 
 #import <UIKit/UIKit.h>
-#import <CoreGraphics/CoreGraphics.h>
-
 
 
 // A TreeGraph's nodes may be connected by either "direct" or "orthogonal" lines.
@@ -33,8 +31,8 @@ typedef enum {
 } PSTreeGraphOrientationStyle;
 
 
-@class PSBaseSubtreeView;
 
+@class PSBaseSubtreeView;
 
 @protocol PSTreeGraphModelNode;
 @protocol PSTreeGraphDelegate;
@@ -42,61 +40,11 @@ typedef enum {
 
 
 @interface PSBaseTreeGraphView : UIView <UIKeyInput>
-{
-
-@private
-	// Model
-    id <PSTreeGraphModelNode> modelRoot_;
-
-	// Delegate
-	id <PSTreeGraphDelegate> delegate_;
-
-    // Model Object -> SubtreeView Mapping
-	NSMutableDictionary *modelNodeToSubtreeViewMapTable_;
-
-    // Selection State
-    NSSet *selectedModelNodes_;
-
-    // Layout State
-    CGSize minimumFrameSize_;
-
-    // Animation Support
-    BOOL animatesLayout_;
-    BOOL layoutAnimationSuppressed_;
-
-    // Layout Metrics
-    CGFloat contentMargin_;
-    CGFloat parentChildSpacing_;
-    CGFloat siblingSpacing_;
-
-    // Layout Behavior
-    BOOL resizesToFillEnclosingScrollView_;
-	PSTreeGraphOrientationStyle treeGraphOrientation_;
-
-    // Styling
-    // UIColor *backgroundColor;
-
-    UIColor *connectingLineColor_;
-    CGFloat connectingLineWidth_;
-    PSTreeGraphConnectingLineStyle connectingLineStyle_;
-
-    // A debug feature that outlines the view hiarchy.
-    BOOL showsSubtreeFrames_;
-
-    // Node View Nib Specification
-    NSString *nodeViewNibName_;
-
-	// iOS 4 and above ONLY
-    UINib *cachedNodeViewNib_;
-
-    // Custom input view support
-    UIView *inputView_;
-}
 
 
 #pragma mark - Delegate
 
-@property (nonatomic, assign) id delegate;
+@property (nonatomic, weak) id delegate;
 
 
 #pragma mark - Parent Resize Notification
@@ -125,7 +73,7 @@ typedef enum {
 /// to traverse the model tree, must conform to the TreeGraphModelNode protocol declared in
 /// TreeGraphModelNode.h
 
-@property (nonatomic, retain) id <PSTreeGraphModelNode> modelRoot;
+@property (nonatomic, strong) id <PSTreeGraphModelNode> modelRoot;
 
 
 #pragma mark - Root SubtreeView Access

@@ -10,7 +10,23 @@
 #import "PSHLeafView.h"
 
 
+@interface PSHLeafView () 
+{
+    
+@private
+    // Interface
+    UIButton *expandButton_;
+    UILabel *titleLabel_;
+    UILabel *detailLabel_;
+}
+
+@end
+
+
 @implementation PSHLeafView
+
+
+#pragma mark - Property Accessors
 
 @synthesize expandButton = expandButton_;
 @synthesize titleLabel = titleLabel_;

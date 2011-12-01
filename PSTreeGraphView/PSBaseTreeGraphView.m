@@ -22,7 +22,57 @@
 #import <QuartzCore/QuartzCore.h>
 
 
-@interface PSBaseTreeGraphView ()
+@interface PSBaseTreeGraphView () 
+{
+    
+@private
+	// Model
+    id <PSTreeGraphModelNode> modelRoot_;
+    
+	// Delegate
+	id <PSTreeGraphDelegate> delegate_;
+    
+    // Model Object -> SubtreeView Mapping
+	NSMutableDictionary *modelNodeToSubtreeViewMapTable_;
+    
+    // Selection State
+    NSSet *selectedModelNodes_;
+    
+    // Layout State
+    CGSize minimumFrameSize_;
+    
+    // Animation Support
+    BOOL animatesLayout_;
+    BOOL layoutAnimationSuppressed_;
+    
+    // Layout Metrics
+    CGFloat contentMargin_;
+    CGFloat parentChildSpacing_;
+    CGFloat siblingSpacing_;
+    
+    // Layout Behavior
+    BOOL resizesToFillEnclosingScrollView_;
+	PSTreeGraphOrientationStyle treeGraphOrientation_;
+    
+    // Styling
+    // UIColor *backgroundColor;
+    
+    UIColor *connectingLineColor_;
+    CGFloat connectingLineWidth_;
+    PSTreeGraphConnectingLineStyle connectingLineStyle_;
+    
+    // A debug feature that outlines the view hiarchy.
+    BOOL showsSubtreeFrames_;
+    
+    // Node View Nib Specification
+    NSString *nodeViewNibName_;
+    
+	// iOS 4 and above ONLY
+    UINib *cachedNodeViewNib_;
+    
+    // Custom input view support
+    UIView *inputView_;
+}
 
 - (void) configureDetaults;
 - (PSBaseSubtreeView *) newGraphForModelNode:(id <PSTreeGraphModelNode> )modelNode;
@@ -452,21 +502,19 @@
 
 - (void) buildGraph
 {
-    // Auto release pool
-    NSAutoreleasePool *subPool = [[NSAutoreleasePool alloc] init];
+    @autoreleasepool {
 
-    // Traverse the model tree, building a SubtreeView for each model node.
-    id <PSTreeGraphModelNode> root = [self modelRoot];
-    if (root) {
-        PSBaseSubtreeView *rootSubtreeView = [self newGraphForModelNode:root];
-        if (rootSubtreeView) {
-            [self addSubview:rootSubtreeView];
-            [rootSubtreeView release];
+        // Traverse the model tree, building a SubtreeView for each model node.
+        id <PSTreeGraphModelNode> root = [self modelRoot];
+        if (root) {
+            PSBaseSubtreeView *rootSubtreeView = [self newGraphForModelNode:root];
+            if (rootSubtreeView) {
+                [self addSubview:rootSubtreeView];
+                [rootSubtreeView release];
+            }
         }
-    }
 
-    // Drain the pool
-    [subPool drain];
+    } // Drain the pool
 }
 
 
