@@ -15,6 +15,8 @@
 #import "ObjCClassWrapper.h"
 
 
+#pragma mark - Internal Interface
+
 @interface PSHTreeGraphViewController () 
 {
 
@@ -65,6 +67,7 @@
     
     [self setRootClassName:@"UIControl"];
     
+    // The system includes some other abstract base classes that are interesting:
     // [self setRootClassName:@"CAAnimation"];
 
 }
