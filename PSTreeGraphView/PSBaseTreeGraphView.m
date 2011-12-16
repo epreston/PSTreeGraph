@@ -22,6 +22,8 @@
 #import <QuartzCore/QuartzCore.h>
 
 
+#pragma mark - Internal Interface
+
 @interface PSBaseTreeGraphView () 
 {
     
@@ -117,7 +119,6 @@
     if (contentMargin_ != newContentMargin) {
         contentMargin_ = newContentMargin;
         [self setNeedsGraphLayout];
-        [[self layer] displayIfNeeded];
     }
 }
 
@@ -128,7 +129,6 @@
     if (parentChildSpacing_ != newParentChildSpacing) {
         parentChildSpacing_ = newParentChildSpacing;
         [self setNeedsGraphLayout];
-        [[self layer] displayIfNeeded];
     }
 }
 
@@ -139,7 +139,6 @@
     if (siblingSpacing_ != newSiblingSpacing) {
         siblingSpacing_ = newSiblingSpacing;
         [self setNeedsGraphLayout];
-        [[self layer] displayIfNeeded];
     }
 }
 
@@ -226,8 +225,6 @@
     if (inputView_ == nil) {
         inputView_ = [[UIView alloc] initWithFrame:CGRectZero];
     }
-
-	// [self setLayerContentsRedrawPolicy:UIViewLayerContentsRedrawNever];
 }
 
 

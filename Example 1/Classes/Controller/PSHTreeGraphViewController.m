@@ -62,7 +62,10 @@
     [self.treeGraphView setNodeViewNibName:@"ObjCClassTreeNodeView"];
 
     // Specify a starting root class to inspect on launch.
+    
     [self setRootClassName:@"UIControl"];
+    
+    // [self setRootClassName:@"CAAnimation"];
 
 }
 

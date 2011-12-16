@@ -17,6 +17,8 @@
 #import <QuartzCore/QuartzCore.h>
 
 
+#pragma mark - Internal Interface
+
 @interface PSBaseLeafView ()
 {
     
@@ -113,40 +115,37 @@
 
 - (void) updateLayerAppearanceToMatchContainerView
 {
+    // // Disable implicit animations during these layer property changes, to make them take effect immediately.
+
+    // BOOL actionsWereDisabled = [CATransaction disableActions];
+    // [CATransaction setDisableActions:YES];
+
+    // Apply the ContainerView's appearance properties to its backing layer.
+    // Important: While UIView metrics are conventionally expressed in points, CALayer metrics are
+    // expressed in pixels.  To produce the correct borderWidth and cornerRadius to apply to the
+    // layer, we must multiply by the window's userSpaceScaleFactor (which is normally 1.0, but may
+    // be larger on a higher-resolution display) to yield pixel units.
+
+    // CGFloat scaleFactor = [[self window] userSpaceScaleFactor];
+    CGFloat scaleFactor = 1.0f;
+    
     CALayer *layer = [self layer];
-    if (layer) {
 
-        // Disable implicit animations during these layer property changes, to make them take effect immediately.
-
-        // BOOL actionsWereDisabled = [CATransaction disableActions];
-        // [CATransaction setDisableActions:YES];
-
-        // Apply the ContainerView's appearance properties to its backing layer.
-        // Important: While UIView metrics are conventionally expressed in points, CALayer metrics are
-        // expressed in pixels.  To produce the correct borderWidth and cornerRadius to apply to the
-        // layer, we must multiply by the window's userSpaceScaleFactor (which is normally 1.0, but may
-        // be larger on a higher-resolution display) to yield pixel units.
-
-        // CGFloat scaleFactor = [[self window] userSpaceScaleFactor];
-		CGFloat scaleFactor = 1.0f;
-
-        [layer setBorderWidth:(borderWidth_ * scaleFactor)];
-        if (borderWidth_ > 0.0f) {
-            [layer setBorderColor:[borderColor_ CGColor]];
-        }
-
-        [layer setCornerRadius:(cornerRadius_ * scaleFactor)];
-
-		if ( showingSelected_ ) {
-			[layer setBackgroundColor:[[self selectionColor] CGColor] ];
-		} else {
-			[layer setBackgroundColor:[[self fillColor] CGColor] ];
-		}
-
-        // [CATransaction setDisableActions:actionsWereDisabled];
-    } else {
-		[self setNeedsDisplay];
+    [layer setBorderWidth:(borderWidth_ * scaleFactor)];
+    if (borderWidth_ > 0.0f) {
+        [layer setBorderColor:[borderColor_ CGColor]];
     }
+
+    [layer setCornerRadius:(cornerRadius_ * scaleFactor)];
+
+    if ( showingSelected_ ) {
+        [layer setBackgroundColor:[[self selectionColor] CGColor] ];
+    } else {
+        [layer setBackgroundColor:[[self fillColor] CGColor] ];
+    }
+
+    // // Disable implicit animations during these layer property changes
+    // [CATransaction setDisableActions:actionsWereDisabled];
 }
 
 

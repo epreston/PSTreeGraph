@@ -257,7 +257,6 @@
 	[[treeGraph connectingLineColor] set];
 	[path setLineWidth:[treeGraph connectingLineWidth]];
 	[path stroke];
-
 }
 
 @end

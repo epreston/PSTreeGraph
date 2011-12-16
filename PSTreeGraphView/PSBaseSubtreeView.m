@@ -34,6 +34,8 @@ static CGFloat subtreeBorderWidth(void)
 }
 
 
+#pragma mark - Internal Interface
+
 @interface PSBaseSubtreeView ()
 {
     
@@ -478,27 +480,29 @@ static CGFloat subtreeBorderWidth(void)
 
 - (void) updateSubtreeBorder
 {
+    // // Disable implicit animations during these layer property changes, to make them take effect immediately.
+    // BOOL actionsWereDisabled = [CATransaction disableActions];
+    // [CATransaction setDisableActions:YES];
+
+    // If the enclosing TreeGraph has its "showsSubtreeFrames" debug feature enabled,
+    // configure the backing layer to draw its border programmatically.  This is much more efficient
+    // than allocating a backing store for each SubtreeView's backing layer, only to stroke a simple
+    // rectangle into that backing store.
+    
     CALayer *layer = [self layer];
-    if (layer) {
-        // Disable implicit animations during these layer property changes, to make them take effect immediately.
-        // BOOL actionsWereDisabled = [CATransaction disableActions];
-        // [CATransaction setDisableActions:YES];
 
-        // If the enclosing TreeGraph has its "showsSubtreeFrames" debug feature enabled,
-		// configure the backing layer to draw its border programmatically.  This is much more efficient
-		// than allocating a backing store for each SubtreeView's backing layer, only to stroke a simple
-		// rectangle into that backing store.
-
-        PSBaseTreeGraphView *treeGraph = [self enclosingTreeGraph];
-        if ([treeGraph showsSubtreeFrames]) {
-            [layer setBorderWidth:subtreeBorderWidth()];
-            [layer setBorderColor:[subtreeBorderColor() CGColor]];
-        } else {
-            [layer setBorderWidth:0.0];
-        }
-
-        // [CATransaction setDisableActions:actionsWereDisabled];
+    PSBaseTreeGraphView *treeGraph = [self enclosingTreeGraph];
+    
+    if ([treeGraph showsSubtreeFrames]) {
+        [layer setBorderWidth:subtreeBorderWidth()];
+        [layer setBorderColor:[subtreeBorderColor() CGColor]];
+    } else {
+        [layer setBorderWidth:0.0];
     }
+
+    // // Disable implicit animations during these layer property changes
+    // [CATransaction setDisableActions:actionsWereDisabled];
+
 }
 
 
@@ -520,21 +524,17 @@ static CGFloat subtreeBorderWidth(void)
 
 - (void) resursiveSetSubtreeBordersNeedDisplay
 {
-    if ( [self layer] ) {
-        // We only need this if layer-backed.  When we have a backing layer, we use the
-		// layer's "border" properties to draw the subtree debug border.
+    // We only need this if layer-backed.  When we have a backing layer, we use the
+    // layer's "border" properties to draw the subtree debug border.
 
-        [self updateSubtreeBorder];
+    [self updateSubtreeBorder];
 
-        // Recurse for descendant SubtreeViews.
-        NSArray *subviews = [self subviews];
-        for (UIView *subview in subviews) {
-            if ([subview isKindOfClass:[PSBaseSubtreeView class]]) {
-                [(PSBaseSubtreeView *)subview updateSubtreeBorder];
-            }
+    // Recurse for descendant SubtreeViews.
+    NSArray *subviews = [self subviews];
+    for (UIView *subview in subviews) {
+        if ([subview isKindOfClass:[PSBaseSubtreeView class]]) {
+            [(PSBaseSubtreeView *)subview updateSubtreeBorder];
         }
-    } else {
-        [self setNeedsDisplay];
     }
 }
 
