@@ -25,7 +25,7 @@
 
 static UIColor *subtreeBorderColor(void)
 {
-    return [[UIColor colorWithRed:0.0f green:0.5f blue:0.0f alpha:1.0f] retain];
+    return [UIColor colorWithRed:0.0f green:0.5f blue:0.0f alpha:1.0f];
 }
 
 static CGFloat subtreeBorderWidth(void)

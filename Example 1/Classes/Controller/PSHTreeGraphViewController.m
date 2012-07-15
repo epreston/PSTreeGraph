@@ -105,7 +105,7 @@
 
 	// labels
 	leafView.titleLabel.text	= [objectWrapper name];
-	leafView.detailLabel.text	= [NSString stringWithFormat:@"%d bytes", [objectWrapper wrappedClassInstanceSize]];
+	leafView.detailLabel.text	= [NSString stringWithFormat:@"%zd bytes", [objectWrapper wrappedClassInstanceSize]];
 
 }
 
