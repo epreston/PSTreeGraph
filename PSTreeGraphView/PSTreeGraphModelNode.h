@@ -21,28 +21,15 @@
 
 @required
 
-/// The model node's parent node, or nil if it doesn't have a parent node.
+/// @return The model node's parent node, or nil if it doesn't have a parent node.
 
 - (id <PSTreeGraphModelNode> )parentModelNode;
 
-/// The model node's child nodes.  If the node has no children, this should return an
-/// empty array ([NSArray array]), not nil.
+/// @return The model node's child nodes.
+///
+/// @note If the node has no children, this should return an empty array
+/// ([NSArray array]), not nil.
 
 - (NSArray *) childModelNodes;
 
 @end
-
-
-
-@protocol PSTreeGraphDelegate <NSObject>
-
-@required
-
-/// The delegate will configure the nodeView with the modelNode provided.
-
-- (void) configureNodeView:(UIView *)nodeView withModelNode:(id <PSTreeGraphModelNode> )modelNode;
-
-@end
-
-
-

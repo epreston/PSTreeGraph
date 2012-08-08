@@ -16,13 +16,15 @@
 
 @class PSBaseTreeGraphView;
 
-/// Each SubtreeView has a BranchView subview that draws the connecting lines between its root node
-/// and its child subtrees.
+/// Each SubtreeView has a BranchView subview that draws the connecting lines
+/// between its root node and its child subtrees.
 
 @interface PSBaseBranchView : UIView
 
-/// Link to the enclosing TreeGraph.  (The getter for this is a convenience method that ascends the view tree
-/// until it encounters a TreeGraph.)
+/// @return Link to the enclosing TreeGraph.
+///
+/// @note The getter for this is a convenience method that ascends the view tree
+/// until it encounters a TreeGraph.
 
 @property (nonatomic, readonly) PSBaseTreeGraphView *enclosingTreeGraph;
 

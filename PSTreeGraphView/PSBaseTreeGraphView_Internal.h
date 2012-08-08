@@ -18,16 +18,16 @@
 
 @class PSBaseSubtreeView;
 
-// This category declares "Internal" methods that make up part of TreeGraph's implementation,
-// but aren't intended to be used as TreeGraph API.
+// This category declares "Internal" methods that make up part of TreeGraph's
+// implementation, but aren't intended to be used as TreeGraph API.
 
 @interface PSBaseTreeGraphView (Internal)
 
 
 #pragma mark - ModelNode -> SubtreeView Relationship Management
 
-// Returns the SubtreeView that corresponds to the specified modelNode, as tracked by the TreeGraph's
-// modelNodeToSubtreeViewMapTable.
+// Returns the SubtreeView that corresponds to the specified modelNode, as
+// tracked by the TreeGraph's modelNodeToSubtreeViewMapTable.
 
 - (PSBaseSubtreeView *) subtreeViewForModelNode:(id)modelNode;
 

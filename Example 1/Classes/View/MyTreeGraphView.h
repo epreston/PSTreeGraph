@@ -1,5 +1,5 @@
 //
-//  PSHTreeGraphView.h
+//  MyTreeGraphView.h
 //  PSHTreeGraph - Example 1
 //
 //  Created by Ed Preston on 7/25/10.
@@ -12,7 +12,7 @@
 #import "PSBaseTreeGraphView.h"
 
 
-@interface PSHTreeGraphView : PSBaseTreeGraphView
+@interface MyTreeGraphView : PSBaseTreeGraphView
 
 // TODO: Place project specific code, extentions here.
 

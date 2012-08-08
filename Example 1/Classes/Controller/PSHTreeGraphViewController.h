@@ -8,7 +8,7 @@
 
 
 #import <UIKit/UIKit.h>
-#import "PSTreeGraphModelNode.h"
+#import "PSTreeGraphDelegate.h"
 
 
 @class PSBaseTreeGraphView;

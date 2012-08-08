@@ -1,5 +1,5 @@
 //
-//  PSHTreeGraphView.m
+//  MyTreeGraphView.m
 //  PSHTreeGraph - Example 1
 //
 //  Created by Ed Preston on 7/25/10.
@@ -7,10 +7,10 @@
 //
 
 
-#import "PSHTreeGraphView.h"
+#import "MyTreeGraphView.h"
 
 
-@implementation PSHTreeGraphView
+@implementation MyTreeGraphView
 
 
 #pragma mark - UIView

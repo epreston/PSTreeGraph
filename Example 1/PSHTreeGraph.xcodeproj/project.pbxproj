@@ -15,7 +15,7 @@
 		2899E5220DE3E06400AC0155 /* PSHTreeGraphViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* PSHTreeGraphViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* PSHTreeGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* PSHTreeGraphViewController.m */; };
-		4F3536F511FC851F00AABFF1 /* PSHTreeGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F3536F411FC851F00AABFF1 /* PSHTreeGraphView.m */; };
+		4F3536F511FC851F00AABFF1 /* MyTreeGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F3536F411FC851F00AABFF1 /* MyTreeGraphView.m */; };
 		4F35379D11FC8EC900AABFF1 /* PSBaseBranchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F35379611FC8EC900AABFF1 /* PSBaseBranchView.m */; };
 		4F35379E11FC8EC900AABFF1 /* PSBaseLeafView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F35379811FC8EC900AABFF1 /* PSBaseLeafView.m */; };
 		4F35379F11FC8EC900AABFF1 /* PSBaseSubtreeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F35379A11FC8EC900AABFF1 /* PSBaseSubtreeView.m */; };
@@ -26,7 +26,7 @@
 		4F35382F11FCA00700AABFF1 /* TreeViewSubtreeExpandedButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F35382B11FCA00700AABFF1 /* TreeViewSubtreeExpandedButton.png */; };
 		4F35383011FCA00700AABFF1 /* TreeViewDirectLinesButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F35382C11FCA00700AABFF1 /* TreeViewDirectLinesButton.png */; };
 		4F35383111FCA00700AABFF1 /* TreeViewOrthogonalLinesButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F35382D11FCA00700AABFF1 /* TreeViewOrthogonalLinesButton.png */; };
-		4F353B8711FCF1A400AABFF1 /* PSHLeafView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F353B8611FCF1A400AABFF1 /* PSHLeafView.m */; };
+		4F353B8711FCF1A400AABFF1 /* MyLeafView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F353B8611FCF1A400AABFF1 /* MyLeafView.m */; };
 		4F4AA33913FA305700607517 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F4AA33813FA305700607517 /* Entitlements.plist */; };
 		4F4AA34513FA32C700607517 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F4AA34413FA32C700607517 /* Icon-72.png */; };
 /* End PBXBuildFile section */
@@ -45,8 +45,9 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* PSHTreeGraph_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSHTreeGraph_Prefix.pch; sourceTree = "<group>"; };
 		4F0E109E1407EB94009B9214 /* Doxyfile */ = {isa = PBXFileReference; explicitFileType = text.script; fileEncoding = 4; name = Doxyfile; path = ../Doxyfile; sourceTree = "<group>"; };
-		4F3536F311FC851F00AABFF1 /* PSHTreeGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSHTreeGraphView.h; path = Classes/View/PSHTreeGraphView.h; sourceTree = SOURCE_ROOT; };
-		4F3536F411FC851F00AABFF1 /* PSHTreeGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSHTreeGraphView.m; path = Classes/View/PSHTreeGraphView.m; sourceTree = SOURCE_ROOT; };
+		4F0EE31B15D2F99B009BC883 /* PSTreeGraphDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSTreeGraphDelegate.h; sourceTree = "<group>"; };
+		4F3536F311FC851F00AABFF1 /* MyTreeGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyTreeGraphView.h; path = Classes/View/MyTreeGraphView.h; sourceTree = SOURCE_ROOT; };
+		4F3536F411FC851F00AABFF1 /* MyTreeGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyTreeGraphView.m; path = Classes/View/MyTreeGraphView.m; sourceTree = SOURCE_ROOT; };
 		4F35379511FC8EC900AABFF1 /* PSBaseBranchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSBaseBranchView.h; path = ../PSTreeGraphView/PSBaseBranchView.h; sourceTree = "<group>"; };
 		4F35379611FC8EC900AABFF1 /* PSBaseBranchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSBaseBranchView.m; path = ../PSTreeGraphView/PSBaseBranchView.m; sourceTree = "<group>"; };
 		4F35379711FC8EC900AABFF1 /* PSBaseLeafView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSBaseLeafView.h; path = ../PSTreeGraphView/PSBaseLeafView.h; sourceTree = "<group>"; };
@@ -63,8 +64,8 @@
 		4F35382B11FCA00700AABFF1 /* TreeViewSubtreeExpandedButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TreeViewSubtreeExpandedButton.png; path = Graphics/TreeViewSubtreeExpandedButton.png; sourceTree = "<group>"; };
 		4F35382C11FCA00700AABFF1 /* TreeViewDirectLinesButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TreeViewDirectLinesButton.png; path = Graphics/TreeViewDirectLinesButton.png; sourceTree = "<group>"; };
 		4F35382D11FCA00700AABFF1 /* TreeViewOrthogonalLinesButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TreeViewOrthogonalLinesButton.png; path = Graphics/TreeViewOrthogonalLinesButton.png; sourceTree = "<group>"; };
-		4F353B8511FCF1A400AABFF1 /* PSHLeafView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSHLeafView.h; path = Classes/View/PSHLeafView.h; sourceTree = SOURCE_ROOT; };
-		4F353B8611FCF1A400AABFF1 /* PSHLeafView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSHLeafView.m; path = Classes/View/PSHLeafView.m; sourceTree = SOURCE_ROOT; };
+		4F353B8511FCF1A400AABFF1 /* MyLeafView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyLeafView.h; path = Classes/View/MyLeafView.h; sourceTree = SOURCE_ROOT; };
+		4F353B8611FCF1A400AABFF1 /* MyLeafView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyLeafView.m; path = Classes/View/MyLeafView.m; sourceTree = SOURCE_ROOT; };
 		4F4AA33813FA305700607517 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		4F4AA34413FA32C700607517 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "Graphics/Icon-72.png"; sourceTree = "<group>"; };
 		4F86D04113FAADAF00A494AE /* PSTreeGraphModelNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSTreeGraphModelNode.h; path = ../PSTreeGraphView/PSTreeGraphModelNode.h; sourceTree = "<group>"; };
@@ -169,10 +170,10 @@
 			isa = PBXGroup;
 			children = (
 				4F35370D11FC86C600AABFF1 /* PSTreeGraphView */,
-				4F3536F311FC851F00AABFF1 /* PSHTreeGraphView.h */,
-				4F3536F411FC851F00AABFF1 /* PSHTreeGraphView.m */,
-				4F353B8511FCF1A400AABFF1 /* PSHLeafView.h */,
-				4F353B8611FCF1A400AABFF1 /* PSHLeafView.m */,
+				4F3536F311FC851F00AABFF1 /* MyTreeGraphView.h */,
+				4F3536F411FC851F00AABFF1 /* MyTreeGraphView.m */,
+				4F353B8511FCF1A400AABFF1 /* MyLeafView.h */,
+				4F353B8611FCF1A400AABFF1 /* MyLeafView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -180,6 +181,7 @@
 		4F35370D11FC86C600AABFF1 /* PSTreeGraphView */ = {
 			isa = PBXGroup;
 			children = (
+				4F0EE31B15D2F99B009BC883 /* PSTreeGraphDelegate.h */,
 				4F86D04113FAADAF00A494AE /* PSTreeGraphModelNode.h */,
 				4F3537B011FC90B200AABFF1 /* PSBaseTreeGraphView_Internal.h */,
 				4F35379B11FC8EC900AABFF1 /* PSBaseTreeGraphView.h */,
@@ -332,13 +334,13 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* PSHTreeGraphAppDelegate.m in Sources */,
 				28D7ACF80DDB3853001CB0EB /* PSHTreeGraphViewController.m in Sources */,
-				4F3536F511FC851F00AABFF1 /* PSHTreeGraphView.m in Sources */,
+				4F3536F511FC851F00AABFF1 /* MyTreeGraphView.m in Sources */,
 				4F35379D11FC8EC900AABFF1 /* PSBaseBranchView.m in Sources */,
 				4F35379E11FC8EC900AABFF1 /* PSBaseLeafView.m in Sources */,
 				4F35379F11FC8EC900AABFF1 /* PSBaseSubtreeView.m in Sources */,
 				4F3537A011FC8EC900AABFF1 /* PSBaseTreeGraphView.m in Sources */,
 				4F3537ED11FC9A2F00AABFF1 /* ObjCClassWrapper.m in Sources */,
-				4F353B8711FCF1A400AABFF1 /* PSHLeafView.m in Sources */,
+				4F353B8711FCF1A400AABFF1 /* MyLeafView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,7 +360,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "PSHTreeGraph-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = PSHTreeGraph;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -375,7 +377,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "PSHTreeGraph-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = PSHTreeGraph;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -414,7 +416,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				USER_HEADER_SEARCH_PATHS = ../PSTreeGraphView/;
@@ -433,7 +435,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;

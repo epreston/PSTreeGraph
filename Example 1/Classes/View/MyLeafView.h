@@ -1,5 +1,5 @@
 //
-//  PSHLeafView.h
+//  MyLeafView.h
 //  PSHTreeGraph - Example 1
 //
 //  Created by Ed Preston on 7/26/10.
@@ -12,7 +12,7 @@
 #import "PSBaseLeafView.h"
 
 
-@interface PSHLeafView : PSBaseLeafView
+@interface MyLeafView : PSBaseLeafView
 
 @property (nonatomic, assign) IBOutlet UIButton *expandButton;
 @property (nonatomic, assign) IBOutlet UILabel *titleLabel;

@@ -10,7 +10,7 @@
 #import "PSHTreeGraphViewController.h"
 
 #import "PSBaseTreeGraphView.h"
-#import "PSHLeafView.h"
+#import "MyLeafView.h"
 
 #import "ObjCClassWrapper.h"
 
@@ -96,7 +96,7 @@
 
 	// NOT FLEXIBLE: treat it like a model node instead of the interface.
 	ObjCClassWrapper *objectWrapper = (ObjCClassWrapper *)modelNode;
-	PSHLeafView *leafView = (PSHLeafView *)nodeView;
+	MyLeafView *leafView = (MyLeafView *)nodeView;
 
 	// button
 	if ( [[objectWrapper childModelNodes] count] == 0 ) {
@@ -105,7 +105,8 @@
 
 	// labels
 	leafView.titleLabel.text	= [objectWrapper name];
-	leafView.detailLabel.text	= [NSString stringWithFormat:@"%zd bytes", [objectWrapper wrappedClassInstanceSize]];
+	leafView.detailLabel.text	= [NSString stringWithFormat:@"%zd bytes",
+                                   [objectWrapper wrappedClassInstanceSize]];
 
 }
 

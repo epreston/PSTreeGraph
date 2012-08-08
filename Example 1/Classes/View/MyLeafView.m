@@ -1,5 +1,5 @@
 //
-//  PSHLeafView.m
+//  MyLeafView.m
 //  PSHTreeGraph - Example 1
 //
 //  Created by Ed Preston on 7/26/10.
@@ -7,10 +7,10 @@
 //
 
 
-#import "PSHLeafView.h"
+#import "MyLeafView.h"
 
 
-@interface PSHLeafView () 
+@interface MyLeafView () 
 {
     
 @private
@@ -23,7 +23,7 @@
 @end
 
 
-@implementation PSHLeafView
+@implementation MyLeafView
 
 
 #pragma mark - Property Accessors
