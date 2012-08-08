@@ -14,7 +14,10 @@
 
 #import <Foundation/Foundation.h>
 
-#import "PSTreeGraphModelNode.h"
+// Forward declaration of Model Node
+
+@protocol PSTreeGraphModelNode;
+
 
 @protocol PSTreeGraphDelegate <NSObject>
 
