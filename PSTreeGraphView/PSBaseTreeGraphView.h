@@ -15,7 +15,7 @@
 #import <UIKit/UIKit.h>
 
 
-// A TreeGraph's nodes may be connected by either "direct" or "orthogonal" lines.
+/// A TreeGraph's nodes may be connected by either "direct" or "orthogonal" lines.
 
 typedef enum {
     PSTreeGraphConnectingLineStyleDirect = 0,
@@ -23,7 +23,7 @@ typedef enum {
 } PSTreeGraphConnectingLineStyle;
 
 
-// A TreeGraph's orientation may be either "horizontal" or "vertical".
+/// A TreeGraph's orientation may be either "horizontal" or "vertical".
 
 typedef enum {
     PSTreeGraphOrientationStyleHorizontal = 0,
@@ -44,7 +44,7 @@ typedef enum {
 
 #pragma mark - Delegate
 
-@property (nonatomic, weak) id delegate;
+@property (nonatomic, weak) id <PSTreeGraphDelegate> delegate;
 
 
 #pragma mark - Parent Resize Notification
@@ -144,7 +144,7 @@ typedef enum {
 @property (nonatomic, assign) BOOL resizesToFillEnclosingScrollView;
 
 /// The style for tree graph orientation
-//(See the TreeGraphOrientationStyle enumeration above.)
+/// @note See the TreeGraphOrientationStyle enumeration.
 
 @property (nonatomic, assign) PSTreeGraphOrientationStyle treeGraphOrientation;
 
@@ -208,8 +208,8 @@ typedef enum {
 
 #pragma mark - Layout Metrics
 
-/// The amount of padding to leave between the displayed tree and each of the four edges of the
-/// TreeGraph's bounds.
+/// The amount of padding to leave between the displayed tree and each of the
+/// four edges of the TreeGraph's bounds.
 
 @property (nonatomic, assign) CGFloat contentMargin;
 
@@ -236,7 +236,8 @@ typedef enum {
 
 @property (nonatomic, assign) CGFloat connectingLineWidth;
 
-/// The style for node connecting lines.  (See the PSTreeGraphConnectingLineStyle enumeration above.)
+/// The style for node connecting lines.
+/// @note See the PSTreeGraphConnectingLineStyle enumeration.
 
 @property (nonatomic, assign) PSTreeGraphConnectingLineStyle connectingLineStyle;
 

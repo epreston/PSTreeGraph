@@ -16,6 +16,7 @@
 #import "PSBaseSubtreeView.h"
 #import "PSBaseLeafView.h"
 
+#import "PSTreeGraphDelegate.h"
 #import "PSTreeGraphModelNode.h"
 
 // For displayIfNeeded
