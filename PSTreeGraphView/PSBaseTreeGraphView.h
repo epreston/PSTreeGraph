@@ -17,7 +17,7 @@
 
 /// A TreeGraph's nodes may be connected by either "direct" or "orthogonal" lines.
 
-typedef enum {
+typedef enum PSTreeGraphConnectingLineStyle : NSUInteger {
     PSTreeGraphConnectingLineStyleDirect = 0,
     PSTreeGraphConnectingLineStyleOrthogonal = 1,
 } PSTreeGraphConnectingLineStyle;
@@ -25,7 +25,7 @@ typedef enum {
 
 /// A TreeGraph's orientation may be either "horizontal" or "vertical".
 
-typedef enum {
+typedef enum PSTreeGraphOrientationStyle : NSUInteger {
     PSTreeGraphOrientationStyleHorizontal = 0,
     PSTreeGraphOrientationStyleVertical = 1,
 } PSTreeGraphOrientationStyle;
