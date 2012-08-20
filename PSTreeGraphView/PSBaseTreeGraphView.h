@@ -28,6 +28,8 @@ typedef enum PSTreeGraphConnectingLineStyle : NSUInteger {
 typedef enum PSTreeGraphOrientationStyle : NSUInteger {
     PSTreeGraphOrientationStyleHorizontal = 0,
     PSTreeGraphOrientationStyleVertical = 1,
+    PSTreeGraphOrientationStyleHorizontalFlipped = 2,
+    PSTreeGraphOrientationStyleVerticalFlipped = 3,
 } PSTreeGraphOrientationStyle;
 
 
@@ -147,6 +149,12 @@ typedef enum PSTreeGraphOrientationStyle : NSUInteger {
 /// @note See the TreeGraphOrientationStyle enumeration.
 
 @property (nonatomic, assign) PSTreeGraphOrientationStyle treeGraphOrientation;
+
+/// Is the TreeGraph flipped 
+/// Flipped means the graph is drawn with the branches to the left or top and the root node
+/// to the right or bottom.  Default is NO
+
+@property (nonatomic, assign) BOOL treeGraphFlipped;
 
 /// Returns YES if the tree needs relayout.
 

@@ -56,6 +56,7 @@
     // Layout Behavior
     BOOL resizesToFillEnclosingScrollView_;
 	PSTreeGraphOrientationStyle treeGraphOrientation_;
+    BOOL treeGraphFlipped_;
     
     // Styling
     // UIColor *backgroundColor;
@@ -77,7 +78,7 @@
     UIView *inputView_;
 }
 
-- (void) configureDetaults;
+- (void) configureDefaults;
 - (PSBaseSubtreeView *) newGraphForModelNode:(id <PSTreeGraphModelNode> )modelNode;
 - (void) buildGraph;
 - (void) updateFrameSizeForContentAndClipView;
@@ -153,6 +154,16 @@
     }
 }
 
+@synthesize treeGraphFlipped = treeGraphFlipped_;
+
+- (void) setTreeGraphFlipped:(BOOL)newTreeGraphFlipped
+{
+    if (treeGraphFlipped_ != newTreeGraphFlipped) {
+        treeGraphFlipped_ = newTreeGraphFlipped;
+        [[self rootSubtreeView] recursiveSetConnectorsViewsNeedDisplay];
+    }
+}
+
 @synthesize connectingLineStyle = connectingLineStyle_;
 
 - (void) setConnectingLineStyle:(PSTreeGraphConnectingLineStyle)newConnectingLineStyle
@@ -196,7 +207,7 @@
 
 #pragma mark - Initialization
 
-- (void) configureDetaults
+- (void) configureDefaults
 {
 	[self setBackgroundColor: [UIColor colorWithRed:0.55 green:0.76 blue:0.93 alpha:1.0]];
 	//[self setClipsToBounds:YES];
@@ -211,6 +222,7 @@
 	siblingSpacing_ = 10.0;
 	animatesLayout_ = YES;
 	resizesToFillEnclosingScrollView_ = YES;
+	treeGraphFlipped_ = NO;
 	treeGraphOrientation_ = PSTreeGraphOrientationStyleHorizontal ;
 	connectingLineStyle_ = PSTreeGraphConnectingLineStyleOrthogonal ;
 	connectingLineWidth_ = 1.0;
@@ -254,7 +266,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self configureDetaults];
+        [self configureDefaults];
     }
     return self;
 }
@@ -282,7 +294,7 @@
     self = [super initWithCoder:decoder];
     if (self) {
 
-        [self configureDetaults];
+        [self configureDefaults];
 
         if ([decoder containsValueForKey:@"animatesLayout"])
             animatesLayout_ = [decoder decodeBoolForKey:@"animatesLayout"];
@@ -558,7 +570,8 @@
     if ( [self resizesToFillEnclosingScrollView] ) {
         CGRect bounds = [self bounds];
 
-		if ( [self treeGraphOrientation] == PSTreeGraphOrientationStyleHorizontal ) {
+		if (( [self treeGraphOrientation] == PSTreeGraphOrientationStyleHorizontal ) ||
+            ( [self treeGraphOrientation] == PSTreeGraphOrientationStyleHorizontalFlipped )){
 			newOrigin = CGPointMake([self contentMargin],
                                     0.5 * (bounds.size.height - rootSubtreeViewSize.height));
 		} else {
@@ -617,7 +630,11 @@
 
         // Position the TreeGraph's root SubtreeView.
         [self updateRootSubtreeViewPositionForSize:rootSubtreeViewSize];
-
+        
+		if (( [self treeGraphOrientation] == PSTreeGraphOrientationStyleHorizontalFlipped ) ||
+            ( [self treeGraphOrientation] == PSTreeGraphOrientationStyleVerticalFlipped )){
+            [rootSubtreeView flipTreeGraph];
+        }
         return rootSubtreeViewSize;
     } else {
         return rootSubtreeView ? [rootSubtreeView frame].size : CGSizeZero;
@@ -831,7 +848,8 @@
             if (nodeView) {
                 CGRect nodeViewFrame = [nodeView frame];
                 id <PSTreeGraphModelNode> nearestChild = nil;
-                if ( self.treeGraphOrientation == PSTreeGraphOrientationStyleHorizontal ) {
+                if (( self.treeGraphOrientation == PSTreeGraphOrientationStyleHorizontal ) ||
+                    ( self.treeGraphOrientation == PSTreeGraphOrientationStyleHorizontalFlipped )){
                     nearestChild = [subtreeView modelNodeClosestToY:CGRectGetMidY(nodeViewFrame)];
                 } else {
                     nearestChild = [subtreeView modelNodeClosestToX:CGRectGetMidX(nodeViewFrame)];
@@ -852,7 +870,8 @@
 
 - (void) moveUp:(id)sender
 {
-    if ( self.treeGraphOrientation == PSTreeGraphOrientationStyleHorizontal ) {
+    if (( self.treeGraphOrientation == PSTreeGraphOrientationStyleHorizontal ) ||
+        ( self.treeGraphOrientation == PSTreeGraphOrientationStyleHorizontalFlipped )){
         [self moveToSiblingByRelativeIndex:1];
     } else {
         [self moveToParent:sender];
@@ -862,7 +881,8 @@
 
 - (void) moveDown:(id)sender
 {
-    if ( self.treeGraphOrientation == PSTreeGraphOrientationStyleHorizontal ) {
+    if (( self.treeGraphOrientation == PSTreeGraphOrientationStyleHorizontal ) ||
+        ( self.treeGraphOrientation == PSTreeGraphOrientationStyleHorizontalFlipped )){
         [self moveToSiblingByRelativeIndex:-1];
     } else {
         [self moveToNearestChild:sender];
@@ -872,7 +892,8 @@
 
 - (void) moveLeft:(id)sender
 {
-    if ( self.treeGraphOrientation == PSTreeGraphOrientationStyleHorizontal ) {
+    if (( self.treeGraphOrientation == PSTreeGraphOrientationStyleHorizontal ) ||
+        ( self.treeGraphOrientation == PSTreeGraphOrientationStyleHorizontalFlipped )){
         [self moveToParent:sender];
     } else {
         [self moveToSiblingByRelativeIndex:1];
@@ -882,7 +903,8 @@
 
 - (void) moveRight:(id)sender
 {
-    if ( self.treeGraphOrientation == PSTreeGraphOrientationStyleHorizontal ) {
+    if (( self.treeGraphOrientation == PSTreeGraphOrientationStyleHorizontal ) ||
+        ( self.treeGraphOrientation == PSTreeGraphOrientationStyleHorizontalFlipped )){
         [self moveToNearestChild:sender];
     } else {
         [self moveToSiblingByRelativeIndex:-1];
