@@ -74,6 +74,9 @@
 
 - (CGSize) layoutGraphIfNeeded;
 
+// Flip the treeGraph end for end (or top for bottom)
+- (void) flipTreeGraph;
+
 /// Resizes this subtree's nodeView to the minimum size required to hold its content, and returns the nodeView's
 /// new size.  (This currently does nothing, and is just stubbed out for future use.)
 

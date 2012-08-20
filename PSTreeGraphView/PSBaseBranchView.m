@@ -50,7 +50,8 @@
 
 	PSTreeGraphOrientationStyle treeDirection = [[self enclosingTreeGraph] treeGraphOrientation];
 
-	if ( treeDirection == PSTreeGraphOrientationStyleHorizontal ) {
+	if (( treeDirection == PSTreeGraphOrientationStyleHorizontal ) ||
+        ( treeDirection == PSTreeGraphOrientationStyleHorizontalFlipped )){
 		rootPoint = CGPointMake(CGRectGetMinX(bounds),
                                 CGRectGetMidY(bounds));
 	} else {
@@ -70,7 +71,8 @@
                 CGRect subviewBounds = [subview bounds];
 				CGPoint targetPoint = CGPointZero;
 
-				if ( treeDirection == PSTreeGraphOrientationStyleHorizontal ) {
+                if (( treeDirection == PSTreeGraphOrientationStyleHorizontal ) ||
+                    ( treeDirection == PSTreeGraphOrientationStyleHorizontalFlipped )){
 					targetPoint = [self convertPoint:CGPointMake(CGRectGetMinX(subviewBounds), CGRectGetMidY(subviewBounds))
                                             fromView:subview];
 				} else {
@@ -116,6 +118,14 @@
 		// Compute point at right edge of root node, from which its connecting line to the vertical line will emerge.
 		rootPoint = CGPointMake(CGRectGetMinX(bounds),
                                 CGRectGetMidY(bounds));
+	} else if ( treeDirection == PSTreeGraphOrientationStyleHorizontalFlipped ){
+		// Compute point at left edge of root node, from which its connecting line to the vertical line will emerge.
+		rootPoint = CGPointMake(CGRectGetMaxX(bounds),
+                                CGRectGetMidY(bounds));
+	} else if ( treeDirection == PSTreeGraphOrientationStyleVerticalFlipped ){
+		// Compute point at top edge of root node, from which its connecting line to the vertical line will emerge.
+		rootPoint = CGPointMake(CGRectGetMidX(bounds),
+                                CGRectGetMaxY(bounds));
 	} else {
 		rootPoint = CGPointMake(CGRectGetMidX(bounds),
                                 CGRectGetMinY(bounds));
@@ -165,7 +175,8 @@
                 CGRect subviewBounds = [subview bounds];
 				CGPoint targetPoint = CGPointZero;
 
-				if ( treeDirection == PSTreeGraphOrientationStyleHorizontal ) {
+                if (( treeDirection == PSTreeGraphOrientationStyleHorizontal ) ||
+                    ( treeDirection == PSTreeGraphOrientationStyleHorizontalFlipped )){
 					targetPoint = [self convertPoint:CGPointMake(CGRectGetMinX(subviewBounds), CGRectGetMidY(subviewBounds))
                                             fromView:subview];
 				} else {
@@ -181,7 +192,8 @@
 
                 // TODO: Make clean line joins (test at high values of line thickness to see the problem).
 
-				if ( treeDirection == PSTreeGraphOrientationStyleHorizontal ) {
+                if (( treeDirection == PSTreeGraphOrientationStyleHorizontal ) ||
+                    ( treeDirection == PSTreeGraphOrientationStyleHorizontalFlipped )){
 					[path moveToPoint:CGPointMake(rootIntersection.x, targetPoint.y)];
 
 					if (minY > targetPoint.y) {
@@ -212,7 +224,8 @@
         [path moveToPoint:rootPoint];
         [path addLineToPoint:rootIntersection];
 
-		if ( treeDirection == PSTreeGraphOrientationStyleHorizontal ) {
+        if (( treeDirection == PSTreeGraphOrientationStyleHorizontal ) ||
+            ( treeDirection == PSTreeGraphOrientationStyleHorizontalFlipped )){
 			// Add a stroke for the vertical connecting line.
 			[path moveToPoint:CGPointMake(rootIntersection.x, minY)];
 			[path addLineToPoint:CGPointMake(rootIntersection.x, maxY)];
