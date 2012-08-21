@@ -197,6 +197,35 @@ static CGFloat subtreeBorderWidth(void)
     return [self.nodeView frame].size;
 }
 
+- (void) flipTreeGraph
+{
+    // Recurse for descendant SubtreeViews.
+    CGFloat             myWidth             = self.frame.size.width;
+    CGFloat             myHeight             = self.frame.size.height;
+    PSBaseTreeGraphView *treeGraph = [self enclosingTreeGraph];
+	PSTreeGraphOrientationStyle treeOrientation = [treeGraph treeGraphOrientation];
+
+    NSArray *subviews = [self subviews];
+    for (UIView *subview in subviews) {
+        CGPoint             subviewCenter       = subview.center;
+        CGPoint             newCenter;
+        CGFloat             offset;
+        if (treeOrientation == PSTreeGraphOrientationStyleHorizontalFlipped ){
+            offset      = subviewCenter.x;
+            newCenter   = CGPointMake(myWidth-offset, subviewCenter.y);
+        }
+        else{
+            offset      = subviewCenter.y;
+            newCenter   = CGPointMake(subviewCenter.x, myHeight-offset);
+        }
+        subview.center                          = newCenter;
+        if ([subview isKindOfClass:[PSBaseSubtreeView class]]) {
+            [(PSBaseSubtreeView *)subview flipTreeGraph];
+        }
+    }
+}
+
+
 - (CGSize) layoutGraphIfNeeded
 {
     // Return early if layout not needed
@@ -246,7 +275,8 @@ static CGFloat subtreeBorderWidth(void)
     CGFloat maxHeight = 0.0f;
     CGPoint nextSubtreeViewOrigin = CGPointZero;
 
-    if ( treeOrientation == PSTreeGraphOrientationStyleHorizontal ) {
+    if (( treeOrientation == PSTreeGraphOrientationStyleHorizontal ) ||
+        ( treeOrientation == PSTreeGraphOrientationStyleHorizontalFlipped )){
         nextSubtreeViewOrigin = CGPointMake(rootNodeViewSize.width + parentChildSpacing, 0.0f);
     } else {
         nextSubtreeViewOrigin = CGPointMake(0.0f, rootNodeViewSize.height + parentChildSpacing);
@@ -267,7 +297,8 @@ static CGFloat subtreeBorderWidth(void)
             // Position the SubtreeView.
             // [(animateLayout ? [subview animator] : subview) setFrameOrigin:nextSubtreeViewOrigin];
 
-            if ( treeOrientation == PSTreeGraphOrientationStyleHorizontal ) {
+            if (( treeOrientation == PSTreeGraphOrientationStyleHorizontal ) || 
+                (treeOrientation == PSTreeGraphOrientationStyleHorizontalFlipped )) {
                 // Since SubtreeView is unflipped, lay out our child SubtreeViews going upward from our
                 // bottom edge, from last to first.
                 subview.frame = CGRectMake( nextSubtreeViewOrigin.x,
@@ -308,7 +339,8 @@ static CGFloat subtreeBorderWidth(void)
     CGFloat totalHeight = 0.0f;
     CGFloat totalWidth = 0.0f;
 
-    if ( treeOrientation == PSTreeGraphOrientationStyleHorizontal ) {
+    if (( treeOrientation == PSTreeGraphOrientationStyleHorizontal ) || 
+        (treeOrientation == PSTreeGraphOrientationStyleHorizontalFlipped )) {
         totalHeight = nextSubtreeViewOrigin.y;
         if (subtreeViewCount > 0) {
             totalHeight -= siblingSpacing;
@@ -325,7 +357,8 @@ static CGFloat subtreeBorderWidth(void)
     if (subtreeViewCount > 0) {
 
         // Determine our width and height.
-        if ( treeOrientation == PSTreeGraphOrientationStyleHorizontal ) {
+        if (( treeOrientation == PSTreeGraphOrientationStyleHorizontal ) || 
+            ( treeOrientation == PSTreeGraphOrientationStyleHorizontalFlipped )) {
             selfTargetSize = CGSizeMake(rootNodeViewSize.width + parentChildSpacing + maxWidth,
                                         MAX(totalHeight, rootNodeViewSize.height) );
         } else {
@@ -341,7 +374,8 @@ static CGFloat subtreeBorderWidth(void)
                                 selfTargetSize.height );
 
         CGPoint nodeViewOrigin = CGPointZero;
-        if ( treeOrientation == PSTreeGraphOrientationStyleHorizontal ) {
+        if (( treeOrientation == PSTreeGraphOrientationStyleHorizontal ) ||
+            ( treeOrientation == PSTreeGraphOrientationStyleHorizontalFlipped )){
             // Position our nodeView vertically centered along the left edge of our new bounds.
             nodeViewOrigin = CGPointMake(0.0f, 0.5f * (selfTargetSize.height - rootNodeViewSize.height));
 
@@ -372,7 +406,8 @@ static CGFloat subtreeBorderWidth(void)
 
         // [_connectorsView setContentMode:UIViewContentModeScaleToFill ];
 
-        if ( treeOrientation == PSTreeGraphOrientationStyleHorizontal ) {
+        if (( treeOrientation == PSTreeGraphOrientationStyleHorizontal ) ||
+            ( treeOrientation == PSTreeGraphOrientationStyleHorizontalFlipped )){
             connectorsView_.frame = CGRectMake(rootNodeViewSize.width,
                                                0.0f,
                                                parentChildSpacing,
@@ -444,7 +479,8 @@ static CGFloat subtreeBorderWidth(void)
             // [_connectorsView setContentMode:UIViewContentModeScaleToFill ];
 
             PSTreeGraphOrientationStyle treeOrientation = [[self enclosingTreeGraph] treeGraphOrientation];
-            if ( treeOrientation == PSTreeGraphOrientationStyleHorizontal ) {
+            if (( treeOrientation == PSTreeGraphOrientationStyleHorizontal ) || 
+                ( treeOrientation == PSTreeGraphOrientationStyleHorizontal )){
                 connectorsView_.frame = CGRectMake(0.0f,
                                                    0.5f * selfTargetSize.height,
                                                    0.0f,
