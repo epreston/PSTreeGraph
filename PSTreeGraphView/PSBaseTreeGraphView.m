@@ -932,16 +932,32 @@
                 [self toggleExpansionOfSelectedModelNodes:self];
                 break;
             case 'w':
-                [self moveUp:self];
+                if (self.treeGraphOrientation == PSTreeGraphOrientationStyleVerticalFlipped ) {
+                    [self moveDown:self];
+                } else {
+                    [self moveUp:self];
+                }
                 break;
             case 'a':
-                [self moveLeft:self];
+                if (self.treeGraphOrientation == PSTreeGraphOrientationStyleHorizontalFlipped ) {
+                    [self moveRight:self];
+                } else {
+                    [self moveLeft:self];
+                }
                 break;
             case 's':
-                [self moveDown:self];
+                if (self.treeGraphOrientation == PSTreeGraphOrientationStyleVerticalFlipped ) {
+                    [self moveUp:self];
+                } else {
+                    [self moveDown:self];
+                }
                 break;
             case 'd':
-                [self moveRight:self];
+                if (self.treeGraphOrientation == PSTreeGraphOrientationStyleHorizontalFlipped ) {
+                    [self moveLeft:self];
+                } else {
+                    [self moveRight:self];
+                }
                 break;
 
             default:
