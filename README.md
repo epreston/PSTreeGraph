@@ -1,4 +1,3 @@
-
 # PSTreeGraph
 
 PSTreeGraph is a treegraph view control implementation for Cocoa Touch.
@@ -51,10 +50,30 @@ There are many places where PSTreeGraph could be improved:
 
 You can generate documentation with [doxygen](http://www.doxygen.org). The example project includes a documentation build target to do this within Xcode.    For more details, see the [Documentation](https://github.com/epreston/PSTreeGraph/wiki/Documentation) page in this projects wiki.
 
+## Contribute
+
+If you'd like to contribute to PSTreeGraph, start by forking this repository on GitHub:
+
+       http://github.com/epreston/PSTreeGraph
+
+The best way to get your changes merged back into core is as follows:
+
+1. Clone down your fork
+2. Create a thoughtfully named topic branch to contain your change
+3. Hack away
+4. Add tests and make sure everything still passes
+5. If you are adding new functionality, document it in the README
+6. Do not change the version number, I will do that on my end
+7. If necessary, rebase your commits into logical chunks, without errors
+8. Push the branch up to GitHub
+9. Send a pull request to the epreston/PSTreeGraph project.
+
+Or better still, [donate] (http://epreston.github.com/PSTreeGraph/) via the [project website] (http://epreston.github.com/PSTreeGraph/).
+
 
 # Copyright and License
 
-Copyright 2010 Preston Software.
+Copyright 2012 Preston Software.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this work except in compliance with the License.
