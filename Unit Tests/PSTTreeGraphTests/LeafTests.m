@@ -18,7 +18,7 @@
 
 
     aLeaf = [[PSBaseLeafView alloc] initWithFrame:CGRectZero];
-    STAssertNotNil(aLeaf, @"Couldn't create leaf view.");
+    XCTAssertNotNil(aLeaf, @"Couldn't create leaf view.");
 
 
 }
@@ -34,13 +34,13 @@
 
 - (void)testSelectionState
 {
-    STAssertFalse(aLeaf.showingSelected, @"Leaf nodes should not be selected by default.");
+    XCTAssertFalse(aLeaf.showingSelected, @"Leaf nodes should not be selected by default.");
 
     aLeaf.showingSelected = YES;
-    STAssertTrue(aLeaf.showingSelected, @"showingSelected property assignment failed.");
+    XCTAssertTrue(aLeaf.showingSelected, @"showingSelected property assignment failed.");
 
     aLeaf.showingSelected = NO;
-    STAssertFalse(aLeaf.showingSelected, @"showingSelected property assignment failed.");
+    XCTAssertFalse(aLeaf.showingSelected, @"showingSelected property assignment failed.");
 }
 
 @end

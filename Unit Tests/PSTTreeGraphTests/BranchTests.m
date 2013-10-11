@@ -17,7 +17,7 @@
     // Set-up code here.
 
     aBranch = [[PSBaseBranchView alloc] initWithFrame:CGRectZero];
-    STAssertNotNil(aBranch, @"Couldn't create branch view.");
+    XCTAssertNotNil(aBranch, @"Couldn't create branch view.");
 
 }
 

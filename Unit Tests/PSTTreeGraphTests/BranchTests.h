@@ -6,11 +6,11 @@
 //  Copyright 2011 Preston Software. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
 #import "PSBaseBranchView.h"
 
-@interface BranchTests : SenTestCase
+@interface BranchTests : XCTestCase
 {
     PSBaseBranchView* aBranch;
 }

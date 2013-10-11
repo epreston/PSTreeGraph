@@ -6,8 +6,8 @@
 //  Copyright 2011 Preston Software. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
-@interface GraphTests : SenTestCase
+@interface GraphTests : XCTestCase
 
 @end

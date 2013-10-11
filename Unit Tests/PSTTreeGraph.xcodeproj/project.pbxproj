@@ -16,7 +16,6 @@
 		4F1FC8531407441600C343D9 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F1FC8511407441600C343D9 /* MainWindow.xib */; };
 		4F1FC8561407441600C343D9 /* PSTTreeGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1FC8551407441600C343D9 /* PSTTreeGraphViewController.m */; };
 		4F1FC8591407441600C343D9 /* PSTTreeGraphViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F1FC8571407441600C343D9 /* PSTTreeGraphViewController.xib */; };
-		4F1FC8611407441600C343D9 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F1FC8601407441600C343D9 /* SenTestingKit.framework */; };
 		4F1FC8621407441600C343D9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F1FC83F1407441500C343D9 /* UIKit.framework */; };
 		4F1FC8631407441600C343D9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F1FC8411407441500C343D9 /* Foundation.framework */; };
 		4F1FC8641407441600C343D9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F1FC8431407441500C343D9 /* CoreGraphics.framework */; };
@@ -56,8 +55,7 @@
 		4F1FC8541407441600C343D9 /* PSTTreeGraphViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSTTreeGraphViewController.h; sourceTree = "<group>"; };
 		4F1FC8551407441600C343D9 /* PSTTreeGraphViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSTTreeGraphViewController.m; sourceTree = "<group>"; };
 		4F1FC8581407441600C343D9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PSTTreeGraphViewController.xib; sourceTree = "<group>"; };
-		4F1FC85F1407441600C343D9 /* PSTTreeGraphTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PSTTreeGraphTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4F1FC8601407441600C343D9 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		4F1FC85F1407441600C343D9 /* PSTTreeGraphTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PSTTreeGraphTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F1FC8691407441600C343D9 /* PSTTreeGraphTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PSTTreeGraphTests-Info.plist"; sourceTree = "<group>"; };
 		4F1FC86B1407441600C343D9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4F1FC88D14074E3300C343D9 /* PSBaseBranchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSBaseBranchView.h; sourceTree = "<group>"; };
@@ -95,7 +93,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F1FC8611407441600C343D9 /* SenTestingKit.framework in Frameworks */,
 				4F1FC8621407441600C343D9 /* UIKit.framework in Frameworks */,
 				4F1FC8631407441600C343D9 /* Foundation.framework in Frameworks */,
 				4F1FC8641407441600C343D9 /* CoreGraphics.framework in Frameworks */,
@@ -119,7 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				4F1FC83B1407441500C343D9 /* PSTTreeGraph.app */,
-				4F1FC85F1407441600C343D9 /* PSTTreeGraphTests.octest */,
+				4F1FC85F1407441600C343D9 /* PSTTreeGraphTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -130,7 +127,6 @@
 				4F1FC83F1407441500C343D9 /* UIKit.framework */,
 				4F1FC8411407441500C343D9 /* Foundation.framework */,
 				4F1FC8431407441500C343D9 /* CoreGraphics.framework */,
-				4F1FC8601407441600C343D9 /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -272,8 +268,8 @@
 			);
 			name = PSTTreeGraphTests;
 			productName = PSTTreeGraphTests;
-			productReference = 4F1FC85F1407441600C343D9 /* PSTTreeGraphTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productReference = 4F1FC85F1407441600C343D9 /* PSTTreeGraphTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -503,14 +499,13 @@
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PSTTreeGraph.app/PSTTreeGraph";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PSTTreeGraph/PSTTreeGraph-Prefix.pch";
 				INFOPLIST_FILE = "PSTTreeGraphTests/PSTTreeGraphTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
@@ -520,14 +515,13 @@
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PSTTreeGraph.app/PSTTreeGraph";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PSTTreeGraph/PSTTreeGraph-Prefix.pch";
 				INFOPLIST_FILE = "PSTTreeGraphTests/PSTTreeGraphTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};
