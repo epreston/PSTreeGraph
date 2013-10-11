@@ -57,7 +57,7 @@ static NSInteger CompareClassNames(id classA, id classB, void* context)
             if (classToWrapperMapTable == nil) {
                 classToWrapperMapTable = [[NSMutableDictionary dictionaryWithCapacity:16] retain];
             }
-            [classToWrapperMapTable setObject:self forKey:(id<NSCopying>)wrappedClass];
+            classToWrapperMapTable[(id<NSCopying>)wrappedClass] = self;
         } else {
             [self release];
             return nil;
@@ -68,7 +68,7 @@ static NSInteger CompareClassNames(id classA, id classB, void* context)
 
 + (ObjCClassWrapper *) wrapperForClass:(Class)aClass
 {
-    ObjCClassWrapper *wrapper = [classToWrapperMapTable objectForKey:aClass];
+    ObjCClassWrapper *wrapper = classToWrapperMapTable[aClass];
     if (wrapper == nil) {
         wrapper = [[[self alloc] initWithWrappedClass:aClass] autorelease];
     }
