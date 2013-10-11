@@ -283,7 +283,7 @@ static CGFloat subtreeBorderWidth(void)
     }
 
     for (index = count - 1; index >= 0; index--) {
-        UIView *subview = [subviews objectAtIndex:index];
+        UIView *subview = subviews[index];
 
         if ([subview isKindOfClass:[PSBaseSubtreeView class]]) {
             ++subtreeViewCount;
@@ -596,7 +596,7 @@ static CGFloat subtreeBorderWidth(void)
     NSInteger index;
 
     for (index = count - 1; index >= 0; index--) {
-        UIView *subview = [subviews objectAtIndex:index];
+        UIView *subview = subviews[index];
 
 		//        CGRect subviewBounds = [subview bounds];
         CGPoint subviewPoint = [subview convertPoint:p fromView:self];

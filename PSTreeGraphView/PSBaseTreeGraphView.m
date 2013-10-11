@@ -1018,12 +1018,12 @@
 
 - (PSBaseSubtreeView *) subtreeViewForModelNode:(id)modelNode
 {
-    return [modelNodeToSubtreeViewMapTable_ objectForKey:modelNode];
+    return modelNodeToSubtreeViewMapTable_[modelNode];
 }
 
 - (void) setSubtreeView:(PSBaseSubtreeView *)subtreeView forModelNode:(id)modelNode
 {
-    [modelNodeToSubtreeViewMapTable_ setObject:subtreeView forKey:modelNode];
+    modelNodeToSubtreeViewMapTable_[modelNode] = subtreeView;
 }
 
 
@@ -1076,7 +1076,7 @@
             if (index != NSNotFound) {
                 index += relativeIndex;
                 if (index >= 0 && index < [siblings count]) {
-                    return [siblings objectAtIndex:index];
+                    return siblings[index];
                 }
             }
         }
