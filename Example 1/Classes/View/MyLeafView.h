@@ -14,8 +14,8 @@
 
 @interface MyLeafView : PSBaseLeafView
 
-@property (nonatomic, assign) IBOutlet UIButton *expandButton;
-@property (nonatomic, assign) IBOutlet UILabel *titleLabel;
-@property (nonatomic, assign) IBOutlet UILabel *detailLabel;
+@property (nonatomic, weak) IBOutlet UIButton *expandButton;
+@property (nonatomic, weak) IBOutlet UILabel *titleLabel;
+@property (nonatomic, weak) IBOutlet UILabel *detailLabel;
 
 @end

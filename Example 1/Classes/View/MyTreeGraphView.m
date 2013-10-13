@@ -45,9 +45,5 @@
 
 #pragma mark - Resource Management
 
-- (void) dealloc
-{
-    [super dealloc];
-}
 
 @end

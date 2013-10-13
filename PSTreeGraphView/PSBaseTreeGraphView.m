@@ -108,8 +108,7 @@
 - (void) setConnectingLineColor:(UIColor *)newConnectingLineColor
 {
     if (connectingLineColor_ != newConnectingLineColor) {
-        [connectingLineColor_ release];
-        connectingLineColor_ = [newConnectingLineColor retain];
+        connectingLineColor_ = newConnectingLineColor;
         [[self rootSubtreeView] recursiveSetConnectorsViewsNeedDisplay];
     }
 }
@@ -216,7 +215,7 @@
 	// since they may wrongly expect the instance to be fully formed.
 
 	// May be configured by user in code, loaded from NSCoder, etc
-	connectingLineColor_ = [[UIColor blackColor] retain];
+	connectingLineColor_ = [UIColor blackColor];
 	contentMargin_ = 20.0;
 	parentChildSpacing_ = 50.0;
 	siblingSpacing_ = 10.0;
@@ -232,7 +231,7 @@
 	showsSubtreeFrames_ = NO;
 	minimumFrameSize_ = CGSizeMake(2.0 * contentMargin_, 2.0 * contentMargin_);
 	selectedModelNodes_ = [[NSMutableSet alloc] init];
-    modelNodeToSubtreeViewMapTable_ = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
+    modelNodeToSubtreeViewMapTable_ = [NSMutableDictionary dictionaryWithCapacity:10];
 
     // If this has been configured by the XIB, leave it during initialization.
     if (inputView_ == nil) {
@@ -246,17 +245,10 @@
 - (void) dealloc
 {
 	// iOS 4.0 and above ONLY
-	[cachedNodeViewNib_ release];
 
     self.delegate = nil;
 
-    [inputView_ release];
-    [nodeViewNibName_ release];
-    [selectedModelNodes_ release];
-    [modelRoot_ release];
-    [modelNodeToSubtreeViewMapTable_ release];
     // [backgroundColor release];
-    [super dealloc];
 }
 
 
@@ -307,7 +299,7 @@
         if ([decoder containsValueForKey:@"resizesToFillEnclosingScrollView"])
             resizesToFillEnclosingScrollView_ = [decoder decodeBoolForKey:@"resizesToFillEnclosingScrollView"];
         if ([decoder containsValueForKey:@"connectingLineColor"])
-            connectingLineColor_ = [[decoder decodeObjectForKey:@"connectingLineColor"] retain];
+            connectingLineColor_ = [decoder decodeObjectForKey:@"connectingLineColor"];
         if ([decoder containsValueForKey:@"connectingLineWidth"])
             connectingLineWidth_ = [decoder decodeFloatForKey:@"connectingLineWidth"];
 
@@ -349,8 +341,7 @@
 
 - (void) setCachedNodeViewNib:(UINib *)newNib {
     if (cachedNodeViewNib_ != newNib) {
-        [cachedNodeViewNib_ release];
-        cachedNodeViewNib_ = [newNib retain];
+        cachedNodeViewNib_ = newNib;
     }
 }
 
@@ -366,7 +357,6 @@
 		// iOS 4.0 and above ONLY
 		[self setCachedNodeViewNib:nil];
 
-        [nodeViewNibName_ release];
         nodeViewNibName_ = [newName copy];
 
         // TODO: Tear down and (later) rebuild view tree.
@@ -408,7 +398,6 @@
         [differenceSet minusSet:intersectionSet];
 
         // Discard the old selectedModelNodes set and replace it with the new one.
-        [selectedModelNodes_ release];
         selectedModelNodes_ = [newSelectedModelNodes mutableCopy];
 
         for (id <PSTreeGraphModelNode> modelNode in differenceSet) {
@@ -422,9 +411,6 @@
         }
 
         // Release the temporary sets we created.
-        [differenceSet release];
-        [combinedSet release];
-        [intersectionSet release];
     }
 }
 
@@ -496,13 +482,11 @@
                         // collapse the subtree, its nodeView will remain frontmost).
 
                         [subtreeView insertSubview:childSubtreeView belowSubview:[subtreeView nodeView]];
-                        [childSubtreeView release];
                     }
                 }
             }
 
         } else {
-            [subtreeView release];
             subtreeView = nil;
         }
     }
@@ -520,7 +504,6 @@
             PSBaseSubtreeView *rootSubtreeView = [self newGraphForModelNode:root];
             if (rootSubtreeView) {
                 [self addSubview:rootSubtreeView];
-                [rootSubtreeView release];
             }
         }
 

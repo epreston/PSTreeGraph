@@ -26,6 +26,6 @@
 /// @note The getter for this is a convenience method that ascends the view tree
 /// until it encounters a TreeGraph.
 
-@property (nonatomic, readonly) PSBaseTreeGraphView *enclosingTreeGraph;
+@property (weak, nonatomic, readonly) PSBaseTreeGraphView *enclosingTreeGraph;
 
 @end

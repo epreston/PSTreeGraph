@@ -44,7 +44,7 @@ static CGFloat subtreeBorderWidth(void)
     id <PSTreeGraphModelNode> modelNode_;   // the model node that nodeView represents
     
     // Views
-    UIView *nodeView_;                      // the subview of this SubtreeView that shows a representation
+    UIView *__weak nodeView_;                      // the subview of this SubtreeView that shows a representation
                                             // of the modelNode
     
     PSBaseBranchView *connectorsView_;		// the view that shows connections from nodeView to its child nodes
@@ -165,14 +165,6 @@ static CGFloat subtreeBorderWidth(void)
 
 #pragma mark - Resource Management
 
-- (void) dealloc
-{
-	//    [nodeView release]; // not retained, since an IBOutlet
-    [connectorsView_ release];
-    [modelNode_ release];
-
-    [super dealloc];
-}
 
 
 #pragma mark - Layout

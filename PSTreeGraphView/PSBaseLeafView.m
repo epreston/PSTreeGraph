@@ -49,8 +49,7 @@
 - (void) setBorderColor:(UIColor *)color
 {
     if (borderColor_ != color) {
-        [borderColor_ release];
-        borderColor_ = [color retain];
+        borderColor_ = color;
         [self updateLayerAppearanceToMatchContainerView];
     }
 }
@@ -80,8 +79,7 @@
 - (void) setFillColor:(UIColor *)color
 {
     if (fillColor_ != color) {
-        [fillColor_ release];
-        fillColor_ = [color retain];
+        fillColor_ = color;
         [self updateLayerAppearanceToMatchContainerView];
     }
 }
@@ -91,8 +89,7 @@
 - (void) setSelectionColor:(UIColor *)color
 {
     if (selectionColor_ != color) {
-        [selectionColor_ release];
-        selectionColor_ = [color retain];
+        selectionColor_ = color;
         [self updateLayerAppearanceToMatchContainerView];
     }
 }
@@ -156,25 +153,17 @@
 	// Initialize ivars directly.  As a rule, it's best to avoid invoking accessors from an -init...
 	// method, since they may wrongly expect the instance to be fully formed.
 
-	borderColor_ = [[UIColor colorWithRed:1.0 green:0.8 blue:0.4 alpha:1.0] retain];
+	borderColor_ = [UIColor colorWithRed:1.0 green:0.8 blue:0.4 alpha:1.0];
 	borderWidth_ = 3.0;
 	cornerRadius_ = 8.0;
-	fillColor_ = [[UIColor colorWithRed:1.0 green:0.5 blue:0.0 alpha:1.0] retain];
-    selectionColor_ = [[UIColor colorWithRed:1.0 green:1.0 blue:0.0 alpha:1.0] retain];
+	fillColor_ = [UIColor colorWithRed:1.0 green:0.5 blue:0.0 alpha:1.0];
+    selectionColor_ = [UIColor colorWithRed:1.0 green:1.0 blue:0.0 alpha:1.0];
     showingSelected_ = NO;
 }
 
 
 #pragma mark - Resource Management
 
-- (void) dealloc
-{
-    [borderColor_ release];
-    [fillColor_ release];
-    [selectionColor_ release];
-
-    [super dealloc];
-}
 
 
 #pragma mark - UIView
@@ -211,15 +200,15 @@
         [self configureDetaults];
 
         if ([decoder containsValueForKey:@"borderColor"])
-            borderColor_ = [[decoder decodeObjectForKey:@"borderColor"] retain];
+            borderColor_ = [decoder decodeObjectForKey:@"borderColor"];
         if ([decoder containsValueForKey:@"borderWidth"])
             borderWidth_ = [decoder decodeFloatForKey:@"borderWidth"];
         if ([decoder containsValueForKey:@"cornerRadius"])
             cornerRadius_ = [decoder decodeFloatForKey:@"cornerRadius"];
         if ([decoder containsValueForKey:@"fillColor"])
-            fillColor_ = [[decoder decodeObjectForKey:@"fillColor"] retain];
+            fillColor_ = [decoder decodeObjectForKey:@"fillColor"];
         if ([decoder containsValueForKey:@"selectionColor"])
-            selectionColor_ = [[decoder decodeObjectForKey:@"selectionColor"] retain];
+            selectionColor_ = [decoder decodeObjectForKey:@"selectionColor"];
         if ([decoder containsValueForKey:@"showingSelected"])
             showingSelected_ = [decoder decodeBoolForKey:@"showingSelected"];
 

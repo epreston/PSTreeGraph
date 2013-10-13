@@ -15,9 +15,9 @@
     
 @private
     // Interface
-    UIButton *expandButton_;
-    UILabel *titleLabel_;
-    UILabel *detailLabel_;
+    UIButton *__weak expandButton_;
+    UILabel *__weak titleLabel_;
+    UILabel *__weak detailLabel_;
 }
 
 @end
@@ -55,9 +55,5 @@
 
 #pragma mark - Resource Management
 
-- (void) dealloc
-{
-    [super dealloc];
-}
 
 @end

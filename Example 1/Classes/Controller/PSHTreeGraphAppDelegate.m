@@ -46,12 +46,6 @@
 
 #pragma mark - Resouce Management
 
-- (void) dealloc
-{
-    [viewController_ release];
-    [window_ release];
-    [super dealloc];
-}
 
 
 @end

@@ -37,12 +37,12 @@
 
 /// The view that represents the modelNode.  Is a subview of SubtreeView, and may itself have descendant views.
 
-@property (nonatomic, assign) IBOutlet UIView *nodeView;
+@property (nonatomic, weak) IBOutlet UIView *nodeView;
 
 /// Link to the enclosing TreeGraph.  (The getter for this is a convenience method that ascends
 /// the view tree until it encounters a TreeGraph.)
 
-@property (nonatomic, readonly) PSBaseTreeGraphView *enclosingTreeGraph;
+@property (weak, nonatomic, readonly) PSBaseTreeGraphView *enclosingTreeGraph;
 
 // Whether the model node represented by this SubtreeView is a leaf node (one without child nodes).  This
 // can be a useful property to bind user interface state to.  In the TreeGraph demo app, for example,

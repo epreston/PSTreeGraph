@@ -35,18 +35,18 @@
 
 /// The wrappedClass' name (e.g. @"UIControl" or @"CALayer" or "CAAnimation")
 
-@property (nonatomic, readonly) NSString *name;
+@property (weak, nonatomic, readonly) NSString *name;
 
 
 /// An ObjCClassWrapper representing the wrappedClass' superclass.
 
-@property (nonatomic, readonly) ObjCClassWrapper *superclassWrapper;
+@property (weak, nonatomic, readonly) ObjCClassWrapper *superclassWrapper;
 
 
 /// An array of ObjCClassWrappers representing the wrappedClass' subclasses.
 /// (For convenience, the subclasses are sorted by name.)
 
-@property (nonatomic, readonly) NSArray *subclasses;
+@property (weak, nonatomic, readonly) NSArray *subclasses;
 
 
 /// The wrappedClass' intrinsic instance size (which doesn't include external/auxiliary storage).
