@@ -163,9 +163,6 @@ static CGFloat subtreeBorderWidth(void)
     return nil;
 }
 
-#pragma mark - Resource Management
-
-
 
 #pragma mark - Layout
 
@@ -193,8 +190,8 @@ static CGFloat subtreeBorderWidth(void)
 {
     // Recurse for descendant SubtreeViews.
     CGFloat             myWidth             = self.frame.size.width;
-    CGFloat             myHeight             = self.frame.size.height;
-    PSBaseTreeGraphView *treeGraph = [self enclosingTreeGraph];
+    CGFloat             myHeight            = self.frame.size.height;
+    PSBaseTreeGraphView *treeGraph          = [self enclosingTreeGraph];
 	PSTreeGraphOrientationStyle treeOrientation = [treeGraph treeGraphOrientation];
 
     NSArray *subviews = [self subviews];
@@ -216,7 +213,6 @@ static CGFloat subtreeBorderWidth(void)
         }
     }
 }
-
 
 - (CGSize) layoutGraphIfNeeded
 {

@@ -244,11 +244,7 @@
 
 - (void) dealloc
 {
-	// iOS 4.0 and above ONLY
-
     self.delegate = nil;
-
-    // [backgroundColor release];
 }
 
 

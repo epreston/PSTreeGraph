@@ -43,7 +43,5 @@
     return self;
 }
 
-#pragma mark - Resource Management
-
 
 @end

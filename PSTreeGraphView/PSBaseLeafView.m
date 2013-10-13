@@ -162,10 +162,6 @@
 }
 
 
-#pragma mark - Resource Management
-
-
-
 #pragma mark - UIView
 
 - initWithFrame:(CGRect)newFrame
