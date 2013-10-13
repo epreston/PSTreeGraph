@@ -15,7 +15,7 @@ There is an iPad example application to demonstrate the features of PSTreeGraph.
 
 # Status
 
-PSTreeGraph should be considered an viable solution for displaying single parent tree data in an interactive hierarchy.
+PSTreeGraph should be considered an viable solution for displaying single parent tree data in an interactive hierarchy.  The "ARC" branch contains the automatic reference counting compatible code base.  In the very near future, this will be merged with "master", non "ARC" code will be frozen at the 1.0 release.  Those looking for a reference counted implementation should look for a "Non ARC 1.0" branch.
 
 This project follows the [SemVer](http://semver.org/) standard. The API may change in backwards-incompatible ways before the 1.0 release.
 
