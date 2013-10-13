@@ -1,5 +1,7 @@
 # PSTreeGraph
 
+This is the "Non ARC" branch frozen in time.  For the latest changes, ARC support, switch to the ARC implementation in "Master".
+
 PSTreeGraph is a treegraph view control implementation for Cocoa Touch.
 
 This is a port of the sample code from Max OS X to iOS (iPad). 
@@ -14,6 +16,8 @@ There is an iPad example application to demonstrate the features of PSTreeGraph.
 
 
 # Status
+
+
 
 PSTreeGraph should be considered an viable solution for displaying single parent tree data in an interactive hierarchy.
 

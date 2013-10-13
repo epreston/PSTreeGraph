@@ -69,6 +69,7 @@
 		4F4AA33813FA305700607517 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		4F4AA34413FA32C700607517 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "Graphics/Icon-72.png"; sourceTree = "<group>"; };
 		4F86D04113FAADAF00A494AE /* PSTreeGraphModelNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSTreeGraphModelNode.h; path = ../PSTreeGraphView/PSTreeGraphModelNode.h; sourceTree = "<group>"; };
+		4FCAA430180B41990018BAB3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; wrapsLines = 1; };
 		8D1107310486CEB800E47090 /* PSHTreeGraph-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PSHTreeGraph-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,6 +120,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				4FCAA430180B41990018BAB3 /* README.md */,
 				4F0E109E1407EB94009B9214 /* Doxyfile */,
 				32CA4F630368D1EE00C91783 /* PSHTreeGraph_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
