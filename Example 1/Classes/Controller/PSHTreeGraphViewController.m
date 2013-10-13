@@ -21,7 +21,7 @@
 {
 
 @private
-	PSBaseTreeGraphView *treeGraphView_;
+	PSBaseTreeGraphView *__weak treeGraphView_;
 	NSString *rootClassName_;
 }
 
@@ -41,7 +41,6 @@
     NSParameterAssert(newRootClassName != nil);
 
     if (![rootClassName_ isEqualToString:newRootClassName]) {
-        [rootClassName_ release];
         rootClassName_ = [newRootClassName copy];
 
         treeGraphView_.treeGraphOrientation  = PSTreeGraphOrientationStyleHorizontalFlipped;
@@ -129,10 +128,5 @@
 	// e.g. self.myOutlet = nil;
 }
 
-- (void) dealloc
-{
-	[rootClassName_ release];
-    [super dealloc];
-}
 
 @end

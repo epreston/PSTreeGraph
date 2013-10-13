@@ -84,7 +84,7 @@ typedef enum PSTreeGraphOrientationStyle : NSUInteger {
 /// read-only accessor provides a way to get the rootmost SubtreeView (the one that corresponds
 /// to the modelRoot model node).
 
-@property (nonatomic, readonly) PSBaseSubtreeView *rootSubtreeView;
+@property (weak, nonatomic, readonly) PSBaseSubtreeView *rootSubtreeView;
 
 
 #pragma mark - Node View Nib Specification
@@ -110,7 +110,7 @@ typedef enum PSTreeGraphOrientationStyle : NSUInteger {
 /// Convenience accessor that returns the selected node, if exactly one node is currently
 /// selected.  Returns nil if zero, or more than one, nodes are currently selected.
 
-@property (nonatomic, readonly) id <PSTreeGraphModelNode> singleSelectedModelNode;
+@property (weak, nonatomic, readonly) id <PSTreeGraphModelNode> singleSelectedModelNode;
 
 /// Returns the bounding box of the selectedModelNodes.  The bounding box takes only the selected
 /// nodes into account, disregarding any descendants they might have.
@@ -238,7 +238,7 @@ typedef enum PSTreeGraphOrientationStyle : NSUInteger {
 
 /// The stroke color for node connecting lines.
 
-@property (nonatomic, retain) UIColor *connectingLineColor;
+@property (nonatomic, strong) UIColor *connectingLineColor;
 
 /// The width for node connecting lines.
 
@@ -273,7 +273,7 @@ typedef enum PSTreeGraphOrientationStyle : NSUInteger {
 /// Custom navigation can be added by assigning a custom UIView to inputView, and linking
 /// it up to some of the actions below.
 
-@property (nonatomic, retain) IBOutlet UIView *inputView;
+@property (nonatomic, strong) IBOutlet UIView *inputView;
 
 // Model relative navigation
 - (void) moveToSiblingByRelativeIndex:(NSInteger)relativeIndex;

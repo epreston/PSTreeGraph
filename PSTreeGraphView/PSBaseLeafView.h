@@ -23,7 +23,7 @@
 #pragma mark - Styling
 
 /// The color of the ContainerView's stroked border.
-@property (nonatomic, retain) UIColor *borderColor;
+@property (nonatomic, strong) UIColor *borderColor;
 
 /// The width of the ContainerView's stroked border.  May be zero.
 @property (nonatomic, assign) CGFloat borderWidth;
@@ -32,10 +32,10 @@
 @property (nonatomic, assign) CGFloat cornerRadius;
 
 /// The fill color for the ContainerView's interior.
-@property (nonatomic, retain) UIColor *fillColor;
+@property (nonatomic, strong) UIColor *fillColor;
 
 /// The fill color for the ContainerView's interior when selected.
-@property (nonatomic, retain) UIColor *selectionColor;
+@property (nonatomic, strong) UIColor *selectionColor;
 
 
 #pragma mark - Selection State

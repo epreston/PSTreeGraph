@@ -44,7 +44,7 @@ static CGFloat subtreeBorderWidth(void)
     id <PSTreeGraphModelNode> modelNode_;   // the model node that nodeView represents
     
     // Views
-    UIView *nodeView_;                      // the subview of this SubtreeView that shows a representation
+    UIView *__weak nodeView_;                      // the subview of this SubtreeView that shows a representation
                                             // of the modelNode
     
     PSBaseBranchView *connectorsView_;		// the view that shows connections from nodeView to its child nodes
@@ -163,17 +163,6 @@ static CGFloat subtreeBorderWidth(void)
     return nil;
 }
 
-#pragma mark - Resource Management
-
-- (void) dealloc
-{
-	//    [nodeView release]; // not retained, since an IBOutlet
-    [connectorsView_ release];
-    [modelNode_ release];
-
-    [super dealloc];
-}
-
 
 #pragma mark - Layout
 
@@ -201,8 +190,8 @@ static CGFloat subtreeBorderWidth(void)
 {
     // Recurse for descendant SubtreeViews.
     CGFloat             myWidth             = self.frame.size.width;
-    CGFloat             myHeight             = self.frame.size.height;
-    PSBaseTreeGraphView *treeGraph = [self enclosingTreeGraph];
+    CGFloat             myHeight            = self.frame.size.height;
+    PSBaseTreeGraphView *treeGraph          = [self enclosingTreeGraph];
 	PSTreeGraphOrientationStyle treeOrientation = [treeGraph treeGraphOrientation];
 
     NSArray *subviews = [self subviews];
@@ -224,7 +213,6 @@ static CGFloat subtreeBorderWidth(void)
         }
     }
 }
-
 
 - (CGSize) layoutGraphIfNeeded
 {

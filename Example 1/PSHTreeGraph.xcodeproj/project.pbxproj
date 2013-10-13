@@ -46,6 +46,7 @@
 		32CA4F630368D1EE00C91783 /* PSHTreeGraph_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSHTreeGraph_Prefix.pch; sourceTree = "<group>"; };
 		4F0E109E1407EB94009B9214 /* Doxyfile */ = {isa = PBXFileReference; explicitFileType = text.script; fileEncoding = 4; name = Doxyfile; path = ../Doxyfile; sourceTree = "<group>"; };
 		4F0EE31B15D2F99B009BC883 /* PSTreeGraphDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSTreeGraphDelegate.h; sourceTree = "<group>"; };
+		4F2A233D180B3AEB00778BA1 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; wrapsLines = 1; };
 		4F3536F311FC851F00AABFF1 /* MyTreeGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyTreeGraphView.h; path = Classes/View/MyTreeGraphView.h; sourceTree = SOURCE_ROOT; };
 		4F3536F411FC851F00AABFF1 /* MyTreeGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyTreeGraphView.m; path = Classes/View/MyTreeGraphView.m; sourceTree = SOURCE_ROOT; };
 		4F35379511FC8EC900AABFF1 /* PSBaseBranchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSBaseBranchView.h; path = ../PSTreeGraphView/PSBaseBranchView.h; sourceTree = "<group>"; };
@@ -119,6 +120,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				4F2A233D180B3AEB00778BA1 /* README.md */,
 				4F0E109E1407EB94009B9214 /* Doxyfile */,
 				32CA4F630368D1EE00C91783 /* PSHTreeGraph_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
@@ -351,6 +353,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -370,6 +373,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

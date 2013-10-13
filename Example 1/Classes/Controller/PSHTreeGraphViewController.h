@@ -17,7 +17,7 @@
 @interface PSHTreeGraphViewController : UIViewController <PSTreeGraphDelegate>
 
 // The TreeGraph
-@property(nonatomic, assign) IBOutlet PSBaseTreeGraphView *treeGraphView;
+@property(nonatomic, weak) IBOutlet PSBaseTreeGraphView *treeGraphView;
 
 // The name of the root class that the TreeGraph is currently showing.
 @property(nonatomic, copy) NSString *rootClassName;
