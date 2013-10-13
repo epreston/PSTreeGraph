@@ -115,7 +115,7 @@ static NSInteger CompareClassNames(id classA, id classB, void* context)
         Class* classes = NULL;
         while (numClasses < newNumClasses) {
             numClasses = newNumClasses;
-            classes = realloc(classes, sizeof(Class) * numClasses);
+            classes = (Class*)realloc(classes, sizeof(Class) * numClasses);
             newNumClasses = objc_getClassList(classes, numClasses);
         }
 
