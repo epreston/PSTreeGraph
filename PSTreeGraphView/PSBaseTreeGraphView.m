@@ -32,8 +32,8 @@
 	// Model
     id <PSTreeGraphModelNode> modelRoot_;
     
-	// Delegate
-	id <PSTreeGraphDelegate> delegate_;
+    // Delegate
+    __weak id <PSTreeGraphDelegate> delegate_;
     
     // Model Object -> SubtreeView Mapping
 	NSMutableDictionary *modelNodeToSubtreeViewMapTable_;
