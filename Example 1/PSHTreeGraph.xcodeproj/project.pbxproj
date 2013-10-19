@@ -27,6 +27,7 @@
 		4F35383011FCA00700AABFF1 /* TreeViewDirectLinesButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F35382C11FCA00700AABFF1 /* TreeViewDirectLinesButton.png */; };
 		4F35383111FCA00700AABFF1 /* TreeViewOrthogonalLinesButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F35382D11FCA00700AABFF1 /* TreeViewOrthogonalLinesButton.png */; };
 		4F353B8711FCF1A400AABFF1 /* MyLeafView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F353B8611FCF1A400AABFF1 /* MyLeafView.m */; };
+		4F4AA33913FA305700607517 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F4AA33813FA305700607517 /* Entitlements.plist */; };
 		4F4AA34513FA32C700607517 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F4AA34413FA32C700607517 /* Icon-72.png */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +67,7 @@
 		4F35382D11FCA00700AABFF1 /* TreeViewOrthogonalLinesButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TreeViewOrthogonalLinesButton.png; path = Graphics/TreeViewOrthogonalLinesButton.png; sourceTree = "<group>"; };
 		4F353B8511FCF1A400AABFF1 /* MyLeafView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyLeafView.h; path = Classes/View/MyLeafView.h; sourceTree = SOURCE_ROOT; };
 		4F353B8611FCF1A400AABFF1 /* MyLeafView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyLeafView.m; path = Classes/View/MyLeafView.m; sourceTree = SOURCE_ROOT; };
+		4F4AA33813FA305700607517 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		4F4AA34413FA32C700607517 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "Graphics/Icon-72.png"; sourceTree = "<group>"; };
 		4F86D04113FAADAF00A494AE /* PSTreeGraphModelNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSTreeGraphModelNode.h; path = ../PSTreeGraphView/PSTreeGraphModelNode.h; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* PSHTreeGraph-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PSHTreeGraph-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				4F86D04413FAAE9D00A494AE /* Interfaces */,
 				4F35381C11FC9F8300AABFF1 /* Graphics */,
 				8D1107310486CEB800E47090 /* PSHTreeGraph-Info.plist */,
+				4F4AA33813FA305700607517 /* Entitlements.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -288,16 +291,6 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Preston Software";
-				TargetAttributes = {
-					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = QNF5V32SN5;
-						SystemCapabilities = {
-							com.apple.Keychain = {
-								enabled = 0;
-							};
-						};
-					};
-				};
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "PSHTreeGraph" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -328,6 +321,7 @@
 				4F35382F11FCA00700AABFF1 /* TreeViewSubtreeExpandedButton.png in Resources */,
 				4F35383011FCA00700AABFF1 /* TreeViewDirectLinesButton.png in Resources */,
 				4F35383111FCA00700AABFF1 /* TreeViewOrthogonalLinesButton.png in Resources */,
+				4F4AA33913FA305700607517 /* Entitlements.plist in Resources */,
 				4F4AA34513FA32C700607517 /* Icon-72.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -360,8 +354,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -381,8 +374,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = PSHTreeGraph_Prefix.pch;
@@ -399,7 +391,11 @@
 		4F0E109B1407EB46009B9214 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -407,7 +403,7 @@
 		4F0E109C1407EB46009B9214 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -415,8 +411,8 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				GCC_C_LANGUAGE_STANDARD = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -435,8 +431,8 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				GCC_C_LANGUAGE_STANDARD = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
