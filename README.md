@@ -1,5 +1,7 @@
 # PSTreeGraph
 
+[![Build Status](https://travis-ci.org/epreston/PSTreeGraph.png?branch=master)](https://travis-ci.org/epreston/PSTreeGraph)
+
 PSTreeGraph is a treegraph view control implementation for Cocoa Touch.
 
 This is a port of the sample code from Max OS X to iOS (iPad). 
