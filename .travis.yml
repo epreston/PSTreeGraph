@@ -1,1 +1,11 @@
 language: objective-c
+
+before_install:
+  - git submodule update --init --recursive
+  - cd Example\ 1/
+
+# whitelist
+branches:
+  only:
+    - master
+
