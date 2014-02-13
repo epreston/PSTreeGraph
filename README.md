@@ -90,3 +90,7 @@ Copyright 2012 Preston Software.
    limitations under the License.
 
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/epreston/pstreegraph/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
