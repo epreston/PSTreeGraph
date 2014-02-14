@@ -1,4 +1,6 @@
 language: objective-c
+xcode_project: PSHTreeGraph.xcodeproj
+xcode_scheme: PSHTreeGraph
 
 before_install:
   - git submodule update --init --recursive
