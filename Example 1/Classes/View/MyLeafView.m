@@ -10,27 +10,8 @@
 #import "MyLeafView.h"
 
 
-@interface MyLeafView () 
-{
-    
-@private
-    // Interface
-    UIButton *__weak expandButton_;
-    UILabel *__weak titleLabel_;
-    UILabel *__weak detailLabel_;
-}
-
-@end
-
 
 @implementation MyLeafView
-
-
-#pragma mark - Property Accessors
-
-@synthesize expandButton = expandButton_;
-@synthesize titleLabel = titleLabel_;
-@synthesize detailLabel = detailLabel_;
 
 
 #pragma mark - NSCoding

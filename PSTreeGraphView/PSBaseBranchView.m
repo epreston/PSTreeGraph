@@ -41,7 +41,7 @@
 }
 
 
-#pragma mark - Drawing
+#pragma mark - Drawing (internal)
 
 - (UIBezierPath *) directConnectionsPath
 {
@@ -240,6 +240,9 @@
     // Return the path.
     return path;
 }
+
+
+#pragma mark - UIView
 
 - (void) drawRect:(CGRect)dirtyRect
 {

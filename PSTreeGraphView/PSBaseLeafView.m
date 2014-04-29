@@ -20,18 +20,6 @@
 #pragma mark - Internal Interface
 
 @interface PSBaseLeafView ()
-{
-    
-@private
-    UIColor    *borderColor_;
-    CGFloat     borderWidth_;
-    CGFloat     cornerRadius_;
-    
-    UIColor    *fillColor_;
-    UIColor    *selectionColor_;
-    
-    BOOL        showingSelected_;
-}
 
 - (void) updateLayerAppearanceToMatchContainerView;
 - (void) configureDetaults;
@@ -44,52 +32,43 @@
 
 #pragma mark - Styling
 
-@synthesize borderColor = borderColor_;
 
 - (void) setBorderColor:(UIColor *)color
 {
-    if (borderColor_ != color) {
-        borderColor_ = color;
+    if (_borderColor != color) {
+        _borderColor = color;
         [self updateLayerAppearanceToMatchContainerView];
     }
 }
-
-@synthesize borderWidth = borderWidth_;
 
 - (void) setBorderWidth:(CGFloat)width
 {
-    if (borderWidth_ != width) {
-        borderWidth_ = width;
+    if (_borderWidth != width) {
+        _borderWidth = width;
         [self updateLayerAppearanceToMatchContainerView];
     }
 }
-
-@synthesize cornerRadius = cornerRadius_;
 
 - (void) setCornerRadius:(CGFloat)radius
 {
-    if (cornerRadius_ != radius) {
-        cornerRadius_ = radius;
+    if (_cornerRadius != radius) {
+        _cornerRadius = radius;
         [self updateLayerAppearanceToMatchContainerView];
     }
 }
-
-@synthesize fillColor = fillColor_;
 
 - (void) setFillColor:(UIColor *)color
 {
-    if (fillColor_ != color) {
-        fillColor_ = color;
+    if (_fillColor != color) {
+        _fillColor = color;
         [self updateLayerAppearanceToMatchContainerView];
     }
 }
 
-@synthesize selectionColor = selectionColor_;
-
 - (void) setSelectionColor:(UIColor *)color
 {
-    if (selectionColor_ != color) {
-        selectionColor_ = color;
+    if (_selectionColor != color) {
+        _selectionColor = color;
         [self updateLayerAppearanceToMatchContainerView];
     }
 }
@@ -97,18 +76,16 @@
 
 #pragma mark - Selection State
 
-@synthesize showingSelected = showingSelected_;
-
 - (void) setShowingSelected:(BOOL)newShowingSelected
 {
-    if (showingSelected_ != newShowingSelected) {
-        showingSelected_ = newShowingSelected;
+    if (_showingSelected != newShowingSelected) {
+        _showingSelected = newShowingSelected;
         [self updateLayerAppearanceToMatchContainerView];
     }
 }
 
 
-#pragma mark - Update Layer
+#pragma mark - Update Layer (internal)
 
 - (void) updateLayerAppearanceToMatchContainerView
 {
@@ -128,14 +105,14 @@
     
     CALayer *layer = [self layer];
 
-    [layer setBorderWidth:(borderWidth_ * scaleFactor)];
-    if (borderWidth_ > 0.0f) {
-        [layer setBorderColor:[borderColor_ CGColor]];
+    [layer setBorderWidth:(_borderWidth * scaleFactor)];
+    if (_borderWidth > 0.0f) {
+        [layer setBorderColor:[_borderColor CGColor]];
     }
 
-    [layer setCornerRadius:(cornerRadius_ * scaleFactor)];
+    [layer setCornerRadius:(_cornerRadius * scaleFactor)];
 
-    if ( showingSelected_ ) {
+    if ( _showingSelected ) {
         [layer setBackgroundColor:[[self selectionColor] CGColor] ];
     } else {
         [layer setBackgroundColor:[[self fillColor] CGColor] ];
@@ -146,25 +123,25 @@
 }
 
 
-#pragma mark - Initialization
+#pragma mark - Initialization (internal)
 
 - (void) configureDetaults
 {
 	// Initialize ivars directly.  As a rule, it's best to avoid invoking accessors from an -init...
 	// method, since they may wrongly expect the instance to be fully formed.
 
-	borderColor_ = [UIColor colorWithRed:1.0 green:0.8 blue:0.4 alpha:1.0];
-	borderWidth_ = 3.0;
-	cornerRadius_ = 8.0;
-	fillColor_ = [UIColor colorWithRed:1.0 green:0.5 blue:0.0 alpha:1.0];
-    selectionColor_ = [UIColor colorWithRed:1.0 green:1.0 blue:0.0 alpha:1.0];
-    showingSelected_ = NO;
+	_borderColor = [UIColor colorWithRed:1.0 green:0.8 blue:0.4 alpha:1.0];
+	_borderWidth = 3.0;
+	_cornerRadius = 8.0;
+	_fillColor = [UIColor colorWithRed:1.0 green:0.5 blue:0.0 alpha:1.0];
+    _selectionColor = [UIColor colorWithRed:1.0 green:1.0 blue:0.0 alpha:1.0];
+    _showingSelected = NO;
 }
 
 
 #pragma mark - UIView
 
-- initWithFrame:(CGRect)newFrame
+- (id) initWithFrame:(CGRect)newFrame
 {
     self = [super initWithFrame:newFrame];
     if (self) {
@@ -180,12 +157,12 @@
 - (void) encodeWithCoder:(NSCoder *)encoder
 {
     [super encodeWithCoder:encoder];
-    [encoder encodeObject:borderColor_ forKey:@"borderColor"];
-    [encoder encodeFloat:borderWidth_ forKey:@"borderWidth"];
-    [encoder encodeFloat:cornerRadius_ forKey:@"cornerRadius"];
-    [encoder encodeObject:fillColor_ forKey:@"fillColor"];
-    [encoder encodeObject:selectionColor_ forKey:@"selectionColor"];
-    [encoder encodeBool:showingSelected_ forKey:@"showingSelected"];
+    [encoder encodeObject:_borderColor forKey:@"borderColor"];
+    [encoder encodeFloat:_borderWidth forKey:@"borderWidth"];
+    [encoder encodeFloat:_cornerRadius forKey:@"cornerRadius"];
+    [encoder encodeObject:_fillColor forKey:@"fillColor"];
+    [encoder encodeObject:_selectionColor forKey:@"selectionColor"];
+    [encoder encodeBool:_showingSelected forKey:@"showingSelected"];
 }
 
 - (id) initWithCoder:(NSCoder *)decoder
@@ -196,17 +173,17 @@
         [self configureDetaults];
 
         if ([decoder containsValueForKey:@"borderColor"])
-            borderColor_ = [decoder decodeObjectForKey:@"borderColor"];
+            _borderColor = [decoder decodeObjectForKey:@"borderColor"];
         if ([decoder containsValueForKey:@"borderWidth"])
-            borderWidth_ = [decoder decodeFloatForKey:@"borderWidth"];
+            _borderWidth = [decoder decodeFloatForKey:@"borderWidth"];
         if ([decoder containsValueForKey:@"cornerRadius"])
-            cornerRadius_ = [decoder decodeFloatForKey:@"cornerRadius"];
+            _cornerRadius = [decoder decodeFloatForKey:@"cornerRadius"];
         if ([decoder containsValueForKey:@"fillColor"])
-            fillColor_ = [decoder decodeObjectForKey:@"fillColor"];
+            _fillColor = [decoder decodeObjectForKey:@"fillColor"];
         if ([decoder containsValueForKey:@"selectionColor"])
-            selectionColor_ = [decoder decodeObjectForKey:@"selectionColor"];
+            _selectionColor = [decoder decodeObjectForKey:@"selectionColor"];
         if ([decoder containsValueForKey:@"showingSelected"])
-            showingSelected_ = [decoder decodeBoolForKey:@"showingSelected"];
+            _showingSelected = [decoder decodeBoolForKey:@"showingSelected"];
 
         [self updateLayerAppearanceToMatchContainerView];
     }

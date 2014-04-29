@@ -40,21 +40,8 @@ static CGFloat subtreeBorderWidth(void)
 {
     
 @private
-    // Model
-    id <PSTreeGraphModelNode> modelNode_;   // the model node that nodeView represents
-    
-    // Views
-    UIView *__weak nodeView_;                      // the subview of this SubtreeView that shows a representation
-                                            // of the modelNode
     
     PSBaseBranchView *connectorsView_;		// the view that shows connections from nodeView to its child nodes
-    
-    // State
-    BOOL expanded_;                         // YES if this subtree is expanded to show its descendants;
-                                            // NO if it's been collapsed to show just its root node
-    
-    BOOL needsGraphLayout_;                 // YES if this SubtreeView needs to position its child views
-                                            // and assess its size; NO if we're sure its layout is up to date
 }
 
 - (CGSize) layoutExpandedGraph;
@@ -68,17 +55,12 @@ static CGFloat subtreeBorderWidth(void)
 
 #pragma mark - Attributes
 
-@synthesize modelNode = modelNode_;
-@synthesize nodeView = nodeView_;
-
-@synthesize expanded = expanded_;
-
 - (void) setExpanded:(BOOL)flag
 {
-    if (expanded_ != flag) {
+    if (_expanded != flag) {
 
         // Remember this SubtreeView's new state.
-        expanded_ = flag;
+        _expanded = flag;
 
         // Notify the TreeGraph we need layout.
         [[self enclosingTreeGraph] setNeedsGraphLayout];
@@ -86,7 +68,7 @@ static CGFloat subtreeBorderWidth(void)
         // Expand or collapse subtrees recursively.
         for (UIView *subview in [self subviews]) {
             if ([subview isKindOfClass:[PSBaseSubtreeView class]]) {
-                [(PSBaseSubtreeView *)subview setExpanded:expanded_];
+                [(PSBaseSubtreeView *)subview setExpanded:_expanded];
             }
         }
     }
@@ -129,8 +111,8 @@ static CGFloat subtreeBorderWidth(void)
         // Initialize ivars directly.  As a rule, it's best to avoid invoking accessors from an -init...
 		// method, since they may wrongly expect the instance to be fully formed.
 
-        expanded_ = YES;
-        needsGraphLayout_ = YES;
+        _expanded = YES;
+        _needsGraphLayout = YES;
 
         // autoresizesSubviews defaults to YES.  We don't want autoresizing, which would interfere
 		// with the explicit layout we do, so we switch it off for SubtreeView instances.
@@ -165,8 +147,6 @@ static CGFloat subtreeBorderWidth(void)
 
 
 #pragma mark - Layout
-
-@synthesize needsGraphLayout = needsGraphLayout_;
 
 - (void) recursiveSetNeedsGraphLayout
 {
@@ -485,7 +465,7 @@ static CGFloat subtreeBorderWidth(void)
 
             [subview setHidden:YES];
 
-        } else if (subview == nodeView_) {
+        } else if (subview == _nodeView) {
 
             subview.frame = CGRectMake(0.0f,
                                        0.0f,
@@ -668,12 +648,12 @@ static CGFloat subtreeBorderWidth(void)
 
 - (NSString *) description
 {
-    return [NSString stringWithFormat:@"SubtreeView<%@>", [modelNode_ description]];
+    return [NSString stringWithFormat:@"SubtreeView<%@>", [_modelNode description]];
 }
 
 - (NSString *) nodeSummary
 {
-    return [NSString stringWithFormat:@"f=%@ %@", NSStringFromCGRect([nodeView_ frame]), [modelNode_ description]];
+    return [NSString stringWithFormat:@"f=%@ %@", NSStringFromCGRect([_nodeView frame]), [_modelNode description]];
 }
 
 - (NSString *) treeSummaryWithDepth:(NSInteger)depth

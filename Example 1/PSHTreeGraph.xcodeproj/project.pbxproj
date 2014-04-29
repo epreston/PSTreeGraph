@@ -273,7 +273,6 @@
 				ORGANIZATIONNAME = "Preston Software";
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = QNF5V32SN5;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 0;

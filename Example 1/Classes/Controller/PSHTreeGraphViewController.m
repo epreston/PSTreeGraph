@@ -15,38 +15,23 @@
 #import "ObjCClassWrapper.h"
 
 
-#pragma mark - Internal Interface
-
-@interface PSHTreeGraphViewController () 
-{
-
-@private
-	PSBaseTreeGraphView *__weak treeGraphView_;
-	NSString *rootClassName_;
-}
-
-@end
-
 
 @implementation PSHTreeGraphViewController
 
 
 #pragma mark - Property Accessors
 
-@synthesize treeGraphView = treeGraphView_;
-@synthesize rootClassName = rootClassName_;
-
 - (void) setRootClassName:(NSString *)newRootClassName
 {
     NSParameterAssert(newRootClassName != nil);
 
-    if (![rootClassName_ isEqualToString:newRootClassName]) {
-        rootClassName_ = [newRootClassName copy];
+    if (![_rootClassName isEqualToString:newRootClassName]) {
+        _rootClassName = [newRootClassName copy];
 
-        treeGraphView_.treeGraphOrientation  = PSTreeGraphOrientationStyleHorizontalFlipped;
+        _treeGraphView.treeGraphOrientation  = PSTreeGraphOrientationStyleHorizontalFlipped;
 
         // Get an ObjCClassWrapper for the named Objective-C Class, and set it as the TreeGraph's root.
-        [treeGraphView_ setModelRoot:[ObjCClassWrapper wrapperForClassNamed:rootClassName_]];
+        [_treeGraphView setModelRoot:[ObjCClassWrapper wrapperForClassNamed:_rootClassName]];
     }
 }
 

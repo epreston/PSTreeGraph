@@ -11,24 +11,7 @@
 #import "PSHTreeGraphViewController.h"
 
 
-#pragma mark - Internal Interface
-
-@interface PSHTreeGraphAppDelegate () 
-{
-
-@private
-    UIWindow *window_;
-    PSHTreeGraphViewController *viewController_;
-}
-
-@end
-
-
 @implementation PSHTreeGraphAppDelegate
-
-
-@synthesize window = window_;
-@synthesize viewController = viewController_;
 
 
 #pragma mark - Application Lifecycle
@@ -36,16 +19,12 @@
 - (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after app launch.
-    [window_ setRootViewController:viewController_];
-    [window_ addSubview:viewController_.view];
-    [window_ makeKeyAndVisible];
+    [_window setRootViewController:_viewController];
+    [_window addSubview:_viewController.view];
+    [_window makeKeyAndVisible];
 
 	return YES;
 }
-
-
-#pragma mark - Resouce Management
-
 
 
 @end
