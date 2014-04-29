@@ -17,14 +17,6 @@
 #import "PSBaseTreeGraphView.h"
 
 
-@interface PSBaseBranchView ()
-
-- (UIBezierPath *) directConnectionsPath;
-- (UIBezierPath *) orthogonalConnectionsPath;
-
-@end
-
-
 @implementation PSBaseBranchView
 
 
@@ -274,5 +266,6 @@
 	[path setLineWidth:[treeGraph connectingLineWidth]];
 	[path stroke];
 }
+
 
 @end

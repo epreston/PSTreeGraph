@@ -147,7 +147,4 @@ static NSInteger CompareClassNames(id classA, id classB, void* context)
 }
 
 
-#pragma mark - Resource Management
-
-
 @end

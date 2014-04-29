@@ -17,16 +17,6 @@
 #import <QuartzCore/QuartzCore.h>
 
 
-#pragma mark - Internal Interface
-
-@interface PSBaseLeafView ()
-
-- (void) updateLayerAppearanceToMatchContainerView;
-- (void) configureDetaults;
-
-@end
-
-
 @implementation PSBaseLeafView
 
 

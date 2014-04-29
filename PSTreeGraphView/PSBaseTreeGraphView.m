@@ -41,12 +41,6 @@
     
 }
 
-- (void) configureDefaults;
-- (PSBaseSubtreeView *) newGraphForModelNode:(id <PSTreeGraphModelNode> )modelNode;
-- (void) buildGraph;
-- (void) updateFrameSizeForContentAndClipView;
-- (void) updateRootSubtreeViewPositionForSize:(CGSize)rootSubtreeViewSize;
-
 @end
 
 
