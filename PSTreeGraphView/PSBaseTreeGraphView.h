@@ -17,20 +17,20 @@
 
 /// A TreeGraph's nodes may be connected by either "direct" or "orthogonal" lines.
 
-typedef enum PSTreeGraphConnectingLineStyle : NSUInteger {
+typedef NS_ENUM(NSUInteger, PSTreeGraphConnectingLineStyle)  {
     PSTreeGraphConnectingLineStyleDirect = 0,
     PSTreeGraphConnectingLineStyleOrthogonal = 1,
-} PSTreeGraphConnectingLineStyle;
+};
 
 
 /// A TreeGraph's orientation may be either "horizontal" or "vertical".
 
-typedef enum PSTreeGraphOrientationStyle : NSUInteger {
+typedef NS_ENUM(NSUInteger, PSTreeGraphOrientationStyle) {
     PSTreeGraphOrientationStyleHorizontal = 0,
     PSTreeGraphOrientationStyleVertical = 1,
     PSTreeGraphOrientationStyleHorizontalFlipped = 2,
     PSTreeGraphOrientationStyleVerticalFlipped = 3,
-} PSTreeGraphOrientationStyle;
+};
 
 
 
@@ -146,7 +146,7 @@ typedef enum PSTreeGraphOrientationStyle : NSUInteger {
 @property (nonatomic, assign) BOOL resizesToFillEnclosingScrollView;
 
 /// The style for tree graph orientation
-/// @note See the TreeGraphOrientationStyle enumeration.
+/// @note See the PSTreeGraphOrientationStyle enumeration.
 
 @property (nonatomic, assign) PSTreeGraphOrientationStyle treeGraphOrientation;
 
