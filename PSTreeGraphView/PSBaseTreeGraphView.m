@@ -483,7 +483,7 @@
         CGSize minimumBoundsSize = CGSizeMake(rootSubtreeViewSize.width + 2.0 * margin,
                                               rootSubtreeViewSize.height + 2.0 * margin);
 
-		[self setMinimumFrameSize:minimumBoundsSize];
+		_minimumFrameSize = minimumBoundsSize;
 
         // Set the TreeGraph's frame size.
         [self updateFrameSizeForContentAndClipView];

@@ -136,7 +136,7 @@ typedef NS_ENUM(NSUInteger, PSTreeGraphOrientationStyle) {
 /// than its minimumFrameSize, since we automatically expand the TreeGraph to always be at least
 /// as large as the UIScrollView's clip area (contentView) to provide a nicer user experience.
 
-@property (nonatomic, assign) CGSize minimumFrameSize;
+@property (nonatomic, readonly) CGSize minimumFrameSize;
 
 /// If YES, and if the TreeGraph is the documentView of an UIScrollView, the TreeGraph will
 /// automatically resize itself as needed to ensure that it always at least fills the content
