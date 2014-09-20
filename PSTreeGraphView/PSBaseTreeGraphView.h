@@ -63,7 +63,7 @@ typedef NS_ENUM(NSUInteger, PSTreeGraphOrientationStyle) {
 /// metrics, but to have a usable TreeGraph with actual content, you need to specify a
 /// nodeViewNibName and a modelRoot.
 
-- (id) initWithFrame:(CGRect)frame;
+- (instancetype) initWithFrame:(CGRect)frame;
 
 
 #pragma mark - Connection to Model

@@ -131,7 +131,7 @@
 
 #pragma mark - UIView
 
-- (id) initWithFrame:(CGRect)newFrame
+- (instancetype) initWithFrame:(CGRect)newFrame
 {
     self = [super initWithFrame:newFrame];
     if (self) {
