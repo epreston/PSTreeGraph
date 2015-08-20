@@ -28,7 +28,11 @@
     if (![_rootClassName isEqualToString:newRootClassName]) {
         _rootClassName = [newRootClassName copy];
 
-        _treeGraphView.treeGraphOrientation  = PSTreeGraphOrientationStyleHorizontalFlipped;
+        // Set the orientation of the Graph
+        _treeGraphView.treeGraphOrientation  = PSTreeGraphOrientationStyleHorizontal;
+        
+        // See the enum for more options
+        // _treeGraphView.treeGraphOrientation  = PSTreeGraphOrientationStyleHorizontalFlipped;
 
         // Get an ObjCClassWrapper for the named Objective-C Class, and set it as the TreeGraph's root.
         [_treeGraphView setModelRoot:[ObjCClassWrapper wrapperForClassNamed:_rootClassName]];
