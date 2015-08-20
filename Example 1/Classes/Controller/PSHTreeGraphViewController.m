@@ -115,9 +115,6 @@
 {
     // Depricated in iOS 6.0  -  This method is never called.
     
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
-    
     [super viewDidUnload];
 }
 
