@@ -10,13 +10,6 @@
 
 @implementation PSTTreeGraphViewController
 
-- (void) didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-
-    // Release any cached data, images, etc that aren't in use.
-}
 
 #pragma mark - View lifecycle
 
@@ -28,17 +21,33 @@
 }
 */
 
-- (void) viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
+#pragma mark - View Creation and Initializer
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
     return YES;
+}
+
+
+#pragma mark - Resouce Management
+
+- (void) didReceiveMemoryWarning
+{
+    // Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+    
+    // Release any cached data, images, etc that aren't in use.
+}
+
+- (void) viewDidUnload
+{
+    // Depricated in iOS 6.0  -  This method is never called.
+    
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+    
+    [super viewDidUnload];
 }
 
 @end

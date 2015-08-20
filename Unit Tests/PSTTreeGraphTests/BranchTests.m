@@ -25,8 +25,6 @@
 {
     // Tear-down code here.
 
-    [aBranch release];
-
     [super tearDown];
 }
 

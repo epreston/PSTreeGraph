@@ -27,8 +27,6 @@
 {
     // Tear-down code here.
 
-    [aLeaf release];
-
     [super tearDown];
 }
 
