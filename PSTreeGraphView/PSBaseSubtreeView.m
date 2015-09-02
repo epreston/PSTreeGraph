@@ -3,7 +3,7 @@
 //  PSTreeGraphView
 //
 //  Created by Ed Preston on 7/25/10.
-//  Copyright 2010 Preston Software. All rights reserved.
+//  Copyright 2015 Preston Software. All rights reserved.
 //
 //
 //  This is a port of the sample code from Max OS X to iOS (iPad).
@@ -100,7 +100,7 @@ static CGFloat subtreeBorderWidth(void)
 
 #pragma mark - Instance Initialization
 
-- initWithModelNode:(id <PSTreeGraphModelNode> )newModelNode
+- (instancetype) initWithModelNode:(id <PSTreeGraphModelNode> )newModelNode
 {
     NSParameterAssert(newModelNode);
 

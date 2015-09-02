@@ -48,7 +48,7 @@ static NSInteger CompareClassNames(id classA, id classB, void* context)
 
 #pragma mark - Creating Instances
 
-- initWithWrappedClass:(Class)aClass
+- (instancetype) initWithWrappedClass:(Class)aClass
 {
     self = [super init];
     if (self) {

@@ -3,7 +3,7 @@
 //  PSTreeGraphView
 //
 //  Created by Ed Preston on 7/25/10.
-//  Copyright 2010 Preston Software. All rights reserved.
+//  Copyright 2015 Preston Software. All rights reserved.
 //
 //
 //  This is a port of the sample code from Max OS X to iOS (iPad).
@@ -29,7 +29,7 @@
 
 /// Initializes a SubtreeView with the associated modelNode.  This is SubtreeView's designated initializer.
 
-- initWithModelNode:( id <PSTreeGraphModelNode> )newModelNode;
+- (instancetype) initWithModelNode:( id <PSTreeGraphModelNode> )newModelNode NS_DESIGNATED_INITIALIZER;
 
 /// The root of the model subtree that this SubtreeView represents.
 

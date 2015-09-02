@@ -1,15 +1,14 @@
 //
-// Prefix header for all source files of the 'PSHTreeGraph' target in the 'PSHTreeGraph' project
+// Prefix header for all source files of the projects which reference it.
 //
-
 
 #import <Availability.h>
 
-#ifndef __IPHONE_4_0
-#warning "This project uses features only available in iOS SDK 4.0 and later."
+#ifndef __IPHONE_6_0
+#warning "This project uses features only available in iOS SDK 6.0 and later."
 #endif
 
 #ifdef __OBJC__
-    #import <UIKit/UIKit.h>
-    #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 #endif
