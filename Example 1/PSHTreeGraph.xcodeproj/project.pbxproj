@@ -269,7 +269,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Preston Software";
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
@@ -348,6 +348,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Target/PSHTreeGraph_Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Target/PSHTreeGraph-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.prestonsoft.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = PSHTreeGraph;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;
@@ -364,6 +365,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Target/PSHTreeGraph_Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Target/PSHTreeGraph-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.prestonsoft.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = PSHTreeGraph;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;
@@ -388,6 +390,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;

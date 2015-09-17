@@ -277,7 +277,7 @@
 		4F1FC8321407441500C343D9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Preston Software";
 			};
 			buildConfigurationList = 4F1FC8351407441500C343D9 /* Build configuration list for PBXProject "PSTTreeGraph" */;
@@ -426,6 +426,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -496,6 +497,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PSTTreeGraph/PSTTreeGraph-Prefix.pch";
 				INFOPLIST_FILE = "PSTTreeGraph/PSTTreeGraph-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.prestonsoft.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -508,6 +510,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PSTTreeGraph/PSTTreeGraph-Prefix.pch";
 				INFOPLIST_FILE = "PSTTreeGraph/PSTTreeGraph-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.prestonsoft.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -525,6 +528,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PSTTreeGraph/PSTTreeGraph-Prefix.pch";
 				INFOPLIST_FILE = "PSTTreeGraphTests/PSTTreeGraphTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.prestonsoft.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
@@ -542,6 +546,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PSTTreeGraph/PSTTreeGraph-Prefix.pch";
 				INFOPLIST_FILE = "PSTTreeGraphTests/PSTTreeGraphTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.prestonsoft.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
