@@ -22,12 +22,12 @@
 
 - (PSBaseTreeGraphView *) enclosingTreeGraph
 {
-    UIView *ancestor = [self superview];
+    UIView *ancestor = self.superview;
     while (ancestor) {
         if ([ancestor isKindOfClass:[PSBaseTreeGraphView class]]) {
             return (PSBaseTreeGraphView *)ancestor;
         }
-        ancestor = [ancestor superview];
+        ancestor = ancestor.superview;
     }
     return nil;
 }
@@ -37,10 +37,10 @@
 
 - (UIBezierPath *) directConnectionsPath
 {
-    CGRect bounds = [self bounds];
+    CGRect bounds = self.bounds;
 	CGPoint rootPoint = CGPointZero;
 
-	PSTreeGraphOrientationStyle treeDirection = [[self enclosingTreeGraph] treeGraphOrientation];
+	PSTreeGraphOrientationStyle treeDirection = self.enclosingTreeGraph.treeGraphOrientation;
 
 	if (( treeDirection == PSTreeGraphOrientationStyleHorizontal ) ||
         ( treeDirection == PSTreeGraphOrientationStyleHorizontalFlipped )){
@@ -55,12 +55,12 @@
     UIBezierPath *path = [UIBezierPath bezierPath];
 
     // Add a stroke from rootPoint to each child SubtreeView of our containing SubtreeView.
-    UIView *subtreeView = [self superview];
+    UIView *subtreeView = self.superview;
     if ([subtreeView isKindOfClass:[PSBaseSubtreeView class]]) {
 
-        for (UIView *subview in [subtreeView subviews]) {
+        for (UIView *subview in subtreeView.subviews) {
             if ([subview isKindOfClass:[PSBaseSubtreeView class]]) {
-                CGRect subviewBounds = [subview bounds];
+                CGRect subviewBounds = subview.bounds;
 				CGPoint targetPoint = CGPointZero;
 
                 if (( treeDirection == PSTreeGraphOrientationStyleHorizontal ) ||
@@ -100,10 +100,10 @@
 	//        adjustment = adjustmentAsSize.width;
 	//    }
 
-    CGRect bounds = [self bounds];
+    CGRect bounds = self.bounds;
 	//    CGPoint basePoint;
 
-	PSTreeGraphOrientationStyle treeDirection = [[self enclosingTreeGraph] treeGraphOrientation];
+	PSTreeGraphOrientationStyle treeDirection = self.enclosingTreeGraph.treeGraphOrientation;
 
 	CGPoint rootPoint = CGPointZero;
 	if ( treeDirection == PSTreeGraphOrientationStyleHorizontal ) {
@@ -155,16 +155,16 @@
 	CGFloat minX = rootPoint.x;
     CGFloat maxX = rootPoint.x;
 
-    UIView *subtreeView = [self superview];
+    UIView *subtreeView = self.superview;
     NSInteger subtreeViewCount = 0;
 
     if ([subtreeView isKindOfClass:[PSBaseSubtreeView class]]) {
 
-        for (UIView *subview in [subtreeView subviews]) {
+        for (UIView *subview in subtreeView.subviews) {
             if ([subview isKindOfClass:[PSBaseSubtreeView class]]) {
                 ++subtreeViewCount;
 
-                CGRect subviewBounds = [subview bounds];
+                CGRect subviewBounds = subview.bounds;
 				CGPoint targetPoint = CGPointZero;
 
                 if (( treeDirection == PSTreeGraphOrientationStyleHorizontal ) ||
@@ -241,7 +241,7 @@
     // Build the set of lines to stroke, according to our enclosingTreeGraph's connectingLineStyle.
     UIBezierPath *path = nil;
 
-    switch ([[self enclosingTreeGraph] connectingLineStyle]) {
+    switch (self.enclosingTreeGraph.connectingLineStyle) {
         case PSTreeGraphConnectingLineStyleDirect:
         default:
             path = [self directConnectionsPath];
@@ -253,17 +253,17 @@
     }
 
     // Stroke the path with the appropriate color and line width.
-    PSBaseTreeGraphView *treeGraph = [self enclosingTreeGraph];
+    PSBaseTreeGraphView *treeGraph = self.enclosingTreeGraph;
 
-	if ( [self isOpaque] ) {
+	if ( self.opaque ) {
 		// Fill background.
-		[[treeGraph backgroundColor] set];
+		[treeGraph.backgroundColor set];
 		UIRectFill(dirtyRect);
 	}
 
 	// Draw lines
-	[[treeGraph connectingLineColor] set];
-	[path setLineWidth:[treeGraph connectingLineWidth]];
+	[treeGraph.connectingLineColor set];
+	path.lineWidth = treeGraph.connectingLineWidth;
 	[path stroke];
 }
 

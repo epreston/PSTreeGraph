@@ -89,7 +89,7 @@ static NSInteger CompareClassNames(id classA, id classB, void* context)
 
 - (NSString *) description
 {
-    return [self name];
+    return self.name;
 }
 
 - (size_t) wrappedClassInstanceSize
@@ -138,12 +138,12 @@ static NSInteger CompareClassNames(id classA, id classB, void* context)
 
 - (id <PSTreeGraphModelNode> ) parentModelNode
 {
-    return [self superclassWrapper];
+    return self.superclassWrapper;
 }
 
 - (NSArray *) childModelNodes
 {
-    return [self subclasses];
+    return self.subclasses;
 }
 
 

@@ -93,19 +93,19 @@
     // CGFloat scaleFactor = [[self window] userSpaceScaleFactor];
     CGFloat scaleFactor = 1.0f;
     
-    CALayer *layer = [self layer];
+    CALayer *layer = self.layer;
 
-    [layer setBorderWidth:(_borderWidth * scaleFactor)];
+    layer.borderWidth = (_borderWidth * scaleFactor);
     if (_borderWidth > 0.0f) {
-        [layer setBorderColor:[_borderColor CGColor]];
+        layer.borderColor = _borderColor.CGColor;
     }
 
-    [layer setCornerRadius:(_cornerRadius * scaleFactor)];
+    layer.cornerRadius = (_cornerRadius * scaleFactor);
 
     if ( _showingSelected ) {
-        [layer setBackgroundColor:[[self selectionColor] CGColor] ];
+        layer.backgroundColor = self.selectionColor.CGColor ;
     } else {
-        [layer setBackgroundColor:[[self fillColor] CGColor] ];
+        layer.backgroundColor = self.fillColor.CGColor ;
     }
 
     // // Disable implicit animations during these layer property changes

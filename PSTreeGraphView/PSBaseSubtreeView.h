@@ -31,6 +31,11 @@
 
 - (instancetype) initWithModelNode:( id <PSTreeGraphModelNode> )newModelNode NS_DESIGNATED_INITIALIZER;
 
+// Don't initialise with these:
+- (instancetype) initWithFrame:(CGRect)frame NS_UNAVAILABLE;
+- (instancetype) initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
+
+
 /// The root of the model subtree that this SubtreeView represents.
 
 @property (nonatomic, strong) id <PSTreeGraphModelNode> modelNode;

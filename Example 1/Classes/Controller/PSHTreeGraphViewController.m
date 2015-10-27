@@ -35,7 +35,7 @@
         // _treeGraphView.treeGraphOrientation  = PSTreeGraphOrientationStyleHorizontalFlipped;
 
         // Get an ObjCClassWrapper for the named Objective-C Class, and set it as the TreeGraph's root.
-        [_treeGraphView setModelRoot:[ObjCClassWrapper wrapperForClassNamed:_rootClassName]];
+        _treeGraphView.modelRoot = [ObjCClassWrapper wrapperForClassNamed:_rootClassName];
     }
 }
 
@@ -48,14 +48,14 @@
     [super viewDidLoad];
 
 	// Set the delegate to self.
-	[self.treeGraphView setDelegate:self];
+	(self.treeGraphView).delegate = self;
 
 	// Specify a .nib file for the TreeGraph to load each time it needs to create a new node view.
-    [self.treeGraphView setNodeViewNibName:@"ObjCClassTreeNodeView"];
+    (self.treeGraphView).nodeViewNibName = @"ObjCClassTreeNodeView";
 
     // Specify a starting root class to inspect on launch.
     
-    [self setRootClassName:@"UIControl"];
+    self.rootClassName = @"UIControl";
     
     // The system includes some other abstract base classes that are interesting:
     // [self setRootClassName:@"CAAnimation"];
@@ -89,14 +89,14 @@
 	MyLeafView *leafView = (MyLeafView *)nodeView;
 
 	// button
-	if ( [[objectWrapper childModelNodes] count] == 0 ) {
+	if ( [objectWrapper childModelNodes].count == 0 ) {
 		[leafView.expandButton setHidden:YES];
 	}
 
 	// labels
-	leafView.titleLabel.text	= [objectWrapper name];
+	leafView.titleLabel.text	= objectWrapper.name;
 	leafView.detailLabel.text	= [NSString stringWithFormat:@"%zd bytes",
-                                   [objectWrapper wrappedClassInstanceSize]];
+                                   objectWrapper.wrappedClassInstanceSize];
 
 }
 
